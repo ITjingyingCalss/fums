@@ -17,9 +17,18 @@
     <result column="user_create_time" jdbcType="DATE" property="userCreateTime" />
     <result column="user_update_time" jdbcType="DATE" property="userUpdateTime" />
     <result column="hospital_department_name" jdbcType="VARCHAR" property="hospitalDepartmentName" />
+    <result column="hospital_department_id" jdbcType="VARCHAR" property="hospitalDepartmentId" />
+
+    <association property="hospitalDepartment" javaType="com.fums.system_management.pojo.HospitalDepartment">
+      <id column="hospital_department_id" jdbcType="INTEGER" property="hospitalDepartmentId" />
+      <result column="hospital_department_name" jdbcType="VARCHAR" property="hospitalDepartmentName" />
+      <result column="hospital_department_state" jdbcType="INTEGER" property="hospitalDepartmentState" />
+      <result column="hospital_department_code" jdbcType="VARCHAR" property="hospitalDepartmentCode" />
+
+    </association>
   </resultMap>
 
-  <resultMap id="usBaseResultMap" type="com.fums.system_management.pojo.HospitalDepartment">
+ <resultMap id="usBaseResultMap" type="com.fums.system_management.pojo.HospitalDepartment">
     <id column="hospital_department_id" jdbcType="INTEGER" property="hospitalDepartmentId" />
     <result column="hospital_department_name" jdbcType="VARCHAR" property="hospitalDepartmentName" />
     <result column="hospital_department_state" jdbcType="INTEGER" property="hospitalDepartmentState" />
@@ -38,7 +47,7 @@
     u.user_email,u.password,h.hospital_department_id,h.hospital_department_name
     from
     `user` u
-    LEFT JOIN user_department d ON u.id = d.id
+    LEFT JOIN user_department d ON u.id = d.user_id
     LEFT JOIN hospital_department h ON d.hospital_department_id = h.hospital_department_id
     where 1 = 1
 
@@ -115,32 +124,26 @@
 <!--权限表-->
 
   <select id="selectUser" resultMap="BaseResultMap">
-    select u.id,u.user_account,h.hospital_department_id,h.hospital_department_name
-    from
-    `user` u
-    LEFT JOIN user_department d ON u.id = d.id
-    LEFT JOIN hospital_department h ON d.hospital_department_id = h.hospital_department_id
-    where 1 = 1
+      select u.id,u.user_account,h.hospital_department_id,h.hospital_department_name
+      FROM `user` u
+      INNER JOIN user_department d ON u.id = d.user_id
+      INNER JOIN hospital_department h ON d.hospital_department_id = h.hospital_department_id
+<!--      where 1 = 1
 
-    <if test="userAccount != null and userAccount != ''">
-      and u.user_account like concat('%',#{userAccount},'%')
-    </if>
-    <if test="hospitalDepartmentName != null and hospitalDepartmentName !=0">
-      and h.hospital_department_name like concat('%',#{hospitalDepartmentName},'%')
-    </if>
+      <if test="hospitalDepartmentName != null and hospitalDepartmentName !=''">
+          and h.hospital_department_name like concat('%',#{hospitalDepartmentName},'%')
+      </if>
+      <if test="userAccount != null and userAccount != ''">
+          and u.user_account like concat('%',#{userAccount},'%')
+      </if>-->
+
+
   </select>
 
   <delete id="delete">
     delete from user where id = #{id}
   </delete>
 
-
-  <insert id="insertUser" parameterType="com.fums.system_management.pojo.User" useGeneratedKeys="true" keyProperty="id" >
-
-    INSERT INTO `tree`.`user` ( `user_account`)
-    VALUES (#{userAccount});
-
-  </insert>
 
   <insert id="insertsUser" parameterType="com.fums.system_management.pojo.UserDepartment">
 
@@ -151,13 +154,18 @@
 
   <!--修改回显-->
   <select id="UpdateUser" resultMap="BaseResultMap">
-      select u.id,u.user_account,h.hospital_department_id,h.hospital_department_name
-    from
-    `user` u
-    LEFT JOIN user_department d ON u.id = d.id
-    LEFT JOIN hospital_department h ON d.hospital_department_id = h.hospital_department_id
-    where u.id = #{id}
+ select u.id,u.user_account,h.hospital_department_id,h.hospital_department_name
+    FROM `user` u
+    INNER JOIN user_department d ON u.id = d.user_id
+    INNER JOIN hospital_department h ON d.hospital_department_id = h.hospital_department_id
+    AND u.id = #{id}
     </select>
+
+<!--    <update id="saveUpdateUser" parameterType="com.fums.system_management.pojo.UserDepartment">
+        UPDATE `tree`.`user_department`
+        SET `user_id`=#{c}, `hospital_department_id`=#{d}
+        WHERE (`id`=#{id});
+    </update>-->
 
 
 </mapper>

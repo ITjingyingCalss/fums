@@ -87,7 +87,8 @@ public class User implements Serializable {
     /*引入科室表*/
     private HospitalDepartment hospitalDepartment;
 
-    private Integer hospitalDepartmentId;
+    private String hospitalDepartmentId;
+
 
     /*引入用户科室中间表*/
     private UserDepartment userDepartment;
@@ -111,7 +112,7 @@ public class User implements Serializable {
                 ", hospitalDepartmentName='" + hospitalDepartmentName + '\'' +
                 ", userUpdateTime=" + userUpdateTime +
                 ", hospitalDepartment=" + hospitalDepartment +
-                ", hospitalDepartmentId=" + hospitalDepartmentId +
+                ", hospitalDepartmentId='" + hospitalDepartmentId + '\'' +
                 ", userDepartment=" + userDepartment +
                 '}';
     }
@@ -244,11 +245,11 @@ public class User implements Serializable {
         this.hospitalDepartment = hospitalDepartment;
     }
 
-    public Integer getHospitalDepartmentId() {
+    public String getHospitalDepartmentId() {
         return hospitalDepartmentId;
     }
 
-    public void setHospitalDepartmentId(Integer hospitalDepartmentId) {
+    public void setHospitalDepartmentId(String hospitalDepartmentId) {
         this.hospitalDepartmentId = hospitalDepartmentId;
     }
 
