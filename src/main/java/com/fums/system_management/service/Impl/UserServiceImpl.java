@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<User> selectUser(String hospitalDepartmentName, String userAccount) {
+    public List<User> selectUser(String hospitalDepartmentName,String userAccount) {
         return userDAO.selectUser(hospitalDepartmentName,userAccount);
     }
 
@@ -86,27 +86,26 @@ public class UserServiceImpl implements UserService {
         return userDAO.delete(id);
     }
 
+    /*新增查询*/
+
     @Override
-    public int insertUser(User user) {
-        return userDAO.insertUser(user);
+    public int insertsUser(Integer a, Integer b) {
+        return userDAO.insertsUser(a,b);
     }
 
 
-    @Override
-    public void insertsUser(Integer a, Integer b) {
-        userDAO.insertsUser(a,b);
-    }
-
-
+    /*修改回显*/
     @Override
     public User UpdateUser(Integer id) {
         return userDAO.UpdateUser(id);
     }
 
+    /*修改更新*/
+    @Override
+    public int saveUpdateUser(Integer c, Integer d) {
+        return userDAO.saveUpdateUser(c,d);
+    }
 
-//    @Override
-//    public int saveUpdateUser(User user) {
-//        return userDAO.saveUpdateUser(user);
-//    }
+
 
 }

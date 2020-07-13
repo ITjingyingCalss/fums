@@ -54,6 +54,9 @@
                             + "<button type=\"button\" class=\"btn btn-success btn-sm\" data-toggle=\"modal\" data-target=\"#editModal\" onclick=\"UpdateUser("+ listUser.list[i].id +")\">编辑</button>"
                             + "<button type=\"button\" class=\"btn btn-success btn-sm\" onclick=\"deleUser("+ listUser.list[i].id +")\">删除</button></td></tr>"
 
+                        // alert(listUser.list[i].id);
+                        console.log(listUser.id);
+
                         $("#tbody").append(ss);
                         qian=listUser.pageNum==1?1:listUser.pageNum-1;
                         hou=listUser.pageNum==listUser.pages?listUser.pages:listUser.pageNum+1;
@@ -72,6 +75,7 @@
                 type:"post",
                 data:{id : id},
                 success:function(ee1){
+                    alert(id);
                     if(confirm("是否确定删除？")){
                         alert("删除成功");
                         window.location.reload();
@@ -136,8 +140,8 @@
     <script type="text/javascript">
         function saveUser() {
 
-            var userAccount = $("#id1").val();//name
-            var hospitalDepartmentName = $("#hospital_department_id1").val();//科室
+            var userAccount = $("#id2").val();//name
+            var hospitalDepartmentName = $("#hospital_department_id2").val();//科室
 
             $.ajax({
                 url: "SystemManagementController/insertUser",
@@ -148,8 +152,8 @@
                 },
                 dataType: "json",
 
-                success: function (insertUser) {
-                    if(insertUser != 0){
+                success: function (ser) {
+                    if(ser != 0){
                         alert("添加成功");
                         window.location.reload();
                     }else{
@@ -173,16 +177,20 @@
                     id : id
                 },
                 success:function (UpdateUser) {
+                    console.log(UpdateUser);
 
-                    $("#qqq").val(UpdateUser.id);
-                    $("#user_account2").val(UpdateUser.userAccount);
-                    $("#hospital_department_name2").val(UpdateUser.hospital_department_name);
+                    $('<option value="' + UpdateUser.hospitalDepartmentId + '"'+(UpdateUser.hospitalDepartmentId == hospital_department_id1?'selected':'')+'>'+ UpdateUser.hospitalDepartmentName +'</option>');
+                    $('<option value="' + UpdateUser.id + '"'+(UpdateUser.id == id1?'selected':'')+'>'+ UpdateUser.userAccount +'</option>');
+
+
+                    /*$("#hospital_department_id1").val(UpdateUser.hospitalDepartmentName)
+                    $("#id1").val(UpdateUser.userAccount);*/
                 }
             })
         }
 
         /*修改更新*/
-        /*function saveUpdateUser() {
+        function saveUpdateUser() {
             $.ajax({
                 url:"SystemManagementController/saveUpdateUser",
                 type:"post",
@@ -197,12 +205,8 @@
                     }
                 }
             })
-        }*/
+        }
     </script>
-
-
-
-
 
 
 </head>
@@ -257,15 +261,7 @@
         </tr>
         </thead>
         <tbody id="tbody">
-        <tr class="active">
-            <td>1</td>
-            <td>肿瘤中心</td>
-            <td>严医生</td>
-            <td>
-                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editModal" onclick="">编辑</button>
-                <button type="button" class="btn btn-success btn-sm" onclick="deleUser()">删除</button>
-            </td>
-        </tr>
+
         </tbody>
     </table>
 
@@ -278,7 +274,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button id="bt1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3 id="myModalLabel">权限管理</h3>
+                    <h3 id="myModalLabel">权限修改</h3>
                 </div>
                 <table class="table" style="background:beige;margin-top: 15px;" >
                     <div>
@@ -289,7 +285,7 @@
                             </td>
                             <td>
                                 <select style="width: 100%;height: 35px;" id="hospital_department_id1" name="hospitalDepartmentName">
-                                    <option value="0">请选择科室</option>
+                                    <option value="0" selected="selected">请选择科室</option>
                                 </select>
                             </td>
 
@@ -298,7 +294,7 @@
                             </td>
                             <td>
                                 <select style="width: 100%;height: 35px;" id="id1" name="userAccount">
-                                    <option value="0">请选择人员</option>
+                                    <option value="0" selected="selected">请选择人员</option>
                                 </select>
                             </td>
                         </tr>
@@ -324,6 +320,7 @@
             <table class="table" style="background:beige;margin-top: 15px;" >
                 <div>
                     <tr>
+                        <input type="hidden" id="qqq1" name="id">
                         <td style="text-align: right">
                             <span style="white-space: nowrap;display: inline-block;color: #0E74B4">科室名称：</span>
                         </td>

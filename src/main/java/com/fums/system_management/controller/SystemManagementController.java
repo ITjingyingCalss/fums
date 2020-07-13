@@ -117,20 +117,23 @@ public class SystemManagementController {
     }
 
 
+    /*权限表查询*/
+
     @ResponseBody
     @RequestMapping(value = "selectUser" , produces = "application/json;charset=utf-8")
     public String selectUser(String hospitalDepartmentName,String userAccount,
                              @RequestParam(value = "pageNum" ,defaultValue = "1",required = false) Integer pageNum){
 
         PageHelper.startPage(pageNum,5);
-        List<User> listUser = userService.selectUser(userAccount,hospitalDepartmentName);
+        List<User> listUser = userService.selectUser(hospitalDepartmentName,userAccount);
 
         PageInfo<User> pageInfo = new PageInfo<>(listUser);
+
 
         return JSON.toJSONString(pageInfo);
     }
 
-    //案件登记页面删除
+    //删除
     @ResponseBody
     @RequestMapping(value = "ee" , produces = "application/json;charset=utf-8")
     public int delete(Integer id) {
@@ -140,17 +143,16 @@ public class SystemManagementController {
         return ee1;
     }
 
-
+/*新增*/
     @RequestMapping(value = "insertUser" ,produces = "application/json;charset=utf-8")
-    public String insertsUser(User user,String hospitalDepartmentName){
+    public int insertsUser(String userAccount,String hospitalDepartmentName){
 
-        userService.insertUser(user);
-        int a = user.getId();
+        int a = Integer.parseInt(userAccount);
         int b = Integer.parseInt(hospitalDepartmentName);
 
-        userService.insertsUser(a,b);
+        int ser = userService.insertsUser(a,b);
 
-        return null;
+        return ser;
     }
 
 
@@ -168,12 +170,15 @@ public class SystemManagementController {
     /**
      * 修改更新
      */
-   /* @RequestMapping(value = "saveUpdateUser" ,produces = "application/json;charset=utf-8")
-    public int saveUpdateUser(User user){
+/*    @RequestMapping(value = "insertUser" ,produces = "application/json;charset=utf-8")
+    public int saveUpdateUser(String userAccount,String hospitalDepartmentName){
 
-        int saveUpdateUser = userService.saveUpdateUser(user);
+        int c = Integer.parseInt(userAccount);
+        int d = Integer.parseInt(hospitalDepartmentName);
 
-        return saveUpdateUser;
+        int saveUser = userService.insertsUser(c,d);
+
+        return saveUser;
     }*/
 
 

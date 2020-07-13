@@ -64,14 +64,12 @@ public interface UserService {
     int delete(Integer id);
 
     /*新增*/
-    int insertUser(User user);
-
-    void insertsUser(@Param("a")Integer a,@Param("b") Integer b);
+    int insertsUser(@Param("a")Integer a,@Param("b") Integer b);
 
     /*修改回显*/
     User UpdateUser(Integer id);
 
     /*更新*/
-//    int saveUpdateUser(User user);
+    int saveUpdateUser(@Param("c")Integer c,@Param("d") Integer d);
 
 }
