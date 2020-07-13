@@ -109,7 +109,7 @@
     <where>
       del_state = 0
       <if test="record.followUpId != 0 and record.followUpId != null">
-        and follow_up_id = #{record.followUpId}
+        and fp.follow_up_id = #{record.followUpId}
       </if>
       <if test="record.hospitalDepartmentId != 0 and record.hospitalDepartmentId != null">
         and hospital_department_id = #{record.hospitalDepartmentId}

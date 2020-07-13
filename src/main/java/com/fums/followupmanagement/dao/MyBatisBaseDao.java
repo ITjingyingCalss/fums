@@ -3,6 +3,8 @@ package com.fums.followupmanagement.dao;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -27,6 +29,8 @@ public interface MyBatisBaseDao<Model, PK extends Serializable, E> {
 
     Model selectByPrimaryKey(PK id);
 
+    String selectByFieldsChinaese(String fieldsChinaese);
+
     int updateByExampleSelective(@Param("record") Model record, @Param("example") E example);
 
     int updateByExample(@Param("record") Model record, @Param("example") E example);
@@ -34,4 +38,6 @@ public interface MyBatisBaseDao<Model, PK extends Serializable, E> {
     int updateByPrimaryKeySelective(Model record);
 
     int updateByPrimaryKey(Model record);
+
+    int updateByField(Map map);
 }

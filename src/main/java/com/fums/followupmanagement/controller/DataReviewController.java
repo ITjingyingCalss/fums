@@ -24,10 +24,16 @@ public class DataReviewController {
         List<DataReview> dataReviewList = dataReviewService.findAllDataReview(dataReview,list);
         return new PageInfo(dataReviewList);
     }
+    @RequestMapping("/seveDataReview")
+    public void seveDataReview(@RequestParam("id") Integer id, @RequestParam("dataItem") String dataItem,@RequestParam("patientId") Integer patientId,@RequestParam("amend") String amend,@RequestParam("revision") String revision){
+        System.err.println(dataItem);
+        System.err.println(amend);
+        System.err.println(revision);
+                dataReviewService.seveDataReview(id,dataItem,patientId,amend,revision);
+    }
     @RequestMapping("/findOneDataReview")
     public DataReview findOneDataReview(@RequestParam Integer id){
         System.err.println(id);
         return dataReviewService.findOneDataReview(id);
-
     }
 }

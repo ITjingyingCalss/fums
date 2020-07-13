@@ -10,4 +10,6 @@ public interface DataReviewService {
     List<DataReview> findAllDataReview(DataReview dataReview,Integer[] list);
 
     DataReview findOneDataReview(Integer id);
+
+    void seveDataReview(Integer id,String dataItem, Integer patientId, String amend, String revision);
 }

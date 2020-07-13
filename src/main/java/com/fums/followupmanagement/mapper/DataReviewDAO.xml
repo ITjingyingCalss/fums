@@ -136,7 +136,7 @@
           #{item}
         </foreach>
       </if>
-      <if test="record.reviewDate != null and record.reviewDate != ''">
+      <if test="record.reviewDate != null">
         and review_date like "%"#{record.reviewDate}"%"
       </if>
     </where>
