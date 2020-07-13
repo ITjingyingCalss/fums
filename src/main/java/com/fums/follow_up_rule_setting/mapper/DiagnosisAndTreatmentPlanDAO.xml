@@ -3,13 +3,7 @@
 <mapper namespace="com.fums.follow_up_rule_setting.dao.DiagnosisAndTreatmentPlanDAO">
   <resultMap id="BaseResultMap" type="com.fums.follow_up_rule_setting.pojo.DiagnosisAndTreatmentPlan">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="
-
-
-medication" jdbcType="VARCHAR" property="
-
-
-medication" />
+    <result column="medication" jdbcType="VARCHAR" property="medication" />
     <result column="test" jdbcType="VARCHAR" property="test" />
     <result column="inspect" jdbcType="VARCHAR" property="inspect" />
     <result column="treatment" jdbcType="VARCHAR" property="treatment" />
@@ -17,12 +11,9 @@ medication" />
     <result column="notice" jdbcType="VARCHAR" property="notice" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, 
-
-
-medication, test, inspect, treatment, `operation`, notice
+    id, medication, test, inspect, treatment, operation, notice
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPlanId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from diagnosis_and_treatment_plan
@@ -33,16 +24,8 @@ medication, test, inspect, treatment, `operation`, notice
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.fums.follow_up_rule_setting.pojo.DiagnosisAndTreatmentPlan">
-    insert into diagnosis_and_treatment_plan (id, 
-
-
-medication, test, 
-      inspect, treatment, `operation`, 
-      notice)
-    values (#{id,jdbcType=INTEGER}, #{
-
-
-medication,jdbcType=VARCHAR}, #{test,jdbcType=VARCHAR}, 
+    insert into diagnosis_and_treatment_plan (id, medication, test, inspect, treatment, operation, notice)
+    values (#{id,jdbcType=INTEGER}, #{medication,jdbcType=VARCHAR}, #{test,jdbcType=VARCHAR},
       #{inspect,jdbcType=VARCHAR}, #{treatment,jdbcType=VARCHAR}, #{operation,jdbcType=VARCHAR}, 
       #{notice,jdbcType=VARCHAR})
   </insert>
@@ -52,14 +35,8 @@ medication,jdbcType=VARCHAR}, #{test,jdbcType=VARCHAR},
       <if test="id != null">
         id,
       </if>
-      <if test="
-
-
-medication != null">
-        
-
-
-medication,
+      <if test="medication != null">
+        medication,
       </if>
       <if test="test != null">
         test,
@@ -71,7 +48,7 @@ medication,
         treatment,
       </if>
       <if test="operation != null">
-        `operation`,
+        operation,
       </if>
       <if test="notice != null">
         notice,
@@ -81,14 +58,8 @@ medication,
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="
-
-
-medication != null">
-        #{
-
-
-medication,jdbcType=VARCHAR},
+      <if test="medication != null">
+        #{medication,jdbcType=VARCHAR},
       </if>
       <if test="test != null">
         #{test,jdbcType=VARCHAR},
@@ -110,17 +81,8 @@ medication,jdbcType=VARCHAR},
   <update id="updateByPrimaryKeySelective" parameterType="com.fums.follow_up_rule_setting.pojo.DiagnosisAndTreatmentPlan">
     update diagnosis_and_treatment_plan
     <set>
-      <if test="
-
-
-medication != null">
-        
-
-
-medication = #{
-
-
-medication,jdbcType=VARCHAR},
+      <if test="medication != null">
+        medication = #{medication,jdbcType=VARCHAR},
       </if>
       <if test="test != null">
         test = #{test,jdbcType=VARCHAR},
@@ -132,7 +94,7 @@ medication,jdbcType=VARCHAR},
         treatment = #{treatment,jdbcType=VARCHAR},
       </if>
       <if test="operation != null">
-        `operation` = #{operation,jdbcType=VARCHAR},
+        operation = #{operation,jdbcType=VARCHAR},
       </if>
       <if test="notice != null">
         notice = #{notice,jdbcType=VARCHAR},
@@ -142,17 +104,11 @@ medication,jdbcType=VARCHAR},
   </update>
   <update id="updateByPrimaryKey" parameterType="com.fums.follow_up_rule_setting.pojo.DiagnosisAndTreatmentPlan">
     update diagnosis_and_treatment_plan
-    set 
-
-
-medication = #{
-
-
-medication,jdbcType=VARCHAR},
+    set medication = #{medication,jdbcType=VARCHAR},
       test = #{test,jdbcType=VARCHAR},
       inspect = #{inspect,jdbcType=VARCHAR},
       treatment = #{treatment,jdbcType=VARCHAR},
-      `operation` = #{operation,jdbcType=VARCHAR},
+      operation = #{operation,jdbcType=VARCHAR},
       notice = #{notice,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

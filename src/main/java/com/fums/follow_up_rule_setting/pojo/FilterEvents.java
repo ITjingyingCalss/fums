@@ -10,34 +10,34 @@ public class FilterEvents implements Serializable {
     private Integer id;
 
     /**
-     * 本院
+     * 本院(0:是1:否)
      */
-    private String ourHospital;
+    private Integer ourHospital;
 
     /**
-     * 本科室
+     * 本科室(0:是1:否)
      */
-    private String undergraduateDepartment;
+    private Integer undergraduateDepartment;
 
     /**
-     * 首次
+     * 首次(0:是1:否)
      */
-    private String first;
+    private Integer first;
 
     /**
-     * 末次
+     * 末次(0:是1:否)
      */
-    private String last;
+    private Integer last;
 
     /**
-     * 本就诊
+     * 本就诊(0:是1:否)
      */
-    private String thisVisit;
+    private Integer thisVisit;
 
     /**
-     * 任意就诊
+     * 任意就诊(0:是1:否)
      */
-    private String arbitraryTreatment;
+    private Integer arbitraryTreatment;
 
     private static final long serialVersionUID = 1L;
 
@@ -49,51 +49,51 @@ public class FilterEvents implements Serializable {
         this.id = id;
     }
 
-    public String getOurHospital() {
+    public Integer getOurHospital() {
         return ourHospital;
     }
 
-    public void setOurHospital(String ourHospital) {
+    public void setOurHospital(Integer ourHospital) {
         this.ourHospital = ourHospital;
     }
 
-    public String getUndergraduateDepartment() {
+    public Integer getUndergraduateDepartment() {
         return undergraduateDepartment;
     }
 
-    public void setUndergraduateDepartment(String undergraduateDepartment) {
+    public void setUndergraduateDepartment(Integer undergraduateDepartment) {
         this.undergraduateDepartment = undergraduateDepartment;
     }
 
-    public String getFirst() {
+    public Integer getFirst() {
         return first;
     }
 
-    public void setFirst(String first) {
+    public void setFirst(Integer first) {
         this.first = first;
     }
 
-    public String getLast() {
+    public Integer getLast() {
         return last;
     }
 
-    public void setLast(String last) {
+    public void setLast(Integer last) {
         this.last = last;
     }
 
-    public String getThisVisit() {
+    public Integer getThisVisit() {
         return thisVisit;
     }
 
-    public void setThisVisit(String thisVisit) {
+    public void setThisVisit(Integer thisVisit) {
         this.thisVisit = thisVisit;
     }
 
-    public String getArbitraryTreatment() {
+    public Integer getArbitraryTreatment() {
         return arbitraryTreatment;
     }
 
-    public void setArbitraryTreatment(String arbitraryTreatment) {
+    public void setArbitraryTreatment(Integer arbitraryTreatment) {
         this.arbitraryTreatment = arbitraryTreatment;
     }
 

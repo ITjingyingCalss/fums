@@ -12,10 +12,7 @@ public class DiagnosisAndTreatmentPlan implements Serializable {
     /**
      * 用药
      */
-    private String 
-
-
-medication;
+    private String medication;
 
     /**
      * 检验
@@ -52,11 +49,11 @@ medication;
         this.id = id;
     }
 
-    public String getmedication() {
+    public String getMedication() {
         return medication;
     }
 
-    public void setmedication(String medication) {
+    public void setMedication(String medication) {
         this.medication = medication;
     }
 
@@ -113,7 +110,7 @@ medication;
         }
         DiagnosisAndTreatmentPlan other = (DiagnosisAndTreatmentPlan) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getmedication() == null ? other.getmedication() == null : this.getmedication().equals(other.getmedication()))
+            && (this.getMedication() == null ? other.getMedication() == null : this.getMedication().equals(other.getMedication()))
             && (this.getTest() == null ? other.getTest() == null : this.getTest().equals(other.getTest()))
             && (this.getInspect() == null ? other.getInspect() == null : this.getInspect().equals(other.getInspect()))
             && (this.getTreatment() == null ? other.getTreatment() == null : this.getTreatment().equals(other.getTreatment()))
@@ -126,7 +123,7 @@ medication;
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getmedication() == null) ? 0 : getmedication().hashCode());
+        result = prime * result + ((getMedication() == null) ? 0 : getMedication().hashCode());
         result = prime * result + ((getTest() == null) ? 0 : getTest().hashCode());
         result = prime * result + ((getInspect() == null) ? 0 : getInspect().hashCode());
         result = prime * result + ((getTreatment() == null) ? 0 : getTreatment().hashCode());

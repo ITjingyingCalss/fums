@@ -10,34 +10,34 @@ public class BenchmarkEvents implements Serializable {
     private Integer id;
 
     /**
-     * 门诊
+     * 门诊（0:是1:否）
      */
-    private String outpatientDepartment;
+    private Integer outpatientDepartment;
 
     /**
-     * 入院
+     * 入院（0:是1:否）
      */
-    private String beHospitalized;
+    private Integer beHospitalized;
 
     /**
-     * 出院
+     * 出院（0:是1:否）
      */
-    private String leaveHospital;
+    private Integer leaveHospital;
 
     /**
-     * 手术
+     * 手术（0:是1:否）
      */
-    private String operation;
+    private Integer operation;
 
     /**
-     * 入ICU
+     * 入ICU（0:是1:否）
      */
-    private String admissionToIcu;
+    private Integer admissionToIcu;
 
     /**
-     * 出ICU
+     * 出ICU（0:是1:否）
      */
-    private String outOfIcu;
+    private Integer outOfIcu;
 
     private static final long serialVersionUID = 1L;
 
@@ -49,51 +49,51 @@ public class BenchmarkEvents implements Serializable {
         this.id = id;
     }
 
-    public String getOutpatientDepartment() {
+    public Integer getOutpatientDepartment() {
         return outpatientDepartment;
     }
 
-    public void setOutpatientDepartment(String outpatientDepartment) {
+    public void setOutpatientDepartment(Integer outpatientDepartment) {
         this.outpatientDepartment = outpatientDepartment;
     }
 
-    public String getBeHospitalized() {
+    public Integer getBeHospitalized() {
         return beHospitalized;
     }
 
-    public void setBeHospitalized(String beHospitalized) {
+    public void setBeHospitalized(Integer beHospitalized) {
         this.beHospitalized = beHospitalized;
     }
 
-    public String getLeaveHospital() {
+    public Integer getLeaveHospital() {
         return leaveHospital;
     }
 
-    public void setLeaveHospital(String leaveHospital) {
+    public void setLeaveHospital(Integer leaveHospital) {
         this.leaveHospital = leaveHospital;
     }
 
-    public String getOperation() {
+    public Integer getOperation() {
         return operation;
     }
 
-    public void setOperation(String operation) {
+    public void setOperation(Integer operation) {
         this.operation = operation;
     }
 
-    public String getAdmissionToIcu() {
+    public Integer getAdmissionToIcu() {
         return admissionToIcu;
     }
 
-    public void setAdmissionToIcu(String admissionToIcu) {
+    public void setAdmissionToIcu(Integer admissionToIcu) {
         this.admissionToIcu = admissionToIcu;
     }
 
-    public String getOutOfIcu() {
+    public Integer getOutOfIcu() {
         return outOfIcu;
     }
 
-    public void setOutOfIcu(String outOfIcu) {
+    public void setOutOfIcu(Integer outOfIcu) {
         this.outOfIcu = outOfIcu;
     }
 
