@@ -154,11 +154,11 @@
 
   <!--修改回显-->
   <select id="UpdateUser" resultMap="BaseResultMap">
- select u.id,u.user_account,h.hospital_department_id,h.hospital_department_name
-    FROM `user` u
-    INNER JOIN user_department d ON u.id = d.user_id
-    INNER JOIN hospital_department h ON d.hospital_department_id = h.hospital_department_id
-    AND u.id = #{id}
+     select u.id,u.user_account,h.hospital_department_id,h.hospital_department_name
+        FROM `user` u
+        INNER JOIN user_department d ON u.id = d.user_id
+        INNER JOIN hospital_department h ON d.hospital_department_id = h.hospital_department_id
+        where u.id = #{id}
     </select>
 
 <!--    <update id="saveUpdateUser" parameterType="com.fums.system_management.pojo.UserDepartment">

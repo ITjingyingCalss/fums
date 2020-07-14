@@ -179,11 +179,14 @@
                 success:function (UpdateUser) {
                     console.log(UpdateUser);
 
-                    $('<option value="' + UpdateUser.hospitalDepartmentId + '"'+(UpdateUser.hospitalDepartmentId == hospital_department_id1?'selected':'')+'>'+ UpdateUser.hospitalDepartmentName +'</option>');
-                    $('<option value="' + UpdateUser.id + '"'+(UpdateUser.id == id1?'selected':'')+'>'+ UpdateUser.userAccount +'</option>');
+                    /*$('<option value="' + UpdateUser.hospitalDepartmentId + '"'+(UpdateUser.hospitalDepartmentId == hospital_department_id1?'selected':'')+'>'+ UpdateUser.hospitalDepartmentName +'</option>');
+                    $('<option value="' + UpdateUser.id + '"'+(UpdateUser.id == id1?'selected':'')+'>'+ UpdateUser.userAccount +'</option>');*/
+                    alert(UpdateUser.hospitalDepartment.hospitalDepartmentName);
+                    alert(UpdateUser.userAccount);
+                    $("#hospital_department_id1").val('<option value="' + UpdateUser.hospitalDepartment.hospitalDepartmentId + '">' + UpdateUser.hospitalDepartment.hospitalDepartmentName + '</option>');
+                    $("#id1").val('<option value="' + UpdateUser.id + '">' + UpdateUser.userAccount + '</option>');
 
-
-                    /*$("#hospital_department_id1").val(UpdateUser.hospitalDepartmentName)
+                    /*$("#hospital_department_id1").val(UpdateUser.hospitalDepartment.hospitalDepartmentName);
                     $("#id1").val(UpdateUser.userAccount);*/
                 }
             })
