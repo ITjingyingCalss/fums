@@ -7,7 +7,9 @@ package com.fums.template_setting.pojo;
  */
 public class tree {
     private int id;
+    //标题
     private String title;
+    //信息
     private String information;
     private int tid;
 

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.template_setting.dao.certificatesMapper">
+  <resultMap id="BaseResultMap" type="com.fums.template_setting.pojo.certificates">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="account_book_no" jdbcType="VARCHAR" property="accountBookNo" />
+    <result column="passport_no" jdbcType="VARCHAR" property="passportNo" />
+    <result column="officer_number" jdbcType="VARCHAR" property="officerNumber" />
+    <result column="driver_number" jdbcType="VARCHAR" property="driverNumber" />
+    <result column="hong_kong_and_macao_pass_no" jdbcType="VARCHAR" property="hongKongAndMacaoPassNo" />
+    <result column="taiwan_pass_number" jdbcType="VARCHAR" property="taiwanPassNumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, idcard, account_book_no, passport_no, officer_number, driver_number, hong_kong_and_macao_pass_no, 
+    taiwan_pass_number
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from certificates
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from certificates
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.template_setting.pojo.certificates">
+    insert into certificates (id, idcard, account_book_no, 
+      passport_no, officer_number, driver_number, 
+      hong_kong_and_macao_pass_no, taiwan_pass_number
+      )
+    values (#{id,jdbcType=INTEGER}, #{idcard,jdbcType=VARCHAR}, #{accountBookNo,jdbcType=VARCHAR}, 
+      #{passportNo,jdbcType=VARCHAR}, #{officerNumber,jdbcType=VARCHAR}, #{driverNumber,jdbcType=VARCHAR}, 
+      #{hongKongAndMacaoPassNo,jdbcType=VARCHAR}, #{taiwanPassNumber,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.template_setting.pojo.certificates">
+    insert into certificates
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="accountBookNo != null">
+        account_book_no,
+      </if>
+      <if test="passportNo != null">
+        passport_no,
+      </if>
+      <if test="officerNumber != null">
+        officer_number,
+      </if>
+      <if test="driverNumber != null">
+        driver_number,
+      </if>
+      <if test="hongKongAndMacaoPassNo != null">
+        hong_kong_and_macao_pass_no,
+      </if>
+      <if test="taiwanPassNumber != null">
+        taiwan_pass_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="accountBookNo != null">
+        #{accountBookNo,jdbcType=VARCHAR},
+      </if>
+      <if test="passportNo != null">
+        #{passportNo,jdbcType=VARCHAR},
+      </if>
+      <if test="officerNumber != null">
+        #{officerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="driverNumber != null">
+        #{driverNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="hongKongAndMacaoPassNo != null">
+        #{hongKongAndMacaoPassNo,jdbcType=VARCHAR},
+      </if>
+      <if test="taiwanPassNumber != null">
+        #{taiwanPassNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.template_setting.pojo.certificates">
+    update certificates
+    <set>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="accountBookNo != null">
+        account_book_no = #{accountBookNo,jdbcType=VARCHAR},
+      </if>
+      <if test="passportNo != null">
+        passport_no = #{passportNo,jdbcType=VARCHAR},
+      </if>
+      <if test="officerNumber != null">
+        officer_number = #{officerNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="driverNumber != null">
+        driver_number = #{driverNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="hongKongAndMacaoPassNo != null">
+        hong_kong_and_macao_pass_no = #{hongKongAndMacaoPassNo,jdbcType=VARCHAR},
+      </if>
+      <if test="taiwanPassNumber != null">
+        taiwan_pass_number = #{taiwanPassNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.template_setting.pojo.certificates">
+    update certificates
+    set idcard = #{idcard,jdbcType=VARCHAR},
+      account_book_no = #{accountBookNo,jdbcType=VARCHAR},
+      passport_no = #{passportNo,jdbcType=VARCHAR},
+      officer_number = #{officerNumber,jdbcType=VARCHAR},
+      driver_number = #{driverNumber,jdbcType=VARCHAR},
+      hong_kong_and_macao_pass_no = #{hongKongAndMacaoPassNo,jdbcType=VARCHAR},
+      taiwan_pass_number = #{taiwanPassNumber,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

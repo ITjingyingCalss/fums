@@ -1,8 +1,12 @@
 package com.fums.template_setting.service;
 import com.fums.template_setting.pojo.Symptom;
+import com.fums.template_setting.pojo.basicinformation;
 import com.fums.template_setting.pojo.detail;
+import com.fums.template_setting.pojo.template;
+import com.fums.template_setting.utils.Dto;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,4 +40,6 @@ public interface treeService {
      * @return
      */
     int insertTree(detail detail);
+
+    List<basicinformation> selectBasicInformation();
 }

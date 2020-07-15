@@ -2,15 +2,27 @@ package com.fums.template_setting.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.fums.template_setting.pojo.Symptom;
+import com.fums.template_setting.pojo.basicinformation;
 import com.fums.template_setting.pojo.detail;
+import com.fums.template_setting.pojo.template;
 import com.fums.template_setting.service.treeService;
+import com.fums.template_setting.utils.Dto;
+import com.fums.template_setting.utils.DtoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.WebRequest;
 
-import java.util.Arrays;
-import java.util.List;
+import javax.annotation.Resource;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -22,9 +34,16 @@ import java.util.List;
 public class TreeController {
     @Autowired
     private treeService treeService;
+    @Resource
+    private RedisTemplate<String,template> redisTemplate;
+
+
+
+
     /**
      * 所有表内容
      */
+    public static int i = 0;
     @RequestMapping(value = "/selectSymptom" ,produces = "application/json;charset=utf-8")
     public String selectSymptom(@RequestParam(value = "symId",required = false) Integer symId){
         if(symId!=null&&symId<=0){
@@ -71,5 +90,68 @@ public class TreeController {
         int i = treeService.insertTree(detail);
         String s = JSON.toJSONString(i);
         return s;
+    }
+    /**
+     * 模板添加
+     */
+    @RequestMapping(value = "/saveTemplate" ,produces = "application/json;charset=utf-8")
+    public Dto saveTemplate(@RequestParam(value = "name") String name,
+                            @RequestParam(value = "sex") int sex,
+                            @RequestParam(value = "bronTime") Date bronTime,
+                            @RequestParam(value = "nation") int nation,
+                            @RequestParam(value = "height") double height,
+                            @RequestParam(value = "weight") double weight,
+                            @RequestParam(value = "bmi") double bmi,
+                            @RequestParam(value = "symptom") int symptom){
+        template template = new template();
+        template.setName(name);
+        template.setSex(sex);
+        template.setBronTime(bronTime);
+        template.setNation(nation);
+        template.setHeight(height);
+        template.setWeight(weight);
+        template.setBmi(bmi);
+        template.setSymptom(symptom);
+        String a = "dayTemplate"+i;
+        redisTemplate.opsForValue().set(a,template,60 * 10,
+                TimeUnit.SECONDS);
+        i ++;
+        //设置过期时间2000秒
+//        redisTemplate.expire("song",2000, TimeUnit.SECONDS);
+        return DtoUtil.returnSuccess();
+    }
+    /**
+     * 模板取值
+     */
+    @RequestMapping(value = "/obtainTemplate" ,produces = "application/json;charset=utf-8")
+    public String obtainTemplate(){
+        List<Object> list = new ArrayList<>();
+        int a = 0;
+        String key = "dayTemplate" + a;
+        while (redisTemplate.hasKey(key)){
+            Object dayTemplate = redisTemplate.opsForValue().get(key);
+//            list.add(JSON.toJSONString(dayTemplate));
+            list.add(dayTemplate);
+            a ++;
+            key = "dayTemplate" + a;
+
+        }
+        return JSON.toJSONString(list);
+    }
+    /**
+     * js拖拽查询
+     */
+    @RequestMapping(value = "/selectBasicInformation" ,produces = "application/json;charset=utf-8")
+    public String selectBasicInformation(){
+        List<basicinformation> basicinformations = treeService.selectBasicInformation();
+        return JSON.toJSONString(basicinformations);
+    }
+    //只需要加上下面这段即可，注意不能忘记注解
+    @InitBinder
+    public void initBinder(WebDataBinder binder, WebRequest request) {
+
+        //转换日期
+        DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));// CustomDateEditor为自定义日期编辑器
     }
 }
