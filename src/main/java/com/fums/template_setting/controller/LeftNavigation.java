@@ -77,8 +77,27 @@ public class LeftNavigation {
     public String index() {
         return "page/template_settings/drag_drop";
     }
-    @RequestMapping("/jj")
+
+    /**
+     * 模板样式
+     * @return
+     */
+    @RequestMapping("/templatestyle")
     public String jj() {
-        return "page/template_settings/jj";
+        return "page/template_settings/template_style";
+    }
+    /**
+     * 柱形图
+     */
+    @RequestMapping("/columnchart")
+    public String columnchart() {
+        return "page/template_settings/column_chart";
+    }
+    /**
+     * 游戏
+     */
+    @RequestMapping("/game")
+    public String game() {
+        return "page/template_settings/game";
     }
 }
