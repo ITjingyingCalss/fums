@@ -48,7 +48,8 @@ $.ajax({
             v += "<td>"+data.list[i].name+"</td>"
             v += "<td>"+data.list[i].sex+"</td>"
             v += "<td>"+data.list[i].patientAge+"</td>"
-            v += "<td>"+data.list[i].followPatient.setOfDate+"</td>"
+          /*  v += "<td>"+data.list[i].followPatient.setOfDate+"</td>"*/
+            v += "<td>"+changeDateFormat("+data.list[i].followPatient.setOfDate+")+"</td>"
             v += '<td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal2" onclick="editSave('+data.list[i].patientId+')">编辑</button></td>';
             v += '<td><button type="button" class="btn btn-info btn-sm">查看</button></td>'
             v += "</tr>";
@@ -139,6 +140,21 @@ $.ajax({
 })
 }
 
+//转换日期格式(时间戳转换为datetime格式)
+function changeDateFormat(cellval) {
+    var dateVal = cellval + "";
+    if (cellval != null) {
+        var date = new Date(parseInt(dateVal.replace("/Date(", "").replace(")/", ""), 10));
+        var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+        var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+
+        var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+        var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+
+        return date.getFullYear() + "-" + month + "-" + currentDate + " " + hours + ":" + minutes + ":" + seconds;
+    }
+}
 </script>
 </head>
 <body>
@@ -257,6 +273,7 @@ $.ajax({
     <th>性别</th>
     <th>年龄</th>
     <th>入组日期</th>
+    <th>编辑</th>
     <th>查看</th>
   </tr>
 </thead>

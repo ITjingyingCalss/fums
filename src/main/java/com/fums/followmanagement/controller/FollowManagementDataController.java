@@ -55,9 +55,9 @@ public class FollowManagementDataController {
      * @return
      */
     @RequestMapping(value = "findFollowManagementAll",produces= {"application/json;charset=utf-8"})
-    public String findFollowManagementAll(@RequestParam(value="pageNum",required = false,defaultValue="1") Integer pageNum,@RequestParam("followUpPrincipal") String followUpPrincipal, @RequestParam("hospitalDepartmentChildName") String hospitalDepartmentChildName, @RequestParam("followUpStatus") Integer followUpStatus, @RequestParam("followUpCreateTime1") Date followUpCreateTime1, @RequestParam("followUpCreateTime2") Date followUpCreateTime2){
+    public String findFollowManagementAll(@RequestParam(value="pageSize",required = false,defaultValue="6") Integer pageSize,@RequestParam(value="pageNum",required = false,defaultValue="1") Integer pageNum,@RequestParam("followUpPrincipal") String followUpPrincipal, @RequestParam("hospitalDepartmentChildName") String hospitalDepartmentChildName, @RequestParam("followUpStatus") Integer followUpStatus, @RequestParam("followUpCreateTime1") Date followUpCreateTime1, @RequestParam("followUpCreateTime2") Date followUpCreateTime2){
         List<FollowUp> followUpAll = followManagementService.findFollowUpAll(followUpPrincipal, hospitalDepartmentChildName, followUpStatus,followUpCreateTime1,followUpCreateTime2);
-        PageHelper.startPage(pageNum,7);
+        PageHelper.startPage(pageNum,pageSize);
         PageInfo<FollowUp> pageInfo = new PageInfo<>(followUpAll);
         return JSON.toJSONString(pageInfo);
     }

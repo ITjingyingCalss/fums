@@ -55,10 +55,10 @@
         FROM follow_up f,hospital_department_child hdc
         WHERE f.hospital_department_child_code = hdc.hospital_department_child_code
         <if test="followUpPrincipal != null and followUpPrincipal != ''">
-            and f.follow_up_principal like CONCAT ("%",#{followUpPrincipal},"%")
+            and f.follow_up_principal like "%"#{followUpPrincipal}"%"
         </if>
         <if test="hospitalDepartmentChildName != null and hospitalDepartmentChildName != ''">
-            and hdc.hospital_department_child_name LIKE  CONCAT ("%",#{hospitalDepartmentChildName},"%")
+            and hdc.hospital_department_child_name LIKE  "%"#{hospitalDepartmentChildName}"%"
         </if>
         <if test="followUpStatus != null and followUpStatus != ''">
             and f.follow_up_status = #{followUpStatus}

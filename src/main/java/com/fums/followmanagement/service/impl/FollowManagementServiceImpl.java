@@ -151,7 +151,10 @@ public class FollowManagementServiceImpl implements FollowManagementService{
      */
     @Override
     public boolean addFollowUpInfo(FollowUp followUp) {
+        followUp.setUserAccount("张三");
+        followUp.setFollowUpCreateTime(new Date());
         int i= followUpMapper.insertSelective(followUp);
+
         FollowUp followUp1 = new FollowUp();
         if (i > 1){
             return true;

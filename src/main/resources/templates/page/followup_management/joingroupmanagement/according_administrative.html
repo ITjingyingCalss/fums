@@ -14,19 +14,38 @@
             app.controller("myController",['$scope','$http',function ($scope,$http) {
 
                 $scope.changeDepartment = function () {
+                    console.log("sss")
                     $http({
                         method:'get',
                         url:'findDepartmentsAll',
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                     }).success(function (data) {
-                        $scope.departments = data;
+                       /* console.log(data)
+                        $scope.departments = data;*/
+                        $("#dosage_form_id").empty();
+                        $("#dosage_form_id").prepend('<option value="0" >请选择</option>')
+                        console.log(data)
+                        for(var i=0;i<data.length;i++){
+                            $("#dosage_form_id").prepend('<option value="' + data[i].hospitalDepartmentChildCode + '">' + data[i].hospitalDepartmentChildName+ '</option>')
+                        }
                     }).error(function () {
 
                     })
                 }
-            }])
-        </script>
 
+            }])
+            // function changeDepartment() {
+            //     $.ajax({
+            //         url:'findDepartmentsAll',
+            //         data:{},
+            //         dataType:"json",
+            //         type:"post",
+            //         success:function (result) {
+            //             console.log(result)
+            //         }
+            //     })
+            // }
+        </script>
 	</head>
 	<body ng-app = "myApp" ng-controller="myController" data-ng-init = "list()">
 		<div class="according_administrative_page" style="margin-left: 50px; margin-top: 50px;">
@@ -35,7 +54,7 @@
 						<td><label>科室</label></td>
 						<td >
 							 <div class="form-group" style="margin-left: -120px;">
-							   <select name="hospitalDepartmentChildName" ng-change="changeDepartment()" ng-model="selectHospitalDepartmentChildName" ng-options="department.hospitalDepartmentChildCode as department.hospitalDepartmentChildName for department in departments" class="form-control" style="width: 210px; height: 38px;">
+							   <select id="dosage_form_id" name="hospitalDepartmentChildName" ng-click="changeDepartment()" ng-model="selectHospitalDepartmentChildName" ng-options="department.hospitalDepartmentChildCode as department.hospitalDepartmentChildName for department in departments" class="form-control" style="width: 210px; height: 38px;">
                                    <option value="">请选择科室</option>
                                </select>
                              </div>
