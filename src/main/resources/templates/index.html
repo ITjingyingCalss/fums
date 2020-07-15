@@ -108,12 +108,12 @@
                 </li>
                 <li><a href="#systemDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-form"></i>系统管理</a>
                     <ul id="systemDropdown" class="collapse list-unstyled ">
-                        <li><a href="#">表单总览</a></li>
-                        <li><a href="#">用户管理</a></li>
-                        <li><a href="#">标准化模板维护</a></li>
-                        <li><a href="#">权限管理</a></li>
-                        <li><a href="#">分类数据项维护</a></li>
-                        <li><a href="#">字典术语维护</a></li>
+                        <li><a onclick="aaa('system_form')" target="iframe">表单总览</a></li>
+                        <li><a onclick="aaa('user_management')" target="iframe">用户管理</a></li>
+                        <li><a onclick="aaa('standard_template')" target="iframe">标准化模板维护</a></li>
+                        <li><a onclick="aaa('authority_management')" target="iframe">权限管理</a></li>
+                        <li><a onclick="aaa('classified_data')" target="iframe">分类数据项维护</a></li>
+                        <li><a onclick="aaa('dictionary_terms')" target="iframe">字典术语维护</a></li>
                     </ul>
                 </li>
                 <li><a href="#userDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-interface-windows"></i>用户</a>
@@ -136,19 +136,19 @@
                 <!-- Nav pills -->
                 <ul class="nav nav-pills" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#home">数据复核</a>
+                        <a class="nav-link" data-toggle="pill" onclick="aaa('dataReview')">数据复核</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="pill" href="#menu1">分组管理</a>
+                        <a class="nav-link" data-toggle="pill" onclick="aaa('toGroupManagement')">分组管理</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">系统设置</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">权限管理</a>
-                                <a class="dropdown-item" href="#">标准化模板维护</a>
-                                <a class="dropdown-item" href="#">表单总览</a>
-                                <a class="dropdown-item" href="#">术语管理</a>
-                                <a class="dropdown-item" href="#">用户管理</a>
+                            <a class="dropdown-item" onclick="aaa('authority_management')">权限管理</a>
+                                <a class="dropdown-item" onclick="aaa('standard_template')">标准化模板维护</a>
+                                <a class="dropdown-item" onclick="aaa('system_form')">表单总览</a>
+                                <a class="dropdown-item" onclick="aaa('dictionary_terms')">术语管理</a>
+                                <a class="dropdown-item" onclick="aaa('user_management')">用户管理</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">

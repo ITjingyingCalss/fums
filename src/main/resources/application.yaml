@@ -14,6 +14,15 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
+    redis:
+      host: 192.168.202.128
+      port: 6379
+      password: 123456
+      database: 0
+      jedis:
+        pool:
+          max-idle: 6
+          max-active: 32
 
 mybatis:
   mapper-locations: classpath:com/fums/**/mapper/*.xml

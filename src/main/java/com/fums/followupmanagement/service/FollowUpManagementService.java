@@ -13,4 +13,6 @@ public interface FollowUpManagementService {
     List<FollowPatient> findAllFollowUpManagement(FollowPatient followPatient, Integer[] list,String setOfDate1,String setOfDate2) throws ParseException;
 
     Map findFollowUpGroupAndHospitalDepartment();
+
+    List<Map> findCalendarData();
 }

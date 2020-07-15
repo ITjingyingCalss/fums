@@ -83,6 +83,7 @@
     </if>
     <include refid="Base_Column_List" />
     from follow_patient
+    where del_state = 0
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
