@@ -1,5 +1,8 @@
 package com.fums.system_management.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -28,6 +31,8 @@ public class FormOverview implements Serializable {
     /**
      * 更新日期
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date updatedDate;
 
     /**
@@ -48,6 +53,8 @@ public class FormOverview implements Serializable {
     /**
      * 创建日期
      */
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date creationDate;
 
     /**
@@ -60,7 +67,27 @@ public class FormOverview implements Serializable {
      */
     private String tableState;
 
+    private FollowUp followUp;
+
     private static final long serialVersionUID = 1L;
+
+    @Override
+    public String toString() {
+        return "FormOverview{" +
+                "overviewId=" + overviewId +
+                ", departmentId=" + departmentId +
+                ", followupUpId=" + followupUpId +
+                ", templateName='" + templateName + '\'' +
+                ", updatedDate=" + updatedDate +
+                ", updateThe='" + updateThe + '\'' +
+                ", theErsionUmber='" + theErsionUmber + '\'' +
+                ", theReator='" + theReator + '\'' +
+                ", creationDate=" + creationDate +
+                ", state='" + state + '\'' +
+                ", tableState='" + tableState + '\'' +
+                ", followUp=" + followUp +
+                '}';
+    }
 
     public Integer getOverviewId() {
         return overviewId;
@@ -150,68 +177,15 @@ public class FormOverview implements Serializable {
         this.tableState = tableState;
     }
 
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        FormOverview other = (FormOverview) that;
-        return (this.getOverviewId() == null ? other.getOverviewId() == null : this.getOverviewId().equals(other.getOverviewId()))
-            && (this.getDepartmentId() == null ? other.getDepartmentId() == null : this.getDepartmentId().equals(other.getDepartmentId()))
-            && (this.getFollowupUpId() == null ? other.getFollowupUpId() == null : this.getFollowupUpId().equals(other.getFollowupUpId()))
-            && (this.getTemplateName() == null ? other.getTemplateName() == null : this.getTemplateName().equals(other.getTemplateName()))
-            && (this.getUpdatedDate() == null ? other.getUpdatedDate() == null : this.getUpdatedDate().equals(other.getUpdatedDate()))
-            && (this.getUpdateThe() == null ? other.getUpdateThe() == null : this.getUpdateThe().equals(other.getUpdateThe()))
-            && (this.getTheErsionUmber() == null ? other.getTheErsionUmber() == null : this.getTheErsionUmber().equals(other.getTheErsionUmber()))
-            && (this.getTheReator() == null ? other.getTheReator() == null : this.getTheReator().equals(other.getTheReator()))
-            && (this.getCreationDate() == null ? other.getCreationDate() == null : this.getCreationDate().equals(other.getCreationDate()))
-            && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()))
-            && (this.getTableState() == null ? other.getTableState() == null : this.getTableState().equals(other.getTableState()));
+    public FollowUp getFollowUp() {
+        return followUp;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getOverviewId() == null) ? 0 : getOverviewId().hashCode());
-        result = prime * result + ((getDepartmentId() == null) ? 0 : getDepartmentId().hashCode());
-        result = prime * result + ((getFollowupUpId() == null) ? 0 : getFollowupUpId().hashCode());
-        result = prime * result + ((getTemplateName() == null) ? 0 : getTemplateName().hashCode());
-        result = prime * result + ((getUpdatedDate() == null) ? 0 : getUpdatedDate().hashCode());
-        result = prime * result + ((getUpdateThe() == null) ? 0 : getUpdateThe().hashCode());
-        result = prime * result + ((getTheErsionUmber() == null) ? 0 : getTheErsionUmber().hashCode());
-        result = prime * result + ((getTheReator() == null) ? 0 : getTheReator().hashCode());
-        result = prime * result + ((getCreationDate() == null) ? 0 : getCreationDate().hashCode());
-        result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
-        result = prime * result + ((getTableState() == null) ? 0 : getTableState().hashCode());
-        return result;
+    public void setFollowUp(FollowUp followUp) {
+        this.followUp = followUp;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", overviewId=").append(overviewId);
-        sb.append(", departmentId=").append(departmentId);
-        sb.append(", followupUpId=").append(followupUpId);
-        sb.append(", templateName=").append(templateName);
-        sb.append(", updatedDate=").append(updatedDate);
-        sb.append(", updateThe=").append(updateThe);
-        sb.append(", theErsionUmber=").append(theErsionUmber);
-        sb.append(", theReator=").append(theReator);
-        sb.append(", creationDate=").append(creationDate);
-        sb.append(", state=").append(state);
-        sb.append(", tableState=").append(tableState);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 }
