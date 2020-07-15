@@ -44,6 +44,61 @@ public class FollowUpRules implements Serializable {
      */
     private Integer prolong;
 
+    private BenchmarkEvents benchmarkEvents;
+    private PointOfTime pointOfTime;
+    private FilterEvents filterEvents;
+    private Department department;
+    private FirstAndLast firstAndLast;
+    private AnyVisit anyVisit;
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public FirstAndLast getFirstAndLast() {
+        return firstAndLast;
+    }
+
+    public void setFirstAndLast(FirstAndLast firstAndLast) {
+        this.firstAndLast = firstAndLast;
+    }
+
+    public AnyVisit getAnyVisit() {
+        return anyVisit;
+    }
+
+    public void setAnyVisit(AnyVisit anyVisit) {
+        this.anyVisit = anyVisit;
+    }
+
+    public BenchmarkEvents getBenchmarkEvents() {
+        return benchmarkEvents;
+    }
+
+    public void setBenchmarkEvents(BenchmarkEvents benchmarkEvents) {
+        this.benchmarkEvents = benchmarkEvents;
+    }
+
+    public PointOfTime getPointOfTime() {
+        return pointOfTime;
+    }
+
+    public void setPointOfTime(PointOfTime pointOfTime) {
+        this.pointOfTime = pointOfTime;
+    }
+
+    public FilterEvents getFilterEvents() {
+        return filterEvents;
+    }
+
+    public void setFilterEvents(FilterEvents filterEvents) {
+        this.filterEvents = filterEvents;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {

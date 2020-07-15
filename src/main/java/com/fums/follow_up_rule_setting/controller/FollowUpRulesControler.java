@@ -17,7 +17,7 @@ public class FollowUpRulesControler {
 
 
     @ResponseBody
-    @RequestMapping("selectAll")
+    @RequestMapping("selectFollowRules")
     public List<FollowUpRules> selectAll(){
         List<FollowUpRules> followUpRules = followUpRulesImpl.selectAll();
         return followUpRules;

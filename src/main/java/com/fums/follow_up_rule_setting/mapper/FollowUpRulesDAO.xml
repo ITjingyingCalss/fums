@@ -12,23 +12,15 @@
     <result column="prolong" jdbcType="INTEGER" property="prolong" />
     <!--基准事件类-->
     <association property="benchmarkEvents" javaType="com.fums.follow_up_rule_setting.pojo.BenchmarkEvents">
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="outpatient_department" jdbcType="INTEGER" property="outpatientDepartment" />
-        <result column="be_hospitalized" jdbcType="INTEGER" property="beHospitalized" />
-        <result column="leave_hospital" jdbcType="INTEGER" property="leaveHospital" />
-        <result column="operation" jdbcType="INTEGER" property="operation" />
-        <result column="admission_to_icu" jdbcType="INTEGER" property="admissionToIcu" />
-        <result column="out_of_icu" jdbcType="INTEGER" property="outOfIcu" />
+        <id column="benchmark_events_id" jdbcType="INTEGER" property="benchmarkEventsId"/>
+        <result column="benchmark_events_name" jdbcType="VARCHAR" property="benchmarkEventsName"/>
     </association>
     <!--筛选事件类-->
     <association property="filterEvents" javaType="com.fums.follow_up_rule_setting.pojo.FilterEvents">
       <id column="id" jdbcType="INTEGER" property="id" />
-      <result column="our_hospital" jdbcType="INTEGER" property="ourHospital" />
-      <result column="undergraduate_department" jdbcType="INTEGER" property="undergraduateDepartment" />
-      <result column="first" jdbcType="INTEGER" property="first" />
-      <result column="last" jdbcType="INTEGER" property="last" />
-      <result column="this_visit" jdbcType="INTEGER" property="thisVisit" />
-      <result column="arbitrary_treatment" jdbcType="INTEGER" property="arbitraryTreatment" />
+      <result column="department" jdbcType="INTEGER" property="department" />
+      <result column="first_and_last" jdbcType="INTEGER" property="firstAndLast" />
+      <result column="any_visit" jdbcType="INTEGER" property="anyVisit" />
     </association>
     <!--时点类-->
     <association property="pointOfTime" javaType="com.fums.follow_up_rule_setting.pojo.PointOfTime">
@@ -44,6 +36,18 @@
       <result column="interval_month" jdbcType="INTEGER" property="intervalMonth" />
       <result column="interval_day" jdbcType="INTEGER" property="intervalDay" />
     </association>
+    <association property="department" javaType="com.fums.follow_up_rule_setting.pojo.Department">
+      <id column="department_id" jdbcType="INTEGER" property="departmentId" />
+      <result column="department_name" jdbcType="VARCHAR" property="departmentName" />
+    </association>
+    <association property="firstAndLast" javaType="com.fums.follow_up_rule_setting.pojo.FirstAndLast">
+      <id column="first_and_last_id" jdbcType="INTEGER" property="firstAndLastId" />
+      <result column="first_and_last_name" jdbcType="VARCHAR" property="firstAndLastName" />
+    </association>
+    <association property="anyVisit" javaType="com.fums.follow_up_rule_setting.pojo.AnyVisit">
+      <id column="any_visit_id" jdbcType="INTEGER" property="anyVisitId" />
+      <result column="any_visit_name" jdbcType="VARCHAR" property="anyVisitName" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     id, are_holidays_scheduled, point_of_time_id, follow_up_template_id, reminders_for_patients,
@@ -53,14 +57,14 @@
   <select id="selectAll" resultMap="BaseResultMap">
     select
     <!--<include refid="Base_Column_List"/>-->
-    id rid, are_holidays_scheduled, point_of_time_id, follow_up_template_id, reminders_for_patients,
-    Doctors_reminders, ahead, prolong, outpatient_department, be_hospitalized, leave_hospital, `operation`, admission_to_icu,
-    out_of_icu,  our_hospital, undergraduate_department, `first`, `last`, this_visit, arbitrary_treatment,  benchmart_events_id, filter_events_id, start_year, start_month, duration, days_ahead,
-    start_day, interval_year, interval_month, interval_day
-    from follow_up_rules r,point_of_time p,benchmark_events b,filter_events f
-    where  r.point_of_time_id =p.id
-    and p.benchmark_events_id = b.id
-    and p.filter_events_id = f.id;
+    r.id,are_holidays_scheduled,point_of_time_id,follow_up_template_id,reminders_for_patients,Doctors_reminders,ahead,prolong,b.benchmark_events_id,benchmark_events_name,p.benchmark_events_id,p.filter_events_id,start_year,start_month,duration,days_ahead,start_day,interval_year,interval_month,interval_day,department_name,first_and_last_name,any_visit_name
+    from follow_up_rules r,point_of_time p,benchmark_events b,filter_events f,department,first_and_last,any_visit
+    where r.point_of_time_id = p.id
+    and p.benchmark_events_id = b.benchmark_events_id
+    and p.filter_events_id = f.id
+    and f.department = department.department_id
+    and f.first_and_last = first_and_last.first_and_last_id
+    and f.any_visit = any_visit.any_visit_id;
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

@@ -2,117 +2,59 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fums.follow_up_rule_setting.dao.BenchmarkEventsDAO">
   <resultMap id="BaseResultMap" type="com.fums.follow_up_rule_setting.pojo.BenchmarkEvents">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="outpatient_department" jdbcType="INTEGER" property="outpatientDepartment" />
-    <result column="be_hospitalized" jdbcType="INTEGER" property="beHospitalized" />
-    <result column="leave_hospital" jdbcType="INTEGER" property="leaveHospital" />
-    <result column="operation" jdbcType="INTEGER" property="operation" />
-    <result column="admission_to_icu" jdbcType="INTEGER" property="admissionToIcu" />
-    <result column="out_of_icu" jdbcType="INTEGER" property="outOfIcu" />
+    <id column="benchmark_events_id" jdbcType="INTEGER" property="benchmarkEventsId" />
+    <result column="benchmark_events_name" jdbcType="VARCHAR" property="benchmarkEventsName" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, outpatient_department, be_hospitalized, leave_hospital, `operation`, admission_to_icu, 
-    out_of_icu
+    benchmark_events_id, benchmark_events_name
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from benchmark_events
-    where id = #{id,jdbcType=INTEGER}
+    where benchmark_events_id = #{benchmarkEventsId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from benchmark_events
-    where id = #{id,jdbcType=INTEGER}
+    where benchmark_events_id = #{benchmarkEventsId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.fums.follow_up_rule_setting.pojo.BenchmarkEvents">
-    insert into benchmark_events (id, outpatient_department, be_hospitalized, 
-      leave_hospital, `operation`, admission_to_icu, 
-      out_of_icu)
-    values (#{id,jdbcType=INTEGER}, #{outpatientDepartment,jdbcType=INTEGER}, #{beHospitalized,jdbcType=INTEGER}, 
-      #{leaveHospital,jdbcType=INTEGER}, #{operation,jdbcType=INTEGER}, #{admissionToIcu,jdbcType=INTEGER}, 
-      #{outOfIcu,jdbcType=INTEGER})
+    insert into benchmark_events (benchmark_events_id, benchmark_events_name
+      )
+    values (#{benchmarkEventsId,jdbcType=INTEGER}, #{benchmarkEventsName,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.fums.follow_up_rule_setting.pojo.BenchmarkEvents">
     insert into benchmark_events
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="benchmarkEventsId != null">
+        benchmark_events_id,
       </if>
-      <if test="outpatientDepartment != null">
-        outpatient_department,
-      </if>
-      <if test="beHospitalized != null">
-        be_hospitalized,
-      </if>
-      <if test="leaveHospital != null">
-        leave_hospital,
-      </if>
-      <if test="operation != null">
-        `operation`,
-      </if>
-      <if test="admissionToIcu != null">
-        admission_to_icu,
-      </if>
-      <if test="outOfIcu != null">
-        out_of_icu,
+      <if test="benchmarkEventsName != null">
+        benchmark_events_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
+      <if test="benchmarkEventsId != null">
+        #{benchmarkEventsId,jdbcType=INTEGER},
       </if>
-      <if test="outpatientDepartment != null">
-        #{outpatientDepartment,jdbcType=INTEGER},
-      </if>
-      <if test="beHospitalized != null">
-        #{beHospitalized,jdbcType=INTEGER},
-      </if>
-      <if test="leaveHospital != null">
-        #{leaveHospital,jdbcType=INTEGER},
-      </if>
-      <if test="operation != null">
-        #{operation,jdbcType=INTEGER},
-      </if>
-      <if test="admissionToIcu != null">
-        #{admissionToIcu,jdbcType=INTEGER},
-      </if>
-      <if test="outOfIcu != null">
-        #{outOfIcu,jdbcType=INTEGER},
+      <if test="benchmarkEventsName != null">
+        #{benchmarkEventsName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.fums.follow_up_rule_setting.pojo.BenchmarkEvents">
     update benchmark_events
     <set>
-      <if test="outpatientDepartment != null">
-        outpatient_department = #{outpatientDepartment,jdbcType=INTEGER},
-      </if>
-      <if test="beHospitalized != null">
-        be_hospitalized = #{beHospitalized,jdbcType=INTEGER},
-      </if>
-      <if test="leaveHospital != null">
-        leave_hospital = #{leaveHospital,jdbcType=INTEGER},
-      </if>
-      <if test="operation != null">
-        `operation` = #{operation,jdbcType=INTEGER},
-      </if>
-      <if test="admissionToIcu != null">
-        admission_to_icu = #{admissionToIcu,jdbcType=INTEGER},
-      </if>
-      <if test="outOfIcu != null">
-        out_of_icu = #{outOfIcu,jdbcType=INTEGER},
+      <if test="benchmarkEventsName != null">
+        benchmark_events_name = #{benchmarkEventsName,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where benchmark_events_id = #{benchmarkEventsId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.fums.follow_up_rule_setting.pojo.BenchmarkEvents">
     update benchmark_events
-    set outpatient_department = #{outpatientDepartment,jdbcType=INTEGER},
-      be_hospitalized = #{beHospitalized,jdbcType=INTEGER},
-      leave_hospital = #{leaveHospital,jdbcType=INTEGER},
-      `operation` = #{operation,jdbcType=INTEGER},
-      admission_to_icu = #{admissionToIcu,jdbcType=INTEGER},
-      out_of_icu = #{outOfIcu,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+    set benchmark_events_name = #{benchmarkEventsName,jdbcType=VARCHAR}
+    where benchmark_events_id = #{benchmarkEventsId,jdbcType=INTEGER}
   </update>
 </mapper>

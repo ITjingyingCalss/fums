@@ -26,14 +26,14 @@
 		.s1{
 			background-color: gainsboro;
 			width: 190px;
-			overflow：hidden;
 			margin-left: 20px;
+			overflow:hidden;
 			border-radius:5px;
 		}
 		.s2{
 			background-color: gainsboro;
 			width: 190px;
-			overflow：hidden;
+			overflow:hidden;
 			margin-left: 20px;
 			border-radius:5px;
 
@@ -103,11 +103,18 @@
 
 		//页面加载
 		$(function () {
-			url="selectAll";
+			url="selectFollowRules";
 			$.get(url,{},function (data) {
 				console.log(data);
-				$(".two").append('<div>'+'基线'+'</div>'+'<br>'+'<div><span>'+'随访规则'+
-						'data[i].id'+'</span><br><br>'+'<span>'+'事件：'+'</span>'+'</div>')
+				/*for (var i = 0; i<data.length;i++){
+					$(".j").append('<br/><div class="s1"><span>'+'随访规则'+
+							data[i].id+'</span><br>'+'<span>'+'事件：'+data[i].department.departmentName+data[i].firstAndLast.firstAndLastName
+							+data[i].benchmarkEvents.benchmarkEventsName+'</span><br>'+'<span>'+'起始时间：事件后'+data[i].pointOfTime.startYear
+							+'年'+'</span><br>'+'<span>'+'间隔时间：'+data[i].pointOfTime.startYear+'年,共'+data[i].pointOfTime.duration+'次'+'</span><br>'
+							+'<span>'+'提前'+data[i].pointOfTime.daysAhead+'天自动通知'+'</span></div>')
+				}*/
+
+
 			})
 		})
 	</script>

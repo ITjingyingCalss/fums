@@ -3,15 +3,12 @@
 <mapper namespace="com.fums.follow_up_rule_setting.dao.FilterEventsDAO">
   <resultMap id="BaseResultMap" type="com.fums.follow_up_rule_setting.pojo.FilterEvents">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="our_hospital" jdbcType="INTEGER" property="ourHospital" />
-    <result column="undergraduate_department" jdbcType="INTEGER" property="undergraduateDepartment" />
-    <result column="first" jdbcType="INTEGER" property="first" />
-    <result column="last" jdbcType="INTEGER" property="last" />
-    <result column="this_visit" jdbcType="INTEGER" property="thisVisit" />
-    <result column="arbitrary_treatment" jdbcType="INTEGER" property="arbitraryTreatment" />
+    <result column="department" jdbcType="INTEGER" property="department" />
+    <result column="first_and_last" jdbcType="INTEGER" property="firstAndLast" />
+    <result column="any_visit" jdbcType="INTEGER" property="anyVisit" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, our_hospital, undergraduate_department, `first`, `last`, this_visit, arbitrary_treatment
+    id, department, first_and_last, any_visit
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -24,12 +21,10 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.fums.follow_up_rule_setting.pojo.FilterEvents">
-    insert into filter_events (id, our_hospital, undergraduate_department, 
-      `first`, `last`, this_visit, 
-      arbitrary_treatment)
-    values (#{id,jdbcType=INTEGER}, #{ourHospital,jdbcType=INTEGER}, #{undergraduateDepartment,jdbcType=INTEGER}, 
-      #{first,jdbcType=INTEGER}, #{last,jdbcType=INTEGER}, #{thisVisit,jdbcType=INTEGER}, 
-      #{arbitraryTreatment,jdbcType=INTEGER})
+    insert into filter_events (id, department, first_and_last, 
+      any_visit)
+    values (#{id,jdbcType=INTEGER}, #{department,jdbcType=INTEGER}, #{firstAndLast,jdbcType=INTEGER}, 
+      #{anyVisit,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.fums.follow_up_rule_setting.pojo.FilterEvents">
     insert into filter_events
@@ -37,81 +32,51 @@
       <if test="id != null">
         id,
       </if>
-      <if test="ourHospital != null">
-        our_hospital,
+      <if test="department != null">
+        department,
       </if>
-      <if test="undergraduateDepartment != null">
-        undergraduate_department,
+      <if test="firstAndLast != null">
+        first_and_last,
       </if>
-      <if test="first != null">
-        `first`,
-      </if>
-      <if test="last != null">
-        `last`,
-      </if>
-      <if test="thisVisit != null">
-        this_visit,
-      </if>
-      <if test="arbitraryTreatment != null">
-        arbitrary_treatment,
+      <if test="anyVisit != null">
+        any_visit,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="ourHospital != null">
-        #{ourHospital,jdbcType=INTEGER},
+      <if test="department != null">
+        #{department,jdbcType=INTEGER},
       </if>
-      <if test="undergraduateDepartment != null">
-        #{undergraduateDepartment,jdbcType=INTEGER},
+      <if test="firstAndLast != null">
+        #{firstAndLast,jdbcType=INTEGER},
       </if>
-      <if test="first != null">
-        #{first,jdbcType=INTEGER},
-      </if>
-      <if test="last != null">
-        #{last,jdbcType=INTEGER},
-      </if>
-      <if test="thisVisit != null">
-        #{thisVisit,jdbcType=INTEGER},
-      </if>
-      <if test="arbitraryTreatment != null">
-        #{arbitraryTreatment,jdbcType=INTEGER},
+      <if test="anyVisit != null">
+        #{anyVisit,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.fums.follow_up_rule_setting.pojo.FilterEvents">
     update filter_events
     <set>
-      <if test="ourHospital != null">
-        our_hospital = #{ourHospital,jdbcType=INTEGER},
+      <if test="department != null">
+        department = #{department,jdbcType=INTEGER},
       </if>
-      <if test="undergraduateDepartment != null">
-        undergraduate_department = #{undergraduateDepartment,jdbcType=INTEGER},
+      <if test="firstAndLast != null">
+        first_and_last = #{firstAndLast,jdbcType=INTEGER},
       </if>
-      <if test="first != null">
-        `first` = #{first,jdbcType=INTEGER},
-      </if>
-      <if test="last != null">
-        `last` = #{last,jdbcType=INTEGER},
-      </if>
-      <if test="thisVisit != null">
-        this_visit = #{thisVisit,jdbcType=INTEGER},
-      </if>
-      <if test="arbitraryTreatment != null">
-        arbitrary_treatment = #{arbitraryTreatment,jdbcType=INTEGER},
+      <if test="anyVisit != null">
+        any_visit = #{anyVisit,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.fums.follow_up_rule_setting.pojo.FilterEvents">
     update filter_events
-    set our_hospital = #{ourHospital,jdbcType=INTEGER},
-      undergraduate_department = #{undergraduateDepartment,jdbcType=INTEGER},
-      `first` = #{first,jdbcType=INTEGER},
-      `last` = #{last,jdbcType=INTEGER},
-      this_visit = #{thisVisit,jdbcType=INTEGER},
-      arbitrary_treatment = #{arbitraryTreatment,jdbcType=INTEGER}
+    set department = #{department,jdbcType=INTEGER},
+      first_and_last = #{firstAndLast,jdbcType=INTEGER},
+      any_visit = #{anyVisit,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

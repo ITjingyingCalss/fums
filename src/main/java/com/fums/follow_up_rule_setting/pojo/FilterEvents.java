@@ -7,37 +7,25 @@ import java.io.Serializable;
  * @author 
  */
 public class FilterEvents implements Serializable {
+    /**
+     * 筛选事件id
+     */
     private Integer id;
 
     /**
-     * 本院(0:是1:否)
+     * （1：本院2：本科室）
      */
-    private Integer ourHospital;
+    private Integer department;
 
     /**
-     * 本科室(0:是1:否)
+     * (1：首次2：末次)
      */
-    private Integer undergraduateDepartment;
+    private Integer firstAndLast;
 
     /**
-     * 首次(0:是1:否)
+     * （1：本就诊2：任意就诊）
      */
-    private Integer first;
-
-    /**
-     * 末次(0:是1:否)
-     */
-    private Integer last;
-
-    /**
-     * 本就诊(0:是1:否)
-     */
-    private Integer thisVisit;
-
-    /**
-     * 任意就诊(0:是1:否)
-     */
-    private Integer arbitraryTreatment;
+    private Integer anyVisit;
 
     private static final long serialVersionUID = 1L;
 
@@ -49,52 +37,28 @@ public class FilterEvents implements Serializable {
         this.id = id;
     }
 
-    public Integer getOurHospital() {
-        return ourHospital;
+    public Integer getDepartment() {
+        return department;
     }
 
-    public void setOurHospital(Integer ourHospital) {
-        this.ourHospital = ourHospital;
+    public void setDepartment(Integer department) {
+        this.department = department;
     }
 
-    public Integer getUndergraduateDepartment() {
-        return undergraduateDepartment;
+    public Integer getFirstAndLast() {
+        return firstAndLast;
     }
 
-    public void setUndergraduateDepartment(Integer undergraduateDepartment) {
-        this.undergraduateDepartment = undergraduateDepartment;
+    public void setFirstAndLast(Integer firstAndLast) {
+        this.firstAndLast = firstAndLast;
     }
 
-    public Integer getFirst() {
-        return first;
+    public Integer getAnyVisit() {
+        return anyVisit;
     }
 
-    public void setFirst(Integer first) {
-        this.first = first;
-    }
-
-    public Integer getLast() {
-        return last;
-    }
-
-    public void setLast(Integer last) {
-        this.last = last;
-    }
-
-    public Integer getThisVisit() {
-        return thisVisit;
-    }
-
-    public void setThisVisit(Integer thisVisit) {
-        this.thisVisit = thisVisit;
-    }
-
-    public Integer getArbitraryTreatment() {
-        return arbitraryTreatment;
-    }
-
-    public void setArbitraryTreatment(Integer arbitraryTreatment) {
-        this.arbitraryTreatment = arbitraryTreatment;
+    public void setAnyVisit(Integer anyVisit) {
+        this.anyVisit = anyVisit;
     }
 
     @Override
@@ -110,12 +74,9 @@ public class FilterEvents implements Serializable {
         }
         FilterEvents other = (FilterEvents) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getOurHospital() == null ? other.getOurHospital() == null : this.getOurHospital().equals(other.getOurHospital()))
-            && (this.getUndergraduateDepartment() == null ? other.getUndergraduateDepartment() == null : this.getUndergraduateDepartment().equals(other.getUndergraduateDepartment()))
-            && (this.getFirst() == null ? other.getFirst() == null : this.getFirst().equals(other.getFirst()))
-            && (this.getLast() == null ? other.getLast() == null : this.getLast().equals(other.getLast()))
-            && (this.getThisVisit() == null ? other.getThisVisit() == null : this.getThisVisit().equals(other.getThisVisit()))
-            && (this.getArbitraryTreatment() == null ? other.getArbitraryTreatment() == null : this.getArbitraryTreatment().equals(other.getArbitraryTreatment()));
+            && (this.getDepartment() == null ? other.getDepartment() == null : this.getDepartment().equals(other.getDepartment()))
+            && (this.getFirstAndLast() == null ? other.getFirstAndLast() == null : this.getFirstAndLast().equals(other.getFirstAndLast()))
+            && (this.getAnyVisit() == null ? other.getAnyVisit() == null : this.getAnyVisit().equals(other.getAnyVisit()));
     }
 
     @Override
@@ -123,12 +84,9 @@ public class FilterEvents implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getOurHospital() == null) ? 0 : getOurHospital().hashCode());
-        result = prime * result + ((getUndergraduateDepartment() == null) ? 0 : getUndergraduateDepartment().hashCode());
-        result = prime * result + ((getFirst() == null) ? 0 : getFirst().hashCode());
-        result = prime * result + ((getLast() == null) ? 0 : getLast().hashCode());
-        result = prime * result + ((getThisVisit() == null) ? 0 : getThisVisit().hashCode());
-        result = prime * result + ((getArbitraryTreatment() == null) ? 0 : getArbitraryTreatment().hashCode());
+        result = prime * result + ((getDepartment() == null) ? 0 : getDepartment().hashCode());
+        result = prime * result + ((getFirstAndLast() == null) ? 0 : getFirstAndLast().hashCode());
+        result = prime * result + ((getAnyVisit() == null) ? 0 : getAnyVisit().hashCode());
         return result;
     }
 
@@ -139,12 +97,9 @@ public class FilterEvents implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", ourHospital=").append(ourHospital);
-        sb.append(", undergraduateDepartment=").append(undergraduateDepartment);
-        sb.append(", first=").append(first);
-        sb.append(", last=").append(last);
-        sb.append(", thisVisit=").append(thisVisit);
-        sb.append(", arbitraryTreatment=").append(arbitraryTreatment);
+        sb.append(", department=").append(department);
+        sb.append(", firstAndLast=").append(firstAndLast);
+        sb.append(", anyVisit=").append(anyVisit);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
