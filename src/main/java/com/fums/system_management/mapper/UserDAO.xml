@@ -24,8 +24,8 @@
       <result column="hospital_department_name" jdbcType="VARCHAR" property="hospitalDepartmentName" />
       <result column="hospital_department_state" jdbcType="INTEGER" property="hospitalDepartmentState" />
       <result column="hospital_department_code" jdbcType="VARCHAR" property="hospitalDepartmentCode" />
-
     </association>
+
   </resultMap>
 
  <resultMap id="usBaseResultMap" type="com.fums.system_management.pojo.HospitalDepartment">
