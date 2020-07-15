@@ -38,8 +38,15 @@ public class FormOverviewController {
                            String theReator,
                            @RequestParam(value = "pageNum" ,defaultValue = "1",required = false) Integer pageNum) throws ParseException {
 
-        Date da = (Date) new  SimpleDateFormat("yyyy-MM-dd").parse(creationDate);
-        Date dada = (Date) new  SimpleDateFormat("yyyy-MM-dd").parse(updatedDate);
+        /*第一种方法*/
+        Date da = null;
+        Date dada = null;
+        if (creationDate != null && !"".equals(creationDate)){
+            da = (Date) new  SimpleDateFormat("yyyy-MM-dd").parse(creationDate);
+            dada = (Date) new  SimpleDateFormat("yyyy-MM-dd").parse(updatedDate);
+        }
+
+
         PageHelper.startPage(pageNum,5);
         List<FormOverview> list = formOverviewService.seleForm(followUpName,da, dada, templateName, theReator);
 
