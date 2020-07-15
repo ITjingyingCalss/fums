@@ -34,6 +34,7 @@
     follow_up_control_group, follow_up_backdrop, follow_up_grate
   </sql>
 
+
     <!--验证随访组表单属性-->
     <select id="verifyProperties" resultMap="BaseResultMap">
         SELECT * FROM follow_up
