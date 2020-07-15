@@ -17,14 +17,14 @@
     <!--引入自己的JS-->
 	<script type="text/javascript" src="js/follow_up_management/follow_up_management.js" ></script>
 	<script type="text/javascript" src="js/index.js" ></script>
-	<style type="text/css">
+	<!--<style type="text/css">
 		.navbar .nav > li .dropdown-menu {
 			margin: 0;
 		}
 		.navbar .nav > li:hover .dropdown-menu {
 			display: block;
 		}
-    </style>
+    </style>-->
     <script>
       function aaa(){
         $("#calendar").css("display","none");
@@ -33,6 +33,7 @@
       function bbb(){
         $("#list_view").css("display","none");
         $("#calendar").css("display","block");
+        findCalendarData();
       }
     </script>
   </head>

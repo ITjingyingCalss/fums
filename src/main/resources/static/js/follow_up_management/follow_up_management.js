@@ -1,8 +1,10 @@
+var fp;
 $(function () {
     findFollowUpGroupAndHospitalDepartment();
     followUpManagementFenYe(1);
 })
 function followUpManagementFenYe(pageNum) {
+    aaa();
     var formData2 = $("#form2").serialize();
     var list = [];
     $("#list_view input[type=checkbox]").each(function () {
@@ -21,6 +23,7 @@ function followUpManagementFenYe(pageNum) {
         url:'followUpManagementController/findAllFollowUpManagement',
         data:formData2,
         success:function (data) {
+            fp=data;
             var result = data.list;
             $("#tbody").empty();
             var a = '';
@@ -41,11 +44,11 @@ function followUpManagementFenYe(pageNum) {
                         a+='<td>已随访</td>';
                         break;
                 }
-                a+='<td><img class="img " src="img/u167.png"/></td>';
+                a+='<td><img class="img" onclick="tiaozhuan('+result[i].patientId+')" src="img/u167.png"/></td>';
                 a+='</tr>';
             }
             $("#tbody").append(a);
-console.log(data);
+//console.log(data);
         }
     })
 }
@@ -56,7 +59,7 @@ function findFollowUpGroupAndHospitalDepartment() {
         url:'followUpManagementController/findFollowUpGroupAndHospitalDepartment',
         data: {},
         success:function (data) {
-            console.log(data);
+            //console.log(data);
             var hospitalDepartmentList = data.hospitalDepartmentList;
             var followUpList = data.followUpList;
             $("#followUp").empty();
@@ -75,6 +78,78 @@ function findFollowUpGroupAndHospitalDepartment() {
         }
     })
 }
-function bian() {
-alert(111)
+function findCalendarData(v) {
+    $.ajax({
+        type:'post',
+        url:'followUpManagementController/findCalendarData',
+        data:{},
+        success:function (data) {
+            var day1 = new Date();
+            var allDays = data[0];
+            var intradayCheckedNumber = data[1];
+            for (var key in allDays){
+                var day2 = new Date(key);
+                if (day2.getTime()-day1.getTime()<=0){
+                    $("#"+key).html(intradayCheckedNumber[key]+'/'+allDays[key]);
+                    if (intradayCheckedNumber[key]/allDays[key]<1){
+                        $("#"+key).css("color","red");
+                        $("#"+key).parent().append('<span style="position: absolute;right: 2px;bottom: 0px;width: 35px;height: 25px;color: red">'+(intradayCheckedNumber[key]/allDays[key])*100+'%</span>');
+                    }else {
+                        $("#"+key).css("color","green");
+                        $("#"+key).parent().append('<span style="position: absolute;right: 2px;bottom: 0px;width: 35px;height: 25px;color: green">'+(intradayCheckedNumber[key]/allDays[key])*100+'%</span>');
+                    }
+                }else {
+                    $("#"+key).html(allDays[key]);
+                    $("#"+key).css("color","green");
+                }
+            }
+            //console.log(data);
+        }
+    })
+}
+function findWeekData() {
+    $.ajax({
+        type:'post',
+        url:'followUpManagementController/findCalendarData',
+        data:{},
+        success:function (data) {
+            var day1 = new Date();
+            var allDays = data[0];
+            var intradayCheckedNumber = data[1];
+            for (var key in allDays){
+                var day2 = new Date(key);
+                if (day2.getTime()-day1.getTime()<=0){
+                    var a='<span style="width: 100%;height: 100%">'
+                    a+='计划随访：'+allDays[key]+'</br>';
+                    a+='实际随访：'+intradayCheckedNumber[key]+'</br>';
+                    a+='随访进度：'+(intradayCheckedNumber[key]/allDays[key])*100+'%</br>';
+                    a+='</span>'
+                    $("#"+key).append(a);
+                    for (var i=0;i<fp.list.length;i++){
+                        console.log(fp.list[i].dateOfNextFollowUp)
+                        if (fp.list[i].dateOfNextFollowUp==key){
+                            var b=fp.list[i].patientName+'</br>';
+                            $("#key"+key).append(b);
+                        }
+                    }
+                }else {
+                    var a='<span style="width: 100%;height: 100%">'
+                    a+='计划随访：'+allDays[key]+'</br>';
+                    a+='</span>'
+                    $("#"+key).append(a);
+                    for (var i=0;i<fp.list.length;i++){
+                        console.log(fp.list[i].dateOfNextFollowUp)
+                        if (fp.list[i].dateOfNextFollowUp==key){
+                            var b=fp.list[i].patientName+'</br>';
+                            $("#key"+key).append(b);
+                        }
+                    }
+                }
+
+            }
+        }
+    })
+}
+function tiaozhuan(id) {
+    window.location.href = 'patientsWithDetails?id='+id;
 }

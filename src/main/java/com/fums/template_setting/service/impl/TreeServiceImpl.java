@@ -1,9 +1,13 @@
 package com.fums.template_setting.service.impl;
 
 import com.fums.template_setting.dao.TreeDao;
+import com.fums.template_setting.dao.basicinformationMapper;
 import com.fums.template_setting.pojo.Symptom;
+import com.fums.template_setting.pojo.basicinformation;
 import com.fums.template_setting.pojo.detail;
+import com.fums.template_setting.pojo.template;
 import com.fums.template_setting.service.treeService;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,7 +22,8 @@ import java.util.List;
 public class TreeServiceImpl implements treeService {
     @Resource
     private TreeDao treeDao;
-
+    @Resource
+    private basicinformationMapper basicinformationMapper;
     @Override
     public List<Symptom> queryid() {
         return treeDao.queryid();
@@ -46,5 +51,10 @@ public class TreeServiceImpl implements treeService {
     @Override
     public int insertTree(detail detail) {
         return treeDao.insertTree(detail);
+    }
+
+    @Override
+    public List<basicinformation> selectBasicInformation() {
+        return basicinformationMapper.selectBasicInformation();
     }
 }

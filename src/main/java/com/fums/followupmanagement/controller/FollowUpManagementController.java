@@ -28,4 +28,10 @@ public class FollowUpManagementController {
     public Map findFollowUpGroupAndHospitalDepartment(){
         return followUpManagementServiceImpl.findFollowUpGroupAndHospitalDepartment();
     }
+    @RequestMapping("findCalendarData")
+    public List<Map> findCalendarData(){
+        List<Map> mapList = followUpManagementServiceImpl.findCalendarData();
+        System.err.println(mapList);
+        return mapList;
+    }
 }

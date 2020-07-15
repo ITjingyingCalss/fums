@@ -1,5 +1,6 @@
 var nextMonth = 0;
 function mm(nextMonth){
+	findCalendarData();
 
 	var time = new Date();
 	var testYear = time.getFullYear(), testMonth = time.getMonth(),testDay = time.getDate();
@@ -59,21 +60,31 @@ function mm(nextMonth){
         }
     } */
 	var nextMonthDay = 1;
+	var idMonth = currentMonth+1;
+	if (idMonth/10<1){
+		idMonth = '0'+idMonth;
+	}
+
 
 	for(var jj = 1;jj<=6;jj++){
+
 		switch(week){
 			case 0:
 				for(var j=0;j<7;j++){
+					var idDay = ((day-7*(dd-jj)) - (week-j));
+					if (idDay/10<1){
+						idDay = '0'+idDay;
+					}
 					if(((day-7*(dd-jj)) - (week-j))<1){
-						a+='<td>'+(month_days[currentMonth-1]+((day-7*(dd-jj)) - (week-j)))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+						a+='<td>'+(month_days[currentMonth-1]+((day-7*(dd-jj)) - (week-j)))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 					}else if(((day-7*(dd-jj)) - (week-j))>(month_days[currentMonth])){
-						a+='<td>'+nextMonthDay+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+						a+='<td>'+nextMonthDay+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						nextMonthDay++;
 					}else{
 						if(testYear==currentYear&&testMonth==currentMonth&&testDay==((day-7*(dd-jj)) - (week-j))){
-							a+='<td style="color:red">'+((day-7*(dd-jj)) - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+							a+='<td style="color:green">'+((day-7*(dd-jj)) - (week-j))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						}else{
-							a+='<td>'+((day-7*(dd-jj)) - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+							a+='<td>'+((day-7*(dd-jj)) - (week-j))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						}
 					}
 				}
@@ -81,34 +92,41 @@ function mm(nextMonth){
 				break;
 			case 1:
 				for(var j=0;j<7;j++){
+					var idDay = ((day-7*(dd-jj)) - (week-j));
+					if (idDay/10<1){
+						idDay = '0'+idDay;
+					}
 					if(((day-7*(dd-jj)) - (week-j))<1){
-						a+='<td>'+(month_days[currentMonth-1]+((day-7*(dd-jj)) - (week-j)))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+						a+='<td>'+(month_days[currentMonth-1]+((day-7*(dd-jj)) - (week-j)))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 					}else if(((day-7*(dd-jj)) - (week-j))>(month_days[currentMonth])){
-						a+='<td>'+nextMonthDay+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+						a+='<td>'+nextMonthDay+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						nextMonthDay++;
 					}else{
 						if(testYear==currentYear&&testMonth==currentMonth&&testDay==((day-7*(dd-jj)) - (week-j))){
-							a+='<td style="color:red">'+((day-7*(dd-jj)) - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+							a+='<td style="color:green">'+((day-7*(dd-jj)) - (week-j))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						}else{
-							a+='<td>'+((day-7*(dd-jj)) - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+							a+='<td>'+((day-7*(dd-jj)) - (week-j))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						}
-
 					}
 				}
 				a+='</tr>';
 				break;
 			case 2:
 				for(var j=0;j<7;j++){
+					var idDay = ((day-7*(dd-jj)) - (week-j));
+					if (idDay/10<1){
+						idDay = '0'+idDay;
+					}
 					if(((day-7*(dd-jj)) - (week-j))<1){
-						a+='<td>'+(month_days[currentMonth-1]+((day-7*(dd-jj)) - (week-j)))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+						a+='<td>'+(month_days[currentMonth-1]+((day-7*(dd-jj)) - (week-j)))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 					}else if(((day-7*(dd-jj)) - (week-j))>(month_days[currentMonth])){
-						a+='<td>'+nextMonthDay+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+						a+='<td>'+nextMonthDay+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						nextMonthDay++;
 					}else{
 						if(testYear==currentYear&&testMonth==currentMonth&&testDay==((day-7*(dd-jj)) - (week-j))){
-							a+='<td style="color:red">'+((day-7*(dd-jj)) - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+							a+='<td style="color:green">'+((day-7*(dd-jj)) - (week-j))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						}else{
-							a+='<td>'+((day-7*(dd-jj)) - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+							a+='<td>'+((day-7*(dd-jj)) - (week-j))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						}
 					}
 				}
@@ -116,16 +134,20 @@ function mm(nextMonth){
 				break;
 			case 3:
 				for(var j=0;j<7;j++){
+					var idDay = ((day-7*(dd-jj)) - (week-j));
+					if (idDay/10<1){
+						idDay = '0'+idDay;
+					}
 					if(((day-7*(dd-jj)) - (week-j))<1){
-						a+='<td>'+(month_days[currentMonth-1]+((day-7*(dd-jj)) - (week-j)))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+						a+='<td>'+(month_days[currentMonth-1]+((day-7*(dd-jj)) - (week-j)))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 					}else if(((day-7*(dd-jj)) - (week-j))>(month_days[currentMonth])){
-						a+='<td>'+nextMonthDay+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+						a+='<td>'+nextMonthDay+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						nextMonthDay++;
 					}else{
 						if(testYear==currentYear&&testMonth==currentMonth&&testDay==((day-7*(dd-jj)) - (week-j))){
-							a+='<td style="color:red">'+((day-7*(dd-jj)) - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+							a+='<td style="color:green">'+((day-7*(dd-jj)) - (week-j))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						}else{
-							a+='<td>'+((day-7*(dd-jj)) - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+							a+='<td>'+((day-7*(dd-jj)) - (week-j))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						}
 					}
 				}
@@ -133,16 +155,20 @@ function mm(nextMonth){
 				break;
 			case 4:
 				for(var j=0;j<7;j++){
+					var idDay = ((day-7*(dd-jj)) - (week-j));
+					if (idDay/10<1){
+						idDay = '0'+idDay;
+					}
 					if(((day-7*(dd-jj)) - (week-j))<1){
-						a+='<td>'+(month_days[currentMonth-1]+((day-7*(dd-jj)) - (week-j)))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+						a+='<td>'+(month_days[currentMonth-1]+((day-7*(dd-jj)) - (week-j)))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 					}else if(((day-7*(dd-jj)) - (week-j))>(month_days[currentMonth])){
-						a+='<td>'+nextMonthDay+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+						a+='<td>'+nextMonthDay+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						nextMonthDay++;
 					}else{
 						if(testYear==currentYear&&testMonth==currentMonth&&testDay==((day-7*(dd-jj)) - (week-j))){
-							a+='<td style="color:red">'+((day-7*(dd-jj)) - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+							a+='<td style="color:green">'+((day-7*(dd-jj)) - (week-j))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						}else{
-							a+='<td>'+((day-7*(dd-jj)) - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+							a+='<td>'+((day-7*(dd-jj)) - (week-j))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						}
 					}
 				}
@@ -150,16 +176,20 @@ function mm(nextMonth){
 				break;
 			case 5:
 				for(var j=0;j<7;j++){
+					var idDay = ((day-7*(dd-jj)) - (week-j));
+					if (idDay/10<1){
+						idDay = '0'+idDay;
+					}
 					if(((day-7*(dd-jj)) - (week-j))<1){
-						a+='<td>'+(month_days[currentMonth-1]+((day-7*(dd-jj)) - (week-j)))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+						a+='<td>'+(month_days[currentMonth-1]+((day-7*(dd-jj)) - (week-j)))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 					}else if(((day-7*(dd-jj)) - (week-j))>(month_days[currentMonth])){
-						a+='<td>'+nextMonthDay+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+						a+='<td>'+nextMonthDay+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						nextMonthDay++;
 					}else{
 						if(testYear==currentYear&&testMonth==currentMonth&&testDay==((day-7*(dd-jj)) - (week-j))){
-							a+='<td style="color:red">'+((day-7*(dd-jj)) - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+							a+='<td style="color:green">'+((day-7*(dd-jj)) - (week-j))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						}else{
-							a+='<td>'+((day-7*(dd-jj)) - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+							a+='<td>'+((day-7*(dd-jj)) - (week-j))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						}
 					}
 				}
@@ -167,16 +197,20 @@ function mm(nextMonth){
 				break;
 			case 6:
 				for(var j=0;j<7;j++){
+					var idDay = ((day-7*(dd-jj)) - (week-j));
+					if (idDay/10<1){
+						idDay = '0'+idDay;
+					}
 					if(((day-7*(dd-jj)) - (week-j))<1){
-						a+='<td>'+(month_days[currentMonth-1]+((day-7*(dd-jj)) - (week-j)))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+						a+='<td>'+(month_days[currentMonth-1]+((day-7*(dd-jj)) - (week-j)))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 					}else if(((day-7*(dd-jj)) - (week-j))>(month_days[currentMonth])){
-						a+='<td>'+nextMonthDay+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+						a+='<td>'+nextMonthDay+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						nextMonthDay++;
 					}else{
 						if(testYear==currentYear&&testMonth==currentMonth&&testDay==((day-7*(dd-jj)) - (week-j))){
-							a+='<td style="color:red">'+((day-7*(dd-jj)) - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+							a+='<td style="color:green">'+((day-7*(dd-jj)) - (week-j))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						}else{
-							a+='<td>'+((day-7*(dd-jj)) - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+((day-7*(dd-jj)) - (week-j))+'"></span></td>';
+							a+='<td>'+((day-7*(dd-jj)) - (week-j))+'<span style="left: 8px;" id="'+currentYear+'-'+idMonth+'-'+idDay+'"></span></td>';
 						}
 					}
 				}
@@ -217,22 +251,29 @@ function weekend(){
 	var th = '<thead><tr>';
 	var a ='<tr style="height:30%">';
 	var b ='<tr style="height:70%">';
-	switch(week){
-		case 0:
+	var idMonth = (currentMonth+1);
+	if (idMonth/10<1){
+		idMonth = '0'+idMonth;
+	}
+
 			for(var j=0;j<7;j++){
-				th+='<td>'+weeks[j]+(day-7 - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
-				a+='<td>'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
-				b+='<td>'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
+				var idDay = (day - (week-j));
+				if (idDay/10<1){
+					idDay = '0'+idDay;
+				}
+				th+='<td>'+weeks[j]+(day- (week-j))+'</td>';
+				a+='<td id="'+currentYear+'-'+idMonth+'-'+idDay+'"></td>';
+				b+='<td id="key'+currentYear+'-'+idMonth+'-'+idDay+'">患者列表：</br></td>';
 			}
 			a+='</tr>';
 			b+='</tr>';
 			th+='</tr></thead>';
-			break;
-		case 1:
+		//	break;
+		/*case 1:
 			for(var j=0;j<7;j++){
 				th+='<td>'+weeks[j]+(day - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
-				a+='<td>'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
-				b+='<td>'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
+				a+='<td id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></td>';
+				b+='<td>患者列表：'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
 			}
 			a+='</tr>';
 			b+='</tr>';
@@ -240,9 +281,9 @@ function weekend(){
 			break;
 		case 2:
 			for(var j=0;j<7;j++){
-				th+='<td>'+weeks[j]+(day-7 - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
-				a+='<td>'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
-				b+='<td>'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
+				th+='<td>'+weeks[j]+(day- (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
+				a+='<td id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></td>';
+				b+='<td>患者列表：'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
 			}
 			a+='</tr>';
 			b+='</tr>';
@@ -250,9 +291,9 @@ function weekend(){
 			break;
 		case 3:
 			for(var j=0;j<7;j++){
-				th+='<td>'+weeks[j]+(day-7 - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
-				a+='<td>'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
-				b+='<td>'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
+				th+='<td>'+weeks[j]+(day- (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
+				a+='<td id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></td>';
+				b+='<td>患者列表：'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
 			}
 			a+='</tr>';
 			b+='</tr>';
@@ -260,9 +301,9 @@ function weekend(){
 			break;
 		case 4:
 			for(var j=0;j<7;j++){
-				th+='<td>'+weeks[j]+(day-7 - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
-				a+='<td>'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
-				b+='<td>'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
+				th+='<td>'+weeks[j]+(day- (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
+				a+='<td id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></td>';
+				b+='<td>患者列表：'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
 			}
 			a+='</tr>';
 			b+='</tr>';
@@ -270,9 +311,9 @@ function weekend(){
 			break;
 		case 5:
 			for(var j=0;j<7;j++){
-				th+='<td>'+weeks[j]+(day-7 - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
-				a+='<td>'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
-				b+='<td>'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
+				th+='<td>'+weeks[j]+(day- (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
+				a+='<td id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></td>';
+				b+='<td>患者列表：'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
 			}
 			a+='</tr>';
 			b+='</tr>';
@@ -280,20 +321,21 @@ function weekend(){
 			break;
 		case 6:
 			for(var j=0;j<7;j++){
-				th+='<td>'+weeks[j]+(day-7 - (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
-				a+='<td>'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
-				b+='<td>'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
+				th+='<td>'+weeks[j]+(day- (week-j))+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
+				a+='<td id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></td>';
+				b+='<td>患者列表：'+'<span id="'+currentYear+'-'+(currentMonth+1)+'-'+(day - (week-j))+'"></span></td>';
 			}
 			a+='</tr>';
 			b+='</tr>';
 			th+='</tr></thead>';
 			break;
-	}
+	*/
 	$("#table").append(th);
 	$("#table").append("<tbody id='tbody2'></tbody>");
 	$("#tbody2").append(a);
 	$("#tbody2").append(b);
 
+	findWeekData();
 }
 function refresh(){
 	mm();

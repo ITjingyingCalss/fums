@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.template_setting.dao.basicinformationMapper">
+  <resultMap id="BaseResultMap" type="com.fums.template_setting.pojo.basicinformation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="patient_unique" jdbcType="VARCHAR" property="patientUnique" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="born_adress" jdbcType="VARCHAR" property="bornAdress" />
+    <result column="born" jdbcType="DATE" property="born" />
+    <result column="culture" jdbcType="VARCHAR" property="culture" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="abo_type" jdbcType="VARCHAR" property="aboType" />
+    <result column="rh_type" jdbcType="VARCHAR" property="rhType" />
+    <result column="contacts_id" jdbcType="INTEGER" property="contactsId" />
+    <result column="certificates_id" jdbcType="INTEGER" property="certificatesId" />
+    <association property="certificates" javaType="com.fums.template_setting.pojo.certificates">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+      <result column="account_book_no" jdbcType="VARCHAR" property="accountBookNo" />
+      <result column="passport_no" jdbcType="VARCHAR" property="passportNo" />
+      <result column="officer_number" jdbcType="VARCHAR" property="officerNumber" />
+      <result column="driver_number" jdbcType="VARCHAR" property="driverNumber" />
+      <result column="hong_kong_and_macao_pass_no" jdbcType="VARCHAR" property="hongKongAndMacaoPassNo" />
+      <result column="taiwan_pass_number" jdbcType="VARCHAR" property="taiwanPassNumber" />
+    </association>
+    <association property="contacts" javaType="com.fums.template_setting.pojo.contacts">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="relationship" jdbcType="VARCHAR" property="relationship" />
+      <result column="relationship_name" jdbcType="VARCHAR" property="relationshipName" />
+      <result column="relationship_sex" jdbcType="VARCHAR" property="relationshipSex" />
+      <result column="relationship_adress" jdbcType="VARCHAR" property="relationshipAdress" />
+      <result column="relationship_email" jdbcType="VARCHAR" property="relationshipEmail" />
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    patient_unique, name, sex, born_adress, born, culture, phone, email, abo_type,
+    rh_type, contacts_id, certificates_id
+  </sql>
+  <select id="selectBasicInformation" resultMap="BaseResultMap">
+    select  c.`account_book_no`,c.`driver_number`,c.`hong_kong_and_macao_pass_no`,c.`idcard`,c.`officer_number`,c.`passport_no`,c.`taiwan_pass_number`,
+    cc.`relationship`,cc.`relationship_adress`,cc.`relationship_email`,cc.`relationship_email`,cc.`relationship_name`,cc.`relationship_sex`,
+    <include refid="Base_Column_List" />
+    from basic_information b
+    inner join certificates c on c.`id`=b.`certificates_id`
+    inner join contacts cc on cc.`id`=b.`contacts_id`
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from basic_information
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from basic_information
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.template_setting.pojo.basicinformation">
+    insert into basic_information (id, patient_unique, name, 
+      sex, born_adress, born, 
+      culture, phone, email, 
+      abo_type, rh_type, contacts_id, 
+      certificates_id)
+    values (#{id,jdbcType=INTEGER}, #{patientUnique,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{bornAdress,jdbcType=VARCHAR}, #{born,jdbcType=DATE}, 
+      #{culture,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{aboType,jdbcType=VARCHAR}, #{rhType,jdbcType=VARCHAR}, #{contactsId,jdbcType=INTEGER}, 
+      #{certificatesId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.template_setting.pojo.basicinformation">
+    insert into basic_information
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="patientUnique != null">
+        patient_unique,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="bornAdress != null">
+        born_adress,
+      </if>
+      <if test="born != null">
+        born,
+      </if>
+      <if test="culture != null">
+        culture,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="aboType != null">
+        abo_type,
+      </if>
+      <if test="rhType != null">
+        rh_type,
+      </if>
+      <if test="contactsId != null">
+        contacts_id,
+      </if>
+      <if test="certificatesId != null">
+        certificates_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="patientUnique != null">
+        #{patientUnique,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="bornAdress != null">
+        #{bornAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="born != null">
+        #{born,jdbcType=DATE},
+      </if>
+      <if test="culture != null">
+        #{culture,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="aboType != null">
+        #{aboType,jdbcType=VARCHAR},
+      </if>
+      <if test="rhType != null">
+        #{rhType,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsId != null">
+        #{contactsId,jdbcType=INTEGER},
+      </if>
+      <if test="certificatesId != null">
+        #{certificatesId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.template_setting.pojo.basicinformation">
+    update basic_information
+    <set>
+      <if test="patientUnique != null">
+        patient_unique = #{patientUnique,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="bornAdress != null">
+        born_adress = #{bornAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="born != null">
+        born = #{born,jdbcType=DATE},
+      </if>
+      <if test="culture != null">
+        culture = #{culture,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="aboType != null">
+        abo_type = #{aboType,jdbcType=VARCHAR},
+      </if>
+      <if test="rhType != null">
+        rh_type = #{rhType,jdbcType=VARCHAR},
+      </if>
+      <if test="contactsId != null">
+        contacts_id = #{contactsId,jdbcType=INTEGER},
+      </if>
+      <if test="certificatesId != null">
+        certificates_id = #{certificatesId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.template_setting.pojo.basicinformation">
+    update basic_information
+    set patient_unique = #{patientUnique,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      born_adress = #{bornAdress,jdbcType=VARCHAR},
+      born = #{born,jdbcType=DATE},
+      culture = #{culture,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      abo_type = #{aboType,jdbcType=VARCHAR},
+      rh_type = #{rhType,jdbcType=VARCHAR},
+      contacts_id = #{contactsId,jdbcType=INTEGER},
+      certificates_id = #{certificatesId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

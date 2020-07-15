@@ -52,6 +52,16 @@
   text-align: center;
   
 }
+#tbody2>tr>td{
+  position: relative;
+}
+#tbody2>tr>td>span{
+  position: absolute;
+
+  bottom: 0px;
+  width: 35px;
+  height: 25px;
+}
 #u1247{
   position:absolute;
   top: 0px;
