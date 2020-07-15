@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.template_setting.dao.contactsMapper">
+  <resultMap id="BaseResultMap" type="com.fums.template_setting.pojo.contacts">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="relationship" jdbcType="VARCHAR" property="relationship" />
+    <result column="relationship_name" jdbcType="VARCHAR" property="relationshipName" />
+    <result column="relationship_sex" jdbcType="VARCHAR" property="relationshipSex" />
+    <result column="relationship_adress" jdbcType="VARCHAR" property="relationshipAdress" />
+    <result column="relationship_email" jdbcType="VARCHAR" property="relationshipEmail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, relationship, relationship_name, relationship_sex, relationship_adress, relationship_email
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from contacts
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from contacts
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.template_setting.pojo.contacts">
+    insert into contacts (id, relationship, relationship_name, 
+      relationship_sex, relationship_adress, relationship_email
+      )
+    values (#{id,jdbcType=INTEGER}, #{relationship,jdbcType=VARCHAR}, #{relationshipName,jdbcType=VARCHAR}, 
+      #{relationshipSex,jdbcType=VARCHAR}, #{relationshipAdress,jdbcType=VARCHAR}, #{relationshipEmail,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.template_setting.pojo.contacts">
+    insert into contacts
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="relationship != null">
+        relationship,
+      </if>
+      <if test="relationshipName != null">
+        relationship_name,
+      </if>
+      <if test="relationshipSex != null">
+        relationship_sex,
+      </if>
+      <if test="relationshipAdress != null">
+        relationship_adress,
+      </if>
+      <if test="relationshipEmail != null">
+        relationship_email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="relationship != null">
+        #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="relationshipName != null">
+        #{relationshipName,jdbcType=VARCHAR},
+      </if>
+      <if test="relationshipSex != null">
+        #{relationshipSex,jdbcType=VARCHAR},
+      </if>
+      <if test="relationshipAdress != null">
+        #{relationshipAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="relationshipEmail != null">
+        #{relationshipEmail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.template_setting.pojo.contacts">
+    update contacts
+    <set>
+      <if test="relationship != null">
+        relationship = #{relationship,jdbcType=VARCHAR},
+      </if>
+      <if test="relationshipName != null">
+        relationship_name = #{relationshipName,jdbcType=VARCHAR},
+      </if>
+      <if test="relationshipSex != null">
+        relationship_sex = #{relationshipSex,jdbcType=VARCHAR},
+      </if>
+      <if test="relationshipAdress != null">
+        relationship_adress = #{relationshipAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="relationshipEmail != null">
+        relationship_email = #{relationshipEmail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.template_setting.pojo.contacts">
+    update contacts
+    set relationship = #{relationship,jdbcType=VARCHAR},
+      relationship_name = #{relationshipName,jdbcType=VARCHAR},
+      relationship_sex = #{relationshipSex,jdbcType=VARCHAR},
+      relationship_adress = #{relationshipAdress,jdbcType=VARCHAR},
+      relationship_email = #{relationshipEmail,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

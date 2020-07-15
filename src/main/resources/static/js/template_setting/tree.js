@@ -262,27 +262,18 @@ layui.use(['tree', 'util'], function(){
             for (var j = 0; j <checkedData.length; j++) {
                 var title2 = checkedData[j].children.length;
                 for(var jj = 0; jj <title2; jj++){
-                    // var id = checkedData[j].children[jj].id;
                     var title = checkedData[j].children[jj].title;
                     var ss="对应id";
                     var randnum=rand(1000,9999);
                     v+="<tr>";
                     v+='<td style="color: #0E74B4"">'+title +'</td>'
-                    v+='<td>'+"<input type='password' id='"+randnum+"' onfocus='cha("+randnum+")'/>"+'</td>';
+                    v+='<td>'+"<input type='text' id='"+randnum+"' onfocus='cha(this.id)'>"+'</td>';
                     v+='<td style="color: #0E74B4"">'+ss +'</td>'
                     v+='<td>'+"<input  type='text' value='"+randnum+"' />"+'</td>';
                     v+="</tr>";
                 }
-
             }
-            // window.parent.document.getElementById('randnum').value=randnum;
            var a = $('#content1', parent.document).append(v);
-
-            // $("#term.window.content1").append(s)
-          /*  console.log(checkedData);*/
-           // return v;
-
-
         }
         ,setChecked: function(){
             tree.setChecked('demoId1', [1,2,3]); //勾选指定节点

@@ -45,21 +45,25 @@
           height: 30px;
       }
     </style>
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
     <script src="js/template_setting/layui.js"></script>
     <script src="js/template_setting/jquery-2.2.3.min.js"></script>
- <script type="text/javascript" src="js/template_setting/tree.js"></script>
-    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-    <script src="js/template_setting/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/template_setting/tree.js"></script>
     <script src="js/template_setting/term.js"></script>
-    <!--<link rel="stylesheet" type="text/css" class="library" href="/bootstarp/css/bootstrap.min.css">-->
-    <!--<script src="vendor/bootstrap/js/bootstrap.min.js"></script>-->
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="js/template_setting/My97DatePicker/WdatePicker.js"></script>
+    <script src="layui/layui.js"></script>
     <script>
         var i=1;
-        var a = "";
+        var id;
+        var cc;
+        $(function () {
+            f();
+        })
        function cha(a) {
-           alert(a)
+           id=a;
+           console.log(a)
        }
         function setColor(color)
         {
@@ -72,8 +76,6 @@
             var xue=document.getElementById('xue');
             var isExposed=false;
             var btn=document.getElementById('btn');
-            var _iframe = document.getElementById('iframex').contentWindow;
-            var _div =_iframe.document.getElementById('randnum');
                 if (color == 'aa') {
                     btn.onclick=function() {
                         i++;
@@ -88,7 +90,8 @@
                             bmi.type="password";
                             xi.type="password";
                             xue.type="password";
-                            _div.type="password";
+                            // cc.type="password";
+                            cc=$("#"+id).prop("type","password");
                             isExposed=false;
                         } else {
                             var oDiv = document.getElementById("div1");
@@ -101,7 +104,8 @@
                             bmi.type="text";
                             xi.type="text";
                             xue.type="text";
-                            _div.type="text";
+                            // cc.type="text";
+                            cc=$("#"+id).prop("type","text");
                             isExposed=true;
                         }
                     }
@@ -181,9 +185,114 @@
             // _div.style.backgroundColor='#F33D05';
             console.log(_div)
         }
-        // // document.getElementById('divIframe).contentWindow.document.getElementById('domId');
-        // var s=document.getElementById('iframex').contentWindow.document.getElementById('randnum');
-        // console.log(s);
+
+        $.fn.serializeObject = function() {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function() {
+                if (o[this.name]) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [ o[this.name] ];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        }
+        //保存
+        function template(){
+            var name;
+            var born;
+           var p=$("#p").val();
+           var sex=$("#sex").val();
+           var nation=$("#min").val();
+           var psw=$("#psw").val();
+           var height=$("#t").val();
+           var weight=$("#hight").val();
+           var bmi=$("#bmi").val();
+           var zheng=$("#zheng").val();
+            var heightReg = /^(0{1}|[1-9]\d{0,3}|.{0})$/;
+            if(p==null||p==""){
+                alert("请输入姓名")
+                return;
+            }
+            if(sex==0){
+                alert("请选择性别")
+                return;
+            }
+            if(nation==0){
+                alert("请选择民族")
+                return;
+            }
+            if(psw==null||psw==""){
+                alert("请选择日期")
+                return;
+            }
+            if(height==null||height==""){
+                alert("请输入身高")
+                return;
+            }
+            if(!heightReg.test(height)){
+                alert("请输入正确身高")
+                return;
+            }
+            if(weight==null||weight==""){
+                alert("请输入体重")
+                return;
+            }
+            if(!heightReg.test(weight)){
+                alert("请输入正确体重")
+                return;
+            }
+            if(bmi==null||bmi==""){
+                alert("请输入BMI")
+                return;
+            }
+            if(!heightReg.test(bmi)){
+                alert("请输入正确BMI")
+                return;
+            }
+            if(zheng==0||zheng==""){
+                alert("请选择症状")
+                return;
+            }
+            function f() {
+                $.ajax({
+                    url: "obtainTemplate",
+                    data: {},
+                    dataType: "json",
+                    async: false,
+                    type: "post",
+                    success: function (result) {
+
+                        for (var i = 0; i < result.length; i++) {
+
+                            name = result[i].name;
+                            born = result[i].bronTime;
+                        }
+                    }
+                })
+            }
+            var arry = $("#fromTemplate").serializeArray();// serialize()
+            console.log(arry);
+            $.ajax({
+                url:"saveTemplate",
+                data:arry,
+                dataType:"json",
+                Type:"post",
+                success:function () {
+                    if(p==name&&psw==born){
+                        alert("用户已存在,请勿重复添加");
+                        return;
+                    }else{
+                        alert("保存成功");
+                    }
+                }
+            })
+        }
+
     </script>
 </head>
 <body>
@@ -198,7 +307,7 @@
         <a class="btn btn-primary btn-sm" data-toggle="modal" id="bbbbb" data-target="#guize" style="margin-left: 50px">规则设定</a>
     </div>
     <div>
-        <a class="btn btn-primary btn-sm" id="btn2" >保存</a>
+        <a class="btn btn-primary btn-sm layui-btn" id="btn2" onclick="template()" data-method="confirmTrans" style="height: 29.6px">保存</a>
     </div>
     <div>
         <a class="btn btn-primary btn-sm" >发布</a>
@@ -215,6 +324,7 @@
     </div>
 </div>
 <div style="float:left; margin-top: 50px; margin-left: 50px;  width: 2px;height: 350px; background: darkgray;"></div>
+    <form action="" id="fromTemplate">
 <div class="test" style="overflow:auto">
        <div class="content">
            <div onclick="aaa('trees')">
@@ -226,12 +336,12 @@
                     <span style="white-space: nowrap;display: inline-block;color: #0E74B4" >姓名：</span>
                 </td>
                 <td>
-                    <input type="password" id="p" >
+                    <input type="text" id="p" name="name">
                 </td>
                 <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">性别：</span>
                 </td>
                 <td >
-                    <select style="width: 300px" id="sex">
+                    <select style="width: 300px" id="sex" name="sex">
                     <option value="0">请选择</option>
                     <option value="1">男</option>
                     <option value="2">女</option>
@@ -244,13 +354,13 @@
                     <span style="white-space: nowrap;display: inline-block;color: #0E74B4">出生日期：</span>
                 </td>
                 <td>
-                    <input type="password"  id="psw">
+                    <input  type="text" id="psw"  name="bronTime" class="Wdate" onClick="WdatePicker()" readonly="readonly">
                 </td>
                 <td style="text-align: right">
                     <span style="white-space: nowrap;display: inline-block;color: #0E74B4">民族：</span>
                 </td>
                 <td>
-                    <select style="width: 300px" id="min">
+                    <select style="width: 300px" id="min" name="nation">
                     <option value="0">请选择</option>
                     <option value="1">汉族</option>
                     <option value="2">其他</option>
@@ -267,12 +377,12 @@
                     <span style="white-space: nowrap;display: inline-block;color: #0E74B4">身高：</span>
                 </td>
                 <td>
-                    <input type="password" id="t">
+                    <input type="text" id="t" name="height">
                 </td>
                 <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">体重：</span>
                 </td>
                 <td >
-                    <input type="password" id="hight">
+                    <input type="text" id="hight" name="weight">
                 </td>
             </tr>
             <tr>
@@ -280,7 +390,7 @@
                     <span style="white-space: nowrap;display: inline-block;color: #0E74B4">BMI：</span>
                 </td>
                 <td>
-                    <input type="password" id="bmi">
+                    <input type="text" id="bmi" name="bmi">
                 </td>
             </tr>
         </table>
@@ -295,13 +405,13 @@
                        <span style="white-space: nowrap;display: inline-block;color: #0E74B4">白细胞：</span>
                    </td>
                    <td>
-                       <input type="password" id="xi">
+                       <input type="text" id="xi">
                    </td>
 
                 <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">血糖：</span>
                 </td>
                 <td >
-                    <input type="password" id="xue">
+                    <input type="text" id="xue">
                 </td>
             </tr>
         </table>
@@ -314,7 +424,7 @@
                     <span style="white-space: nowrap;display: inline-block;color: #0E74B4">症状：</span>
                 </td>
                 <td>
-                    <select style="width: 300px" class="detailsinp" id="zheng">
+                    <select style="width: 300px" class="detailsinp" id="zheng" name="symptom">
                         <option value="0">请选择</option>
                     </select>
                 </td>
@@ -323,14 +433,15 @@
     </div>
 </div>
 </div>
+        </form>
 </div>
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content" style="width:500px;height: 495px">
-            <div class="modal-header" style="background: #0d6aad;width: 500px;height: 100px">
+        <div class="modal-content" style="width:500px;height: 430px;overflow-y: auto;">
+            <div class="modal-header" style="background: #0d6aad;width: 500px;height: 39px">
                 <button id="btss" type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
             </div>
-            <div class="modal-bodys" style="overflow: auto;">
+            <div class="modal-bodys">
                 <div class="shuyu" style="margin-top: 30px;text-align: center">
                 <ul>
                 <select style="width: 200px;height: 20px" id="dosage_form_id" onclick="selectByEntity()">
@@ -338,8 +449,7 @@
                 </select>
                 </ul>
                 </div>
-                <!--<table class="table table-bordered table-striped">-->
-                    <div class="shuyu2" style="text-align:center; margin-left:auto; margin-right:auto" >
+                    <div class="shuyu2" style="text-align:center; margin-left:auto; margin-right:auto;" >
                     </div>
             </div>
             <div class="modal-footer">
@@ -419,7 +529,7 @@
 </div>
 
 <div class="modal fade" id="guize" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="width:1500px;height: 600px">
+    <div class="modal-dialog" style="width:499px;height: 600px">
         <div class="modal-content">
             <div class="modal-header" style="background: #0d6aad;width: 499px;height: 60px">
                 <button id="btts" type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>

@@ -159,14 +159,15 @@ function tableList(id) {
             content = '<div class="form-group draggable ui-draggable dropped"><label class="col-sm-2 control-label">省市区：</label><div class="col-sm-7">' + picker + '</div><p class="tools col-sm-3"><a class="edit-link" name="picker" title="设置"><i class="fa fa-cog fa-fw"></i></a><a class="remove-link"><i class="fa fa-trash-o"></i></a></p></div>';
             break;
         case "name":
-            //姓名
-            var text = '<input type="text" class="form-control" placeholder="请输入你的姓名">';
-            content = '<div class="form-group draggable ui-draggable dropped"><label class="col-sm-2 control-label">姓名：</label><div class="col-sm-7">' + text + '</div><p class="tools col-sm-3"><a class="edit-link" name="text" title="设置"><i class="fa fa-cog fa-fw"></i></a><a class="remove-link"><i class="fa fa-trash-o"></i></a><label class="labcheck"><input type="checkbox"> 必填</label></p></div>';
+            //基本信息
+            var text = '<input type="text" class="form-control layui-btn" placeholder="双击查看信息" onclick="wen()"  readonly="readonly" data-method="confirmTrans">';
+            content = '<div class="form-group draggable ui-draggable dropped"><label class="col-sm-2 control-label">基本信息:</label><div class="col-sm-7">' + text + '</div><p class="tools col-sm-3"><a class="edit-link" name="text" title="设置"><i class="fa fa-cog fa-fw"></i></a><a class="remove-link"><i class="fa fa-trash-o"></i></a><label class="labcheck"><input type="checkbox"> 必填</label></p></div>';
+
             break;
         case "phone":
-            //电话
-            var text = '<input type="text" class="form-control" placeholder="请输入你的电话">';
-            content = '<div class="form-group draggable ui-draggable dropped"><label class="col-sm-2 control-label">电话：</label><div class="col-sm-7">' + text + '</div><p class="tools col-sm-3"><a class="edit-link" name="text" title="设置"><i class="fa fa-cog fa-fw"></i></a><a class="remove-link"><i class="fa fa-trash-o"></i></a><label class="labcheck"><input type="checkbox"> 必填</label></p></div>';
+            //模板信息
+            var text = '<input type="text" class="form-control layui-btn" placeholder="双击查看信息" onclick="information()" readonly="readonly" data-method="confirmTrans">';
+            content = '<div class="form-group draggable ui-draggable dropped"><label class="col-sm-2 control-label">模板信息：</label><div class="col-sm-7">' + text + '</div><p class="tools col-sm-3"><a class="edit-link" name="text" title="设置"><i class="fa fa-cog fa-fw"></i></a><a class="remove-link"><i class="fa fa-trash-o"></i></a><label class="labcheck"><input type="checkbox"> 必填</label></p></div>';
             break;
         case "email":
             //邮箱
@@ -206,6 +207,139 @@ function tableList(id) {
             break;
     }
     return content;
+}
+// 基本信息
+function wen() {
+    $.ajax({
+        url:"selectBasicInformation",
+        data:{},
+        dataType:"json",
+        async:false,
+        type:"post",
+        success:function (result) {
+            var vv="basicinformation[";
+            layui.use('layer', function () { //独立版的layer无需执行这一句
+                var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+                //触发事件
+                var active = {
+                    confirmTrans: function(){
+                        //配置一个透明的询问框
+                        for (var i=0;i<result.length;i++) {
+                            vv+="{" +
+                                " patientUnique='" + result[i].patientUnique + '\'' +
+                                ", name='" + result[i].name + '\'' +
+                                ", sex='" + result[i].sex + '\'' +
+                                ", bornAdress='" + result[i].bornAdress + '\'' +
+                                ", born=" + result[i].born +
+                                ", culture='" + result[i].culture + '\'' +
+                                ", phone='" + result[i].phone + '\'' +
+                                ", email='" + result[i].email + '\'' +
+                                ", aboType='" + result[i].aboType + '\'' +
+                                ", rhType='" + result[i].rhType + '\'' +
+                                ", contactsId=" + result[i].contactsId +
+                                ", certificatesId=" + result[i].certificatesId +"}"+
+                                ", certificates=" + "{" +
+                                "accountBookNo="+result[i].certificates.accountBookNo+
+                                ", driverNumber=" + result[i].certificates.driverNumber +
+                                ", hongKongAndMacaoPassNo=" + result[i].certificates.hongKongAndMacaoPassNo +
+                                ", idcard=" + result[i].certificates.idcard +
+                                ", officerNumber=" + result[i].certificates.officerNumber +
+                                ", passportNo=" + result[i].certificates.passportNo +
+                                ", taiwanPassNumber=" + result[i].certificates.taiwanPassNumber +"}"+
+                                ",contacts="+"{"+
+                                "relationship=" + result[i].contacts.relationship +
+                                ", relationshipAdress=" + result[i].contacts.relationshipAdress +
+                                ", relationshipEmail=" + result[i].contacts.relationshipEmail +
+                                ", relationshipName=" + result[i].contacts.relationshipName +
+                                ", relationshipSex=" + result[i].contacts.relationshipSex +"}"
+                            if (!i == result.length-1){
+                                vv += ',';
+                            }
+                        }
+                        vv += ']';
+                        console.log(result)
+                        layer.msg(vv, {
+                            time: 4000, //4s后自动关闭
+                            area:['1000px','500px']
+                        });
+                    }
+                };
+                $('.layui-btn').on('click', function(){
+                    var othis = $(this), method = othis.data('method');
+                    active[method] ? active[method].call(this, othis) : '';
+                });
+            });
+        }
+    })
+}
+// 模板信息
+function information() {
+    $.ajax({
+        url:"obtainTemplate",
+        data:{},
+        dataType:"json",
+        async:false,
+        type:"post",
+        success:function (result) {
+            console.log(result)
+            console.log(result.length)
+            var s = "basicinformation[";
+            for (var i=0;i<result.length;i++) {
+                var sex=result[i].sex==1?"男":"女";
+                var nation=result[i].nation==1?"汉族":"其他";
+                var name=result[i].name;
+                var bmi=result[i].bmi;
+                var weight=result[i].weight;
+                var height=result[i].height;
+                var symptom=result[i].symptom;
+                var date=result[i].bronTime;
+                var date1=new Date(date);
+                year=date1.getFullYear();
+                month=date1.getMonth()+1;
+                day=date1.getDate();
+                time=year+'-'+getzf(month)+'-'+getzf(day);
+               s +="{" +
+                    "name='" + name + '\'' +
+                    ", sex='" + sex + '\'' +
+                    ", nation='" + nation + '\'' +
+                    ", bronTime='" + time + '\'' +
+                    ", bmi='" + bmi + '\'' +
+                    ", weight='" + weight + '\'' +
+                    ", height='" + height + '\'' +
+                    ", symptom='" + symptom + '\'' +
+                    '}';
+               if (!i == result.length-1){
+                   s += ',';
+               }
+            }
+            s += ']';
+            console.log(s);
+
+            layui.use('layer', function(){ //独立版的layer无需执行这一句
+                var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+                //触发事件
+                var active = {
+                    confirmTrans: function(){
+                        //配置一个透明的询问框
+                        layer.msg(s, {
+                            time: 4000, //4s后自动关闭
+
+                        });
+                    }
+                };
+                $('.layui-btn').on('click', function(){
+                    var othis = $(this), method = othis.data('method');
+                    active[method] ? active[method].call(this, othis) : '';
+                });
+            });
+        }
+    })
+}
+function getzf(num) {
+    if(parseInt(num)<10){
+        num='0'+num;
+    }
+    return num;
 }
 //表单自定义设置
 function tabUp(tabL, $el) {
