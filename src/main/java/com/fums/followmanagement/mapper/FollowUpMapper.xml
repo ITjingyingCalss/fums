@@ -33,7 +33,6 @@
     follow_up_start_time, follow_up_end_time, follow_up_code, follow_up_patient_number,
     follow_up_control_group, follow_up_backdrop, follow_up_grate
   </sql>
-
     <!--验证随访组表单属性-->
     <select id="verifyProperties" resultMap="BaseResultMap">
         SELECT * FROM follow_up
