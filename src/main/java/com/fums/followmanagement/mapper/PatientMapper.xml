@@ -54,8 +54,11 @@
         SELECT p.name,p.patient_number,p.admission_number,p.patient_age,p.sex,fp.set_of_date,fp.id as fpID
             FROM patient p,follow_patient fp
             WHERE p.patient_id = fp.patient_id
-            <if test="patientNumber != null and admissionNumber != null">
-                and p.`patient_number` = #{patientNumber} or  #{admissionNumber}
+            <if test="patientNumber != null and patientNumber != ''">
+                and p.`patient_number` = #{patientNumber}
+            </if>
+            <if test="admissionNumber != null and admissionNumber != ''">
+                and p.admission_number = #{admissionNumber}
             </if>
             <if test="setOfDate1 != null and setOfDate2 != null">
                 and fp.set_of_date between #{setOfDate1} and #{setOfDate2}
