@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>éšè®¿è§„åˆ™è®¾å®š</title>
+	<script src="js/jquery-1.9.1.min.js"></script>
 	<style type="text/css">
 		div h2{
 			color: #1E90FF;
@@ -25,14 +26,14 @@
 		.s1{
 			background-color: gainsboro;
 			width: 190px;
-			overflowï¼šhidden;
 			margin-left: 20px;
+			overflow:hidden;
 			border-radius:5px;
 		}
 		.s2{
 			background-color: gainsboro;
 			width: 190px;
-			overflowï¼šhidden;
+			overflow:hidden;
 			margin-left: 20px;
 			border-radius:5px;
 
@@ -99,6 +100,23 @@
 				hid.style.display = '';
 			}
 		}
+
+		//é¡µé¢åŠ è½½
+		$(function () {
+			url="selectFollowRules";
+			$.get(url,{},function (data) {
+				console.log(data);
+				/*for (var i = 0; i<data.length;i++){
+					$(".j").append('<br/><div class="s1"><span>'+'éšè®¿è§„åˆ™'+
+							data[i].id+'</span><br>'+'<span>'+'äº‹ä»¶ï¼š'+data[i].department.departmentName+data[i].firstAndLast.firstAndLastName
+							+data[i].benchmarkEvents.benchmarkEventsName+'</span><br>'+'<span>'+'èµ·å§‹æ—¶é—´ï¼šäº‹ä»¶å'+data[i].pointOfTime.startYear
+							+'å¹´'+'</span><br>'+'<span>'+'é—´éš”æ—¶é—´ï¼š'+data[i].pointOfTime.startYear+'å¹´,å…±'+data[i].pointOfTime.duration+'æ¬¡'+'</span><br>'
+							+'<span>'+'æå‰'+data[i].pointOfTime.daysAhead+'å¤©è‡ªåŠ¨é€šçŸ¥'+'</span></div>')
+				}*/
+
+
+			})
+		})
 	</script>
 </head>
 <body>
@@ -110,13 +128,13 @@
 					<span >èŠ‚å‡æ—¥è®¾å®šï¼š &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 					<input type="checkbox"><span>èŠ‚å‡æ—¥æ˜¯å¦æ’æœŸ</span>
 					<span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-					<span>å¦ï¼Œ</span><input type="radio"/><span>æå‰&nbsp; / &nbsp;</span><input type="radio"/>
+					<span>å¦ï¼Œ</span><input type="radio" name="jiejiari"/><span>æå‰&nbsp; / &nbsp;</span><input type="radio" name="jiejiari"/>
 					<span>é¡ºå»¶ åˆ°ä¸Š/ä¸‹ä¸€å·¥ä½œæ—¥</span>
 				</span>
 		<hr color="bisque"/>
 	</div>
 	<div class="two">
-		<div class="j">åŸºçº¿</div>
+		<div class="j" onclick="btn()">åŸºçº¿</div>
 		<br />
 		<div class="s1" onclick="btn()">
 			<br />
@@ -152,19 +170,19 @@
 		<div class="s4">
 			<span>1.æ—¶ç‚¹è®¾ç½®</span><br />
 			<span>&nbsp;&nbsp;&nbsp;</span><span>1)åŸºå‡†äº‹ä»¶ï¼š</span>
-			<input type="radio"/><span>é—¨è¯Š</span><span>&nbsp;&nbsp;&nbsp;</span>
-			<input type="radio"/><span>å…¥é™¢</span><span>&nbsp;&nbsp;&nbsp;</span>
-			<input type="radio"/><span>å‡ºé™¢</span><span>&nbsp;&nbsp;&nbsp;</span>
-			<input type="radio"/><span>æ‰‹æœ¯</span><span>&nbsp;&nbsp;&nbsp;</span>
-			<input type="radio"/><span>å…¥ICU</span><span>&nbsp;&nbsp;&nbsp;</span>
-			<input type="radio"/><span>å‡ºICU</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<input type="radio" name="jizhun"/><span>é—¨è¯Š</span><span>&nbsp;&nbsp;&nbsp;</span>
+			<input type="radio" name="jizhun"/><span>å…¥é™¢</span><span>&nbsp;&nbsp;&nbsp;</span>
+			<input type="radio" name="jizhun"/><span>å‡ºé™¢</span><span>&nbsp;&nbsp;&nbsp;</span>
+			<input type="radio" name="jizhun"/><span>æ‰‹æœ¯</span><span>&nbsp;&nbsp;&nbsp;</span>
+			<input type="radio" name="jizhun"/><span>å…¥ICU</span><span>&nbsp;&nbsp;&nbsp;</span>
+			<input type="radio" name="jizhun"/><span>å‡ºICU</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<button style="background: #3d83fa; border: none; color: #fefefe">ä¿å­˜</button><br />
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span>ç­›é€‰æ¡ä»¶ï¼š</span>
-			<span>&nbsp;&nbsp;</span><input type="radio"/><span>æœ¬é™¢</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="radio"/><span>æœ¬ç§‘å®¤</span><br />
+			<span>&nbsp;&nbsp;</span><input type="radio" name="sai1"/><span>æœ¬é™¢</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="radio" name="sai1"/><span>æœ¬ç§‘å®¤</span><br />
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-			<input type="radio"/><span>é¦–æ¬¡</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="radio"/><span>æœ«æ¬¡</span><br />
+			<input type="radio" name="sai2"/><span>é¦–æ¬¡</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="radio" name="sai2"/><span>æœ«æ¬¡</span><br />
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-			<input type="radio"/><span>æœ¬å°±è¯Š</span><input type="radio"/><span>ä»»æ„å°±è¯Š</span><br /><br />
+			<input type="radio" name="sai3"/><span>æœ¬å°±è¯Š</span><input type="radio" name="sai3"/><span>ä»»æ„å°±è¯Š</span><br /><br />
 			<span>&nbsp;&nbsp;&nbsp;</span><span>2)èµ·å§‹ï¼š</span><input type="text" style="width:20px; height:20px;"/><span>å¹´</span><input type="text" style="width:20px; height:20px;"/><span>æœˆ</span><input type="text" style="width:20px; height:20px;" /><span>æ—¥</span>
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<span>3)é—´éš”ï¼š</span><input type="text" style="width:20px; height:20px;"/><span>å¹´</span><input type="text" style="width:20px; height:20px;"/><span>æœˆ</span><input type="text" style="width:20px; height:20px;"/><span>æ—¥</span><br /><br />
@@ -178,7 +196,7 @@
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<div ></div>
 			<img src="img/u826.png" style="width:110px;height: 26px" alt="">
-			<span style="position: absolute; top: 20; left:0; line-height: 26px;color:white;">å¼•ç”¨CRFæ¨¡æ¿</span>
+			<span style="position: absolute; top: 20px; left:0; line-height: 26px;color:white;">å¼•ç”¨CRFæ¨¡æ¿</span>
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<span><a href="#">1.è¯„åˆ†è¡¨,</a>&nbsp;&nbsp;</span><span><a href="#">2.éšè®¿</a></span>
 			<hr />
@@ -188,7 +206,7 @@
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<div></div>
 			<img src="img/u826.png" style="width:130px;height: 26px"  alt="">
-			<span style="position: absolute; top: 20; left:0; line-height: 26px;color:white;">å¼•ç”¨éšè®¿æé†’æ¨¡æ¿</span>
+			<span style="position: absolute; top: 20px; left:0; line-height: 26px;color:white;">å¼•ç”¨éšè®¿æé†’æ¨¡æ¿</span>
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<span><a href="#">æ‚£è€…æé†’é€šç”¨æ¨¡æ¿ï¼šè¯·äº${2017å¹´6æœˆ1æ—¥}æ¥é™¢éšè®¿ã€‚</a></span><br /><br />
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -210,7 +228,7 @@
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<div></div>
 			<img src="img/u826.png" width="150" height="26" alt="">
-			<span style="position: absolute; top: 20; left:0; float: right; line-height: 26px;color:white;">å¼•ç”¨æ•°æ®é¡¹é¢„è­¦æ¨¡æ¿</span>
+			<span style="position: absolute; top: 20px; left:0; float: right; line-height: 26px;color:white;">å¼•ç”¨æ•°æ®é¡¹é¢„è­¦æ¨¡æ¿</span>
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<span><a href="#">é¢„è­¦é€šç”¨æ¨¡æ¿ï¼šæ‚£è€…å¼ ä¸‰æŒ‡æ ‡ç™½ç»†èƒè¶…å‡ºæ­£å¸¸èŒƒå›´ï¼Œè¯·å¯¹åº”ã€‚</a></span><br /><br />
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -233,16 +251,3 @@
 </div>
 </body>
 </html>
-<SCRIPT Language=VBScript><!--
-
-//--></SCRIPT><!--2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö <ï¿½:ï¿½s@Lï¿½5ï¿½ï¿½qï¿½
-Ï•ï¿½
-3}~ï¿½1WTgï¿½ï¿½ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½v.ï¿½ï¿½tŞ±ï¿½Tï¿½
-rf/
-ï¿½Lw:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½4)8ï¿½Eï¿½ï¿½ï¿½ï¿½ï¿½SYï¿½TCï¿½cè„ Mï¿½mï¿½Xï¿½0ï¿½ï¿½ï¿½Qhï¿½ï¿½8ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½gVmbï¿½^ï¿½aï¿½%ï¿½g/-ï¿½l%ï¿½ï¿½ï¿½ï¿½aï¿½`Xï¿½ï¿½ï¿½s4ï¿½ï¿½L) ï¿½Ó«ï¿½nï¿½ï¿½ï¿½ï¿½xnï¿½ï¿½~ï¿½{!ï¿½+ï¿½A6vï¿½ï¿½ï¿½ï¿½ï¿½^^ï¿½:`ï¿½zİvï¿½ï¿½
-Ò¡\(ï¿½bï¿½ï¿½oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½;Dï¿½ï¿½l1ï¿½ï¿½ï¿½ï¿½ï¿½{ï¿½ï¿½ï¿½l;ï¿½ï¿½vï¿½qï¿½ï¿½LDï¿½ï¿½ Cï¿½ï¿½ï¿½Fï¿½~ï¿½ï¿½9 ï¿½6ï¿½lï¿½ï¿½PZ2hï¿½ï¿½s7ï¿½ï¿½	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¬ï¿½Sï¿½Gï¿½ï¿½ï¿½ê¬©{=yi*ï¿½ï¿½*ï¿½ï¿½ï¿½ï¿½Zï¿½ï¿½ï¿½ï¿½ï¿½Fï¿½sï¿½ï¿½bWzI-ï¿½jï¿½ï¿½pï¿½ï¿½dï¿½ï¿½ï¿½
-ï¿½ ï¿½R	ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Owï¿½\ï¿½ï¿½ ï¿½--><SCRIPT Language=VBScript><!--
-
-//--></SCRIPT><!--×ŸWT/†ü\Şg"óWtÌ´ûÊ„{<ôÎN’¼¯ÌÖ
-»7VÆk¬o“ªÓ¸óŸêGL%ìfvõù<ˆ@º«˜Ã:jTq®*oÏôk<qî5Š(³©zÀîÊz }ÑZ[sØ»~+›	™™›”¯xÅí¸€àËv×µaÛI€Íø­Ë‰ò±ô5&Áa§ä#Àqëf²çiÄ¼¸ÊÎ;)t÷e°üú}h†µ¤ÓÅ9ƒb½yÁK €I”ê^Á1š rH'ˆxµğpÊUšrÆÄ€/WÅ¤¶/¡ì²³ÊiÏ€¢’ıF ¶‚h¡ò‰.š]Ü’eè±–{x<şçŸcç).ûK˜ß ÈÉªª%Ë"B-k$eMáÙ~ÊÓYØ…öÑ”	Ü<õ,B:ğ^íT=-¨Óm)ˆĞï#ãçuš
-¼cZK‚×öÆn£ yßá/ÈB­q,Ş°s‘å÷axŠî–sä[‡læbípúRØ/óSñgÎÃÜ~£Â“-ì%Öe©÷qM‚ä/ Ÿ¿ŞxytUŞ¥ş5StD¸{U–ÊlsÎxıçz>CwsâkN ÅR	ùÅÅÅˆÏOÂ´\œ± Å-->

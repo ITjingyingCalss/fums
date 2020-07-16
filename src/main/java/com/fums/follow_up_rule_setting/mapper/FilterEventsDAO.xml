@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.follow_up_rule_setting.dao.FilterEventsDAO">
+  <resultMap id="BaseResultMap" type="com.fums.follow_up_rule_setting.pojo.FilterEvents">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="department" jdbcType="INTEGER" property="department" />
+    <result column="first_and_last" jdbcType="INTEGER" property="firstAndLast" />
+    <result column="any_visit" jdbcType="INTEGER" property="anyVisit" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, department, first_and_last, any_visit
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from filter_events
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from filter_events
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.follow_up_rule_setting.pojo.FilterEvents">
+    insert into filter_events (id, department, first_and_last, 
+      any_visit)
+    values (#{id,jdbcType=INTEGER}, #{department,jdbcType=INTEGER}, #{firstAndLast,jdbcType=INTEGER}, 
+      #{anyVisit,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.follow_up_rule_setting.pojo.FilterEvents">
+    insert into filter_events
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="department != null">
+        department,
+      </if>
+      <if test="firstAndLast != null">
+        first_and_last,
+      </if>
+      <if test="anyVisit != null">
+        any_visit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=INTEGER},
+      </if>
+      <if test="firstAndLast != null">
+        #{firstAndLast,jdbcType=INTEGER},
+      </if>
+      <if test="anyVisit != null">
+        #{anyVisit,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.follow_up_rule_setting.pojo.FilterEvents">
+    update filter_events
+    <set>
+      <if test="department != null">
+        department = #{department,jdbcType=INTEGER},
+      </if>
+      <if test="firstAndLast != null">
+        first_and_last = #{firstAndLast,jdbcType=INTEGER},
+      </if>
+      <if test="anyVisit != null">
+        any_visit = #{anyVisit,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.follow_up_rule_setting.pojo.FilterEvents">
+    update filter_events
+    set department = #{department,jdbcType=INTEGER},
+      first_and_last = #{firstAndLast,jdbcType=INTEGER},
+      any_visit = #{anyVisit,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
