@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.follow_up_rule_setting.dao.AnyVisitDAO">
+  <resultMap id="BaseResultMap" type="com.fums.follow_up_rule_setting.pojo.AnyVisit">
+    <id column="any_visit_id" jdbcType="INTEGER" property="anyVisitId" />
+    <result column="any_visit_name" jdbcType="VARCHAR" property="anyVisitName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    any_visit_id, any_visit_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from any_visit
+    where any_visit_id = #{anyVisitId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from any_visit
+    where any_visit_id = #{anyVisitId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.follow_up_rule_setting.pojo.AnyVisit">
+    insert into any_visit (any_visit_id, any_visit_name)
+    values (#{anyVisitId,jdbcType=INTEGER}, #{anyVisitName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.follow_up_rule_setting.pojo.AnyVisit">
+    insert into any_visit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="anyVisitId != null">
+        any_visit_id,
+      </if>
+      <if test="anyVisitName != null">
+        any_visit_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="anyVisitId != null">
+        #{anyVisitId,jdbcType=INTEGER},
+      </if>
+      <if test="anyVisitName != null">
+        #{anyVisitName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.follow_up_rule_setting.pojo.AnyVisit">
+    update any_visit
+    <set>
+      <if test="anyVisitName != null">
+        any_visit_name = #{anyVisitName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where any_visit_id = #{anyVisitId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.follow_up_rule_setting.pojo.AnyVisit">
+    update any_visit
+    set any_visit_name = #{anyVisitName,jdbcType=VARCHAR}
+    where any_visit_id = #{anyVisitId,jdbcType=INTEGER}
+  </update>
+</mapper>
