@@ -1,21 +1,16 @@
 package com.fums.template_setting.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.fums.template_setting.pojo.Symptom;
-import com.fums.template_setting.pojo.basicinformation;
-import com.fums.template_setting.pojo.detail;
-import com.fums.template_setting.pojo.template;
+import com.fums.template_setting.pojo.*;
 import com.fums.template_setting.service.treeService;
 import com.fums.template_setting.utils.Dto;
 import com.fums.template_setting.utils.DtoUtil;
+import com.fums.template_setting.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.annotation.Resource;
@@ -153,5 +148,41 @@ public class TreeController {
         //转换日期
         DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));// CustomDateEditor为自定义日期编辑器
+    }
+    /**
+     * 添加至树节点
+     */
+    @RequestMapping(value = "/insertSelective" ,produces = "application/json;charset=utf-8")
+    public String insertSelective(@RequestParam("ids") String ids){
+        middle middle = new middle();
+        String[] split = ids.split(",");
+        String ss="";
+        String vv="";
+        String substring="";
+        for (String s : split) {
+            int num =Integer.parseInt(s);
+                if(num>10){
+                    ss+=num+",";
+                    substring = ss.substring(0, ss.length() - 1);
+                    System.out.println(substring);
+                    middle.setCid(substring);
+                 }else{
+                    vv+=num+",";
+                    substring = vv.substring(0, vv.length() - 1);
+                    System.out.println(substring);
+                    middle.setDid(substring);
+            }
+        }
+        int i = treeService.insertSelective(middle);
+        String s = JSON.toJSONString(i);
+        return s;
+    }
+    /**
+     * 树查询
+     */
+    @RequestMapping(value = "/selectDictionary" ,produces = "application/json;charset=utf-8")
+    public String selectDictionary(){
+        List<dictionary> dictionaries = treeService.selectDictionary();
+        return JSON.toJSONString(dictionaries);
     }
 }
