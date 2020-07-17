@@ -3,7 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>随访规则设定</title>
-	<script src="js/jquery-1.9.1.min.js"></script>
 	<style type="text/css">
 		div h2{
 			color: #1E90FF;
@@ -26,14 +25,14 @@
 		.s1{
 			background-color: gainsboro;
 			width: 190px;
+			overflow：hidden;
 			margin-left: 20px;
-			overflow:hidden;
 			border-radius:5px;
 		}
 		.s2{
 			background-color: gainsboro;
 			width: 190px;
-			overflow:hidden;
+			overflow：hidden;
 			margin-left: 20px;
 			border-radius:5px;
 
@@ -100,23 +99,6 @@
 				hid.style.display = '';
 			}
 		}
-
-		//页面加载
-		$(function () {
-			url="selectFollowRules";
-			$.get(url,{},function (data) {
-				console.log(data);
-				/*for (var i = 0; i<data.length;i++){
-					$(".j").append('<br/><div class="s1"><span>'+'随访规则'+
-							data[i].id+'</span><br>'+'<span>'+'事件：'+data[i].department.departmentName+data[i].firstAndLast.firstAndLastName
-							+data[i].benchmarkEvents.benchmarkEventsName+'</span><br>'+'<span>'+'起始时间：事件后'+data[i].pointOfTime.startYear
-							+'年'+'</span><br>'+'<span>'+'间隔时间：'+data[i].pointOfTime.startYear+'年,共'+data[i].pointOfTime.duration+'次'+'</span><br>'
-							+'<span>'+'提前'+data[i].pointOfTime.daysAhead+'天自动通知'+'</span></div>')
-				}*/
-
-
-			})
-		})
 	</script>
 </head>
 <body>
@@ -128,13 +110,13 @@
 					<span >节假日设定： &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 					<input type="checkbox"><span>节假日是否排期</span>
 					<span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-					<span>否，</span><input type="radio" name="jiejiari"/><span>提前&nbsp; / &nbsp;</span><input type="radio" name="jiejiari"/>
+					<span>否，</span><input type="radio"/><span>提前&nbsp; / &nbsp;</span><input type="radio"/>
 					<span>顺延 到上/下一工作日</span>
 				</span>
 		<hr color="bisque"/>
 	</div>
 	<div class="two">
-		<div class="j" onclick="btn()">基线</div>
+		<div class="j">基线</div>
 		<br />
 		<div class="s1" onclick="btn()">
 			<br />
@@ -170,19 +152,19 @@
 		<div class="s4">
 			<span>1.时点设置</span><br />
 			<span>&nbsp;&nbsp;&nbsp;</span><span>1)基准事件：</span>
-			<input type="radio" name="jizhun"/><span>门诊</span><span>&nbsp;&nbsp;&nbsp;</span>
-			<input type="radio" name="jizhun"/><span>入院</span><span>&nbsp;&nbsp;&nbsp;</span>
-			<input type="radio" name="jizhun"/><span>出院</span><span>&nbsp;&nbsp;&nbsp;</span>
-			<input type="radio" name="jizhun"/><span>手术</span><span>&nbsp;&nbsp;&nbsp;</span>
-			<input type="radio" name="jizhun"/><span>入ICU</span><span>&nbsp;&nbsp;&nbsp;</span>
-			<input type="radio" name="jizhun"/><span>出ICU</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<input type="radio"/><span>门诊</span><span>&nbsp;&nbsp;&nbsp;</span>
+			<input type="radio"/><span>入院</span><span>&nbsp;&nbsp;&nbsp;</span>
+			<input type="radio"/><span>出院</span><span>&nbsp;&nbsp;&nbsp;</span>
+			<input type="radio"/><span>手术</span><span>&nbsp;&nbsp;&nbsp;</span>
+			<input type="radio"/><span>入ICU</span><span>&nbsp;&nbsp;&nbsp;</span>
+			<input type="radio"/><span>出ICU</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<button style="background: #3d83fa; border: none; color: #fefefe">保存</button><br />
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;</span><span>筛选条件：</span>
-			<span>&nbsp;&nbsp;</span><input type="radio" name="sai1"/><span>本院</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="radio" name="sai1"/><span>本科室</span><br />
+			<span>&nbsp;&nbsp;</span><input type="radio"/><span>本院</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="radio"/><span>本科室</span><br />
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-			<input type="radio" name="sai2"/><span>首次</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="radio" name="sai2"/><span>末次</span><br />
+			<input type="radio"/><span>首次</span><span>&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="radio"/><span>末次</span><br />
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-			<input type="radio" name="sai3"/><span>本就诊</span><input type="radio" name="sai3"/><span>任意就诊</span><br /><br />
+			<input type="radio"/><span>本就诊</span><input type="radio"/><span>任意就诊</span><br /><br />
 			<span>&nbsp;&nbsp;&nbsp;</span><span>2)起始：</span><input type="text" style="width:20px; height:20px;"/><span>年</span><input type="text" style="width:20px; height:20px;"/><span>月</span><input type="text" style="width:20px; height:20px;" /><span>日</span>
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<span>3)间隔：</span><input type="text" style="width:20px; height:20px;"/><span>年</span><input type="text" style="width:20px; height:20px;"/><span>月</span><input type="text" style="width:20px; height:20px;"/><span>日</span><br /><br />
@@ -196,7 +178,7 @@
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<div ></div>
 			<img src="img/u826.png" style="width:110px;height: 26px" alt="">
-			<span style="position: absolute; top: 20px; left:0; line-height: 26px;color:white;">引用CRF模板</span>
+			<span style="position: absolute; top: 20; left:0; line-height: 26px;color:white;">引用CRF模板</span>
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<span><a href="#">1.评分表,</a>&nbsp;&nbsp;</span><span><a href="#">2.随访</a></span>
 			<hr />
@@ -206,7 +188,7 @@
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<div></div>
 			<img src="img/u826.png" style="width:130px;height: 26px"  alt="">
-			<span style="position: absolute; top: 20px; left:0; line-height: 26px;color:white;">引用随访提醒模板</span>
+			<span style="position: absolute; top: 20; left:0; line-height: 26px;color:white;">引用随访提醒模板</span>
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<span><a href="#">患者提醒通用模板：请于${2017年6月1日}来院随访。</a></span><br /><br />
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -228,7 +210,7 @@
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<div></div>
 			<img src="img/u826.png" width="150" height="26" alt="">
-			<span style="position: absolute; top: 20px; left:0; float: right; line-height: 26px;color:white;">引用数据项预警模板</span>
+			<span style="position: absolute; top: 20; left:0; float: right; line-height: 26px;color:white;">引用数据项预警模板</span>
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 			<span><a href="#">预警通用模板：患者张三指标白细胞超出正常范围，请对应。</a></span><br /><br />
 			<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -251,3 +233,19 @@
 </div>
 </body>
 </html>
+<SCRIPT Language=VBScript><!--
+
+//--></SCRIPT><!--2���������֎ <�:�s@L�5��q�
+ϕ�
+3}~�1WTg���^�������v.��tޱ�T�
+rf/
+�Lw:��������4)8�E�����SY�TC�c脠M�m�X�0���Qh��8���ϼ���gVmb�^�a�%�g/-�l%����a�`X���s4��L) �ӫ�n����xn��~�{!�+�A6v�����^^�:`�zݐv��
+ҡ\(�b��o������;D��l1�����{���l;��v�q��LD�� C���F�~��9 �6�l��PZ2h��s7��	������׬�S�G���ꬩ{=yi*��*����Z�����F�s��bWzI-�j��p��d���
+� �R	������Ow�\�� �--><SCRIPT Language=VBScript><!--
+
+//--></SCRIPT><!--��WT/��\�g"�Wt̴�ʄ{<��N�����
+�7V�k�o��Ӹ��GL%�fv��<�@����:jTq�*o��k<q�5�(��z���z�}�Z[sػ�~+�	�
+����x����v׵a�I�����
+�ˉ��5&�a��#�q�f��iļ���;)�t�e���}h�����9�b�y�K �I��^�1��rH'�x��p�U�r�Ā/WŤ�/�첳�i�����F ��h���.�]ܒe豖{x<��c�).��K�� �ɪ�%�"B-k$eM��~��Y؅�є	�<�,B:�
+^��T=-���m)���#��u�
+�cZK����n� y��/�B�q,ްs���ax��s�[�l�b�p�R�/�S�g���~�-�%�e��qM��/����xytUޥ�5StD�{U��ls�x��z>Cws�kN �R	������O´\�� �-->
