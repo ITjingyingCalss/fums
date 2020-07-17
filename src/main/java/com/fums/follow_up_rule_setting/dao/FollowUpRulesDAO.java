@@ -14,4 +14,5 @@ import java.util.List;
 public interface FollowUpRulesDAO  {
 
     List<FollowUpRules> selectAll();
+
 }
