@@ -126,9 +126,7 @@ public class SystemManagementController {
 
         PageHelper.startPage(pageNum,5);
         List<User> listUser = userService.selectUser(hospitalDepartmentName,userAccount);
-
         PageInfo<User> pageInfo = new PageInfo<>(listUser);
-
 
         return JSON.toJSONString(pageInfo);
     }
@@ -180,6 +178,5 @@ public class SystemManagementController {
 
         return saveUser;
     }*/
-
 
 }

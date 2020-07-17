@@ -28,13 +28,6 @@
 
   </resultMap>
 
- <resultMap id="usBaseResultMap" type="com.fums.system_management.pojo.HospitalDepartment">
-    <id column="hospital_department_id" jdbcType="INTEGER" property="hospitalDepartmentId" />
-    <result column="hospital_department_name" jdbcType="VARCHAR" property="hospitalDepartmentName" />
-    <result column="hospital_department_state" jdbcType="INTEGER" property="hospitalDepartmentState" />
-    <result column="hospital_department_code" jdbcType="VARCHAR" property="hospitalDepartmentCode" />
-  </resultMap>
-
   <!--用户科室中间表-->
   <resultMap id="ueBaseResultMap" type="com.fums.system_management.pojo.UserDepartment">
     <id column="id" jdbcType="INTEGER" property="id" />
@@ -75,8 +68,7 @@
   </select>
 
 
-
-  <select id="seleDepartment" resultMap="usBaseResultMap">
+  <select id="seleDepartment" resultMap="BaseResultMap">
     select hospital_department_id,hospital_department_name from hospital_department
   </select>
 
@@ -137,11 +129,10 @@
           and u.user_account like concat('%',#{userAccount},'%')
       </if>-->
 
-
   </select>
 
   <delete id="delete">
-    delete from user where id = #{id}
+    delete from user_department where id = #{id}
   </delete>
 
 

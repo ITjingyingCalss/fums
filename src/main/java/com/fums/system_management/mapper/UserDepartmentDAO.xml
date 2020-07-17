@@ -20,10 +20,10 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.fums.system_management.pojo.UserDepartment">
-    insert into user_department (id, user_id, hospital_department_id
-      )
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{hospitalDepartmentId,jdbcType=INTEGER}
-      )
+    insert into user_department (id, user_id, hospital_department_id)
+
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{hospitalDepartmentId,jdbcType=INTEGER})
+
   </insert>
   <insert id="insertSelective" parameterType="com.fums.system_management.pojo.UserDepartment">
     insert into user_department

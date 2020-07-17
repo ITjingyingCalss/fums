@@ -7,6 +7,7 @@ import com.fums.system_management.service.FormOverviewService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,9 +30,13 @@ public class FormOverviewController {
 
     @Autowired
     FormOverviewService formOverviewService;
+
     @ResponseBody
     @RequestMapping(value = "seleForm" ,produces = "application/json;charset=utf-8")
     public String seleForm(String followUpName,
+                           /*第二中方法，直接转换，不用修改字段的类型*/
+                           /*@DateTimeFormat(pattern = "yyyy-MM-dd") Date creationDate,
+                           @DateTimeFormat(pattern = "yyyy-MM-dd") Date updatedDate,*/
                            String creationDate,
                            String updatedDate,
                            String templateName,

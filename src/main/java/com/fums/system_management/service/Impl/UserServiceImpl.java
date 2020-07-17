@@ -75,7 +75,6 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
     @Override
     public List<User> selectUser(String hospitalDepartmentName,String userAccount) {
         return userDAO.selectUser(hospitalDepartmentName,userAccount);
