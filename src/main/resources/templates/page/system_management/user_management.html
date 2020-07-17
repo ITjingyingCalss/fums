@@ -39,7 +39,7 @@
 
         $(function () {
             retrieval()
-        })
+        });
 
         function retrieval(pageNum){
 
@@ -127,6 +127,24 @@
              var userEmail = $("#user_email1").val();//邮箱
              var password = $("#password1").val();//密码
              var hospitalDepartmentName = $("#hospital_department_id1").val();//科室
+
+             /*判断是否有值*/
+             if (userId == null || userId == '') {
+                 alert("请输入用户ID")
+                 return;
+             }
+             if (userAccount == null || userAccount == '') {
+                 alert("请输入姓名")
+                 return;
+             }
+             if (userSex == null || userSex == '') {
+                 alert("请输入性别")
+                 return;
+             }
+             if (userPhone == null || userPhone == '') {
+                 alert("请输入电话")
+                 return;
+             }
 
              $.ajax({
                  url: "SystemManagementController/insert",

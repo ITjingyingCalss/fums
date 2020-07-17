@@ -128,16 +128,25 @@
                         time2=year1+'-'+getzf(month1)+'-'+getzf(day1);
                         console.log(data[i])
 
+                        var state = data[i].state;
+                        if (data[i].state == 0) {
+                            state = "历史版本";
+                        }
+                        if (data[i].state == 1) {
+                            state = "当前版本";
+                        }
+                        if (data[i].state == 2) {
+                            state = "未发布";
+                        }
                         ss = "<tr><td>"+ data[i].templateName +"</td><td>"
                             + data[i].followUp.followUpName +"</td><td>"
                             + time +"</td><td>"
                             + data[i].updateThe +"</td><td>"
                             + data[i].theErsionUmber +"</td><td>"
                             + data[i].theReator +"</td><td>"
-                            + time2 +"</td><td>"
-                            + data[i].state +"</td></tr>"
+                            + time2 +"</td><td><a href='standard_template'>"+ state +"</a></td></tr>"
 
-                        $("#tbody").append(aa);
+                        $("#tbody").append(ss);
                         qian=list.pageNum==1?1:list.pageNum-1;
                         hou=list.pageNum==list.pages?list.pages:list.pageNum+1;
                     }
@@ -278,9 +287,9 @@
             <td>001</td>
             <td>赵四</td>
             <td>2015-06-01</td>
-            <td>
+<!--            <butten>
                 <a href="#">历史版本</a>
-            </td>
+            </butten>-->
         </tr>
         <tr class="active">
             <td>2015-06-01</td>
@@ -394,7 +403,7 @@
     </div>
 
 
-    <div style="padding-left: 567px;">
+    <div style="padding-left: 322px;">
         <ul class="pagination">
             <li><a href="#">&laquo;</a></li>
             <li class="active"><a href="#">1</a></li>

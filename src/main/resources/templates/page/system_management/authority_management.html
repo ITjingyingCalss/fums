@@ -54,9 +54,6 @@
                             + "<button type=\"button\" class=\"btn btn-success btn-sm\" data-toggle=\"modal\" data-target=\"#editModal\" onclick=\"UpdateUser("+ listUser.list[i].id +")\">编辑</button>"
                             + "<button type=\"button\" class=\"btn btn-success btn-sm\" onclick=\"deleUser("+ listUser.list[i].id +")\">删除</button></td></tr>"
 
-                        // alert(listUser.list[i].id);
-                        console.log(listUser.id);
-
                         $("#tbody").append(ss);
                         qian=listUser.pageNum==1?1:listUser.pageNum-1;
                         hou=listUser.pageNum==listUser.pages?listUser.pages:listUser.pageNum+1;
@@ -70,12 +67,12 @@
     <script type="text/javascript">
 
         function deleUser(id) {
+            alert(id);
             $.ajax({
                 url:"SystemManagementController/ee",
                 type:"post",
                 data:{id : id},
                 success:function(ee1){
-                    alert(id);
                     if(confirm("是否确定删除？")){
                         alert("删除成功");
                         window.location.reload();
@@ -86,7 +83,6 @@
             })
 
         }
-
 
     </script>
 

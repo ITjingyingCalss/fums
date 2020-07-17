@@ -5,31 +5,28 @@
     <title>标准化模板维护</title>
     <style>
         .scroll-container{
-            width: 400px;
-            height: 575px;
+            width: 250px;
+            height: 450px;
             overflow: auto;
             float: left;
         }
         .scroll-content{
-            width: 377px;
-            height: 810px;
+            width: 600px;
+            height: 1000px;
         }
         .test{
-            width: 940px;
-            height: 570px;
+            width: 676px;
+            height: 450px;
             border: 1px silver solid;
             float: left;
-            margin-left: 100px;
-
+            margin-left: 50px;
+            font-size: 10px;
         }
         .table tr td:nth-of-type(2) input{
             margin-right: 100px;
         }
         .content{
             margin-left: 100px;
-        }
-        .table tr{
-            line-height: 50px;
         }
         .imgs div{
             display: inline-block;
@@ -47,258 +44,535 @@
             width: 30px;
             height: 30px;
         }
-
     </style>
-    <script src="vendor/layui/layui.js"></script>
-    <script src="layui/js/jquery-2.2.3.min.js"></script>
-    <script type="text/javascript" src="layui/tree.js"></script>
-    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css">
-    <script src="vendor/jquery-2.2.3.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <!--    <script>
-            function aa(str)
-            {
-                var obj=document.getElementById("divIframe");
-                if(str=="t")
-                {
-                    obj.innerHTML="<iframe id=\"ifurl\" src=\"/tree\" target=\"iframe\" style='overflow: auto;' width=\"400\" height=\"800\"></iframe>";
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+    <script src="js/template_setting/layui.js"></script>
+    <script src="js/template_setting/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="js/template_setting/tree.js"></script>
+    <script src="js/template_setting/term.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="js/template_setting/My97DatePicker/WdatePicker.js"></script>
+    <script src="layui/layui.js"></script>
+    <script>
+        var i=1;
+        var id;
+        var cc;
+        $(function () {
+            f();
+        })
+        function cha(a) {
+            id=a;
+            console.log(a)
+        }
+        function setColor(color)
+        {
+            var psw=document.getElementById('psw');
+            var p=document.getElementById('p');
+            var t=document.getElementById('t');
+            var hight=document.getElementById('hight');
+            var bmi=document.getElementById('bmi');
+            var xi=document.getElementById('xi');
+            var xue=document.getElementById('xue');
+            var isExposed=false;
+            var btn=document.getElementById('btn');
+            if (color == 'aa') {
+                btn.onclick=function() {
+                    i++;
+                    if (i % 2 == 0||isExposed) {
+                        var oDiv = document.getElementById("div1");
+                        oDiv.style.background = "#6C6F6C";
+                        // //切换为隐藏
+                        psw.type='password';
+                        p.type="password";
+                        t.type="password";
+                        hight.type="password";
+                        bmi.type="password";
+                        xi.type="password";
+                        xue.type="password";
+                        // cc.type="password";
+                        cc=$("#"+id).prop("type","password");
+                        isExposed=false;
+                    } else {
+                        var oDiv = document.getElementById("div1");
+                        oDiv.style.background = "#229D0C";
+                        //切换为显示
+                        psw.type='text';
+                        p.type="text";
+                        t.type="text";
+                        hight.type="text";
+                        bmi.type="text";
+                        xi.type="text";
+                        xue.type="text";
+                        // cc.type="text";
+                        cc=$("#"+id).prop("type","text");
+                        isExposed=true;
+                    }
                 }
-                else
-                {
-                    obj.innerHTML="";
+            } else if (color == 'bb') {
+                i++;
+                if (i % 2 == 0) {
+                    var oDiv = document.getElementById("div2");
+                    oDiv.style.background = "#6C6F6C";
+                } else {
+                    var oDiv = document.getElementById("div2");
+                    oDiv.style.background = "#229D0C";
+                }
+            } else if (color == 'cc') {
+                i++;
+                if (i % 2 == 0) {
+                    var oDiv = document.getElementById("div3");
+                    oDiv.style.background = "#6C6F6C";
+                    document.getElementById('psw').readOnly=false;
+                    document.getElementById('p').readOnly=false;
+                    document.getElementById('t').readOnly=false;
+                    document.getElementById('hight').readOnly=false;
+                    document.getElementById('bmi').readOnly=false;
+                    document.getElementById('xi').readOnly=false;
+                    document.getElementById('xue').readOnly=false;
+                    document.getElementById('sex').disabled=false;
+                    document.getElementById('min').disabled=false;
+                    document.getElementById('zheng').disabled=false;
+                } else {
+                    var oDiv = document.getElementById("div3");
+                    oDiv.style.background = "#229D0C";
+                    document.getElementById('psw').readOnly=true;
+                    document.getElementById('p').readOnly=true;
+                    document.getElementById('t').readOnly=true;
+                    document.getElementById('hight').readOnly=true;
+                    document.getElementById('bmi').readOnly=true;
+                    document.getElementById('xi').readOnly=true;
+                    document.getElementById('xue').readOnly=true;
+                    document.getElementById('sex').disabled=true;
+                    document.getElementById('min').disabled=true;
+                    document.getElementById('zheng').disabled=true;
+                }
+            } else if (color == 'dd') {
+                i++;
+                if (i % 2 == 0) {
+                    var oDiv = document.getElementById("div4");
+                    oDiv.style.background = "#6C6F6C";
+                } else {
+                    var oDiv = document.getElementById("div4");
+                    oDiv.style.background = "#229D0C";
+                }
+            } else if (color == 'ee') {
+                i++;
+                if (i % 2 == 0) {
+                    var oDiv = document.getElementById("div5");
+                    oDiv.style.background = "#6C6F6C";
+                } else {
+                    var oDiv = document.getElementById("div5");
+                    oDiv.style.background = "#229D0C";
                 }
             }
-            function bb(str)
-            {
-                var obj=document.getElementById("divIframe");
-                if(str=="y")
-                {
-                    obj.innerHTML="<iframe id=\"ifurl\" src=\"/combinationattribute\" target=\"iframe\" style='overflow: auto;' width=\"400\" height=\"800\"></iframe>";
-                }
-                else
-                {
-                    obj.innerHTML="";
-                }
-            }
-            function cc(str)
-            {
-                var obj=document.getElementById("divIframe");
-                if(str=="u")
-                {
-                    obj.innerHTML="<iframe id=\"ifurl\" src=\"/controlproperties\" target=\"iframe\" style='overflow: auto;' width=\"400\" height=\"800\"></iframe>";
-                }
-                else
-                {
-                    obj.innerHTML="";
-                }
-            }
-            function dd(str)
-            {
-                var obj=document.getElementById("divIframe");
-                if(str=="i")
-                {
-                    obj.innerHTML="<iframe id=\"ifurl\" src=\"/custom\" target=\"iframe\" style='overflow: auto;' width=\"400\" height=\"800\"></iframe>";
-                }
-                else
-                {
-                    obj.innerHTML="";
-                }
-            }
+        }
+        function baocun2() {
+            var oDiv=document.getElementById("div1");
+            oDiv.style.background="#EDEDED";
+            var oDiv=document.getElementById("div2");
+            oDiv.style.background="#EDEDED";
+            var oDiv=document.getElementById("div3");
+            oDiv.style.background="#EDEDED";
+            var oDiv=document.getElementById("div4");
+            oDiv.style.background="#EDEDED";
+            var oDiv=document.getElementById("div5");
+            oDiv.style.background="#EDEDED";
+        }
+        window.onload = function(){
+            var _iframe = document.getElementById('iframex').contentWindow;
+            var _div =_iframe.document.getElementById('randnum');
+            // _div.style.backgroundColor='#F33D05';
+            console.log(_div)
+        }
 
-        </script>-->
+        $.fn.serializeObject = function() {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function() {
+                if (o[this.name]) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [ o[this.name] ];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        }
+        //保存
+        function template(){
+            var name;
+            var born;
+            var p=$("#p").val();
+            var sex=$("#sex").val();
+            var nation=$("#min").val();
+            var psw=$("#psw").val();
+            var height=$("#t").val();
+            var weight=$("#hight").val();
+            var bmi=$("#bmi").val();
+            var zheng=$("#zheng").val();
+            var heightReg = /^(0{1}|[1-9]\d{0,3}|.{0})$/;
+            if(p==null||p==""){
+                alert("请输入姓名")
+                return;
+            }
+            if(sex==0){
+                alert("请选择性别")
+                return;
+            }
+            if(nation==0){
+                alert("请选择民族")
+                return;
+            }
+            if(psw==null||psw==""){
+                alert("请选择日期")
+                return;
+            }
+            if(height==null||height==""){
+                alert("请输入身高")
+                return;
+            }
+            if(!heightReg.test(height)){
+                alert("请输入正确身高")
+                return;
+            }
+            if(weight==null||weight==""){
+                alert("请输入体重")
+                return;
+            }
+            if(!heightReg.test(weight)){
+                alert("请输入正确体重")
+                return;
+            }
+            if(bmi==null||bmi==""){
+                alert("请输入BMI")
+                return;
+            }
+            if(!heightReg.test(bmi)){
+                alert("请输入正确BMI")
+                return;
+            }
+            if(zheng==0||zheng==""){
+                alert("请选择症状")
+                return;
+            }
+            function f() {
+                $.ajax({
+                    url: "obtainTemplate",
+                    data: {},
+                    dataType: "json",
+                    async: false,
+                    type: "post",
+                    success: function (result) {
+
+                        for (var i = 0; i < result.length; i++) {
+
+                            name = result[i].name;
+                            born = result[i].bronTime;
+                        }
+                    }
+                })
+            }
+            var arry = $("#fromTemplate").serializeArray();// serialize()
+            console.log(arry);
+            $.ajax({
+                url:"saveTemplate",
+                data:arry,
+                dataType:"json",
+                Type:"post",
+                success:function () {
+                    if(p==name&&psw==born){
+                        alert("用户已存在,请勿重复添加");
+                        return;
+                    }else{
+                        alert("保存成功");
+                    }
+                }
+            })
+        }
+
+    </script>
 </head>
 <body>
-<div class="imgs">
-    <div style="position: relative; width: 170px; height: 89px;" data-toggle="modal" data-target="#myModal">
-        <img src="img/u640.png" width="170" height="59" alt="">
-        <span style="position: absolute; top: -10px; left: 10px;"><h1 style="color: white"></h1></span>
-    </div>
-    <div style="margin-left: 10px;margin-top: 20px"> <span><h1 style="color: #0E74B4"> 标准化模板维护</h1></span></div>
-
-    <div>
-        <button type="button" class="btn btn-primary" style="margin-left: 710px;width: 110px;background-color: #2b669a">保存</button>
-    </div>
-    <div>
-        <button type="button" class="btn btn-primary" style="margin-left: 20px;width: 110px;background-color: #2b669a">发布</button>
-    </div>
-    <div>
-        <button type="button" class="btn btn-primary" style="margin-left: 20px;width: 110px;background-color: #2b669a">取消</button>
-    </div>
-</div>
-
-
-<div class="scroll-container">
-    <div class="scroll-content" id="divIframe">
-        <div class="main_right" style="width:calc(100% - 240px);height:calc(100% - 80px)">
-            <iframe frameborder="0" scrolling="no" style="width: 245%;height: 100%" name="iframe" src="" id="iframe"></iframe>
+<div class="Parent">
+    <div class="imgs">
+        <div style="position: relative; width: 170px; height: 89px;" data-toggle="modal" data-target="#editModal">
+            <img src="img/template_setting/u640.png" width="120" height="39" alt="">
+            <span style="position: absolute; top: 0px; left: 10px;"><h4 style="color: white">引用模板</h4></span>
+        </div>
+<!--        <div style="margin-left: 30px;margin-top: 20px"> <span><h5 style="color: #0E74B4">基本信息,体格检查</h5></span></div>-->
+        <div>
+            <a class="btn btn-primary btn-sm" data-toggle="modal" id="bbbbb" data-target="#guize" style="margin-left: 50px">规则设定</a>
+        </div>
+        <div>
+            <a class="btn btn-primary btn-sm layui-btn" id="btn2" onclick="template()" data-method="confirmTrans" style="height: 29.6px">保存</a>
+        </div>
+        <div>
+            <a class="btn btn-primary btn-sm" >发布</a>
+        </div>
+        <div>
+            <a class="btn btn-primary btn-sm">取消</a>
         </div>
     </div>
-</div>
 
-
-<div style="float:left; margin-top: 50px; margin-left: 90px;  width: 2px;height: 500px; background: darkgray;"></div>
-<div class="test" style="overflow:auto">
-    <div class="content">
-        <div onclick="aa('t')">
-            <div>
-                <h1>基本信息</h1>
-                <table id="content1">
-                    <tr>
-                        <td style="text-align: right">
-                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">姓名：</span>
-                        </td>
-                        <td>
-                            <input type="text" id="mdc_city">
-                        </td>
-                        <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">性别：</span>
-                        </td>
-                        <td >
-                            <select style="width: 300px">
-                                <option value="0">请选择</option>
-                                <option value="1">男</option>
-                                <option value="2">女</option>
-                                <option value="3">其他</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: right">
-                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">出生日期：</span>
-                        </td>
-                        <td>
-                            <input type="text">
-                        </td>
-                        <td style="text-align: right">
-                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">民族：</span>
-                        </td>
-                        <td>
-                            <select style="width: 300px">
-                                <option value="0">请选择</option>
-                                <option value="1">汉族</option>
-                                <option value="2">其他</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div style="margin-top: 50px">
-                <h1>体格检查</h1>
-                <table class="table">
-                    <tr>
-                        <td style="text-align: right">
-                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">身高：</span>
-                        </td>
-                        <td>
-                            <input type="text">
-                        </td>
-                        <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">体重：</span>
-                        </td>
-                        <td >
-                            <input type="text">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: right">
-                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">BMI：</span>
-                        </td>
-                        <td>
-                            <input type="text">
-                        </td>
-                    </tr>
-                </table>
+    <div class="scroll-container">
+        <div class="scroll-content" id="divIframe">
+            <div class="main_right" style="width:calc(100% - 240px);height:calc(100% - 80px)">
+                <iframe frameborder="0" scrolling="no" style="width: 100%;height: 100%" name="iframe" src="/trees" id="iframex"></iframe>
             </div>
         </div>
-        <div style="margin-top:50px">
-            <h1>实验室检查</h1>
-            <table class="table" >
-                <!--<span  style="float:left; margin-top:10px; margin-left: 30px;  width: 4px;height:30px; background:darkgrey;"></span>-->
-
-                <td onclick="bb('y')"><span style="white-space: nowrap;display: inline-block;color: dimgray;margin-left: 10px">血常规</span></td>
-                <tr onclick="cc('u')">
-                    <td style="text-align: right">
-                        <span style="white-space: nowrap;display: inline-block;color: #0E74B4">白细胞：</span>
-                    </td>
-                    <td>
-                        <a href="/"><input type="text"></a>
-                    </td>
-
-                    <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">血糖：</span>
-                    </td>
-                    <td >
-                        <input type="text">
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div onclick="dd('i')" style="margin-top: 50px">
-            <h1 >症状</h1>
-            <table class="table" style="margin-left: -100px">
-                <tr>
-                    <td style="text-align: right">
-                        <span style="white-space: nowrap;display: inline-block;color: #0E74B4">症状：</span>
-                    </td>
-                    <td>
-                        <a href="/">
-                            <select style="width: 300px">
-                                <option value="0">请选择</option>
-                            </select>
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </div>
     </div>
-</div>
 
-<div class="modal fade" id="myModal">
+    <div style="float:left; margin-top: 50px; margin-left: 50px;  width: 2px;height: 350px; background: darkgray;"></div>
+    <form action="" id="fromTemplate">
+        <div class="test" style="overflow:auto">
+            <div class="content">
+                <div onclick="aaa('trees')">
+                    <div>
+                        <h5>基本信息</h5>
+                        <table id="content1">
+                            <tr>
+                                <td style="text-align: right">
+                                    <span style="white-space: nowrap;display: inline-block;color: #0E74B4" >姓名：</span>
+                                </td>
+                                <td>
+                                    <input type="text" id="p" name="name">
+                                </td>
+                                <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">性别：</span>
+                                </td>
+                                <td >
+                                    <select style="width: 300px" id="sex" name="sex">
+                                        <option value="0">请选择</option>
+                                        <option value="1">男</option>
+                                        <option value="2">女</option>
+                                        <option value="3">其他</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">
+                                    <span style="white-space: nowrap;display: inline-block;color: #0E74B4">出生日期：</span>
+                                </td>
+                                <td>
+                                    <input  type="text" id="psw"  name="bronTime" class="Wdate" onClick="WdatePicker()" readonly="readonly">
+                                </td>
+                                <td style="text-align: right">
+                                    <span style="white-space: nowrap;display: inline-block;color: #0E74B4">民族：</span>
+                                </td>
+                                <td>
+                                    <select style="width: 300px" id="min" name="nation">
+                                        <option value="0">请选择</option>
+                                        <option value="1">汉族</option>
+                                        <option value="2">其他</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="margin-top: 0px">
+                        <h5>体格检查</h5>
+                        <table class="table">
+                            <tr>
+                                <td style="text-align: right">
+                                    <span style="white-space: nowrap;display: inline-block;color: #0E74B4">身高：</span>
+                                </td>
+                                <td>
+                                    <input type="text" id="t" name="height">
+                                </td>
+                                <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">体重：</span>
+                                </td>
+                                <td >
+                                    <input type="text" id="hight" name="weight">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right">
+                                    <span style="white-space: nowrap;display: inline-block;color: #0E74B4">BMI：</span>
+                                </td>
+                                <td>
+                                    <input type="text" id="bmi" name="bmi">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div style="margin-top:0px">
+                    <h5>实验室检查</h5>
+                    <table class="table" >
+                        <td onclick="aaa('combinationattribute')"><span style="white-space: nowrap;display: inline-block;color: dimgray;margin-left: 10px">血常规</span></td>
+                        <tr onclick="aaa('controlproperties')">
+                            <td style="text-align: right">
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">白细胞：</span>
+                            </td>
+                            <td>
+                                <input type="text" id="xi">
+                            </td>
+
+                            <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">血糖：</span>
+                            </td>
+                            <td >
+                                <input type="text" id="xue">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div onclick="aaa('custom')" >
+                    <h5>症状</h5>
+                    <table class="table" style="margin-left: -30px">
+                        <tr>
+                            <td style="text-align: right">
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">症状：</span>
+                            </td>
+                            <td>
+                                <select style="width: 300px" class="detailsinp" id="zheng" name="symptom">
+                                    <option value="0">请选择</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="shuyu" style="margin-top: 30px;text-align: center">
-                <h2>通用模板选择</h2>
+        <div class="modal-content" style="width:500px;height: 430px;overflow-y: auto;">
+            <div class="modal-header" style="background: #0d6aad;width: 500px;height: 39px">
+                <button id="btss" type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
             </div>
-            <div class="shuyu2" style="text-align:center; margin-left:auto; margin-right:auto" >
-                <ul style="margin-top: 30px">
-                    <li><input type="checkbox"></li>
-                    <li>基本信息<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></li>
-
-                    <li><input type="checkbox"></li>
-                    <li>用药<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></li>
-                </ul>
-                <ul>
-
-                    <li><input type="checkbox"></li>
-                    <li>体格检查<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></li>
-
-
-                    <li><input type="checkbox"></li>
-                    <li>既往史<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></li>
-                </ul>
-                <ul>
-                    <li><input type="checkbox"></li>
-                    <li>实验室检查<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></li>
-
-
-                    <li><input type="checkbox"></li>
-                    <li>临床诊断<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></li>
-                </ul>
-                <ul>
-                    <li><input type="checkbox"></li>
-                    <li>影像学检查<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></li>
-
-                    <li><input type="checkbox"></li>
-                    <li>随访<span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></li>
-                </ul>
+            <div class="modal-bodys">
+                <div class="shuyu" style="margin-top: 30px;text-align: center">
+                    <ul>
+                        <select style="width: 200px;height: 20px" id="dosage_form_id" onclick="selectByEntity()">
+                            <option value="0">请选择</option>
+                        </select>
+                    </ul>
+                </div>
+                <div class="shuyu2" style="text-align:center; margin-left:auto; margin-right:auto;" >
+                </div>
             </div>
-            <div style="text-align: center">
-                <button class="btn btn-primary" style="width: 150px" >确定/合并</button>
-            </div>
-            <!-- 模态框底部 -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true" onclick="baocun()">保存</button>
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
             </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content"  style="width:500px;height: 350px" >
+            <div class="modal-header" style="background: #0d6aad;width: 500px;height: 60px">
+                <button id="bts" type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-striped" id="ids_table">
+                    <tr>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>基本信息
+                        </td>
+                        <td><span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></td>
+                        <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>用药
+                        </td>
+                        <td><span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>体格检查
+                        </td>
+                        <td>
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+                        </td>
 
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>既往史
+                        </td>
+                        <td>
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>实验室检查
+                        </td>
+                        <td>
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+                        </td>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span>临床诊断
+                        </td>
+                        <td>
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span><span>影像学检查</span>
+                        </td>
+                        <td>
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+                        </td>
+                        <td style="text-align: right">
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4"><input type="checkbox"></span><span>随访</span>
+                        </td>
+                        <td>
+                            <span class="glyphicon glyphicon-th-list" aria-hidden="true" style="margin-left: 10px"></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true" onclick="baocun()">确定合并</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="guize" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:499px;height: 600px">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #0d6aad;width: 499px;height: 60px">
+                <button id="btts" type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <div onclick="setColor('aa')" id="btn">
+                    <img src="img/template_setting/u775.png" width="10" height="59" alt="">
+                    <img src="img/template_setting/u776.png" width="300" height="59" alt=""id="div1">
+                    <span style="position: absolute; top: 40px; left: 210px;" ><span style="color: #229D0C">显示</span>/<span style="color: #6C6F6C">隐藏</span></span>
+                </div>
+                <div onclick="setColor('bb')">
+                    <img src="img/template_setting/u775.png" width="10" height="59" alt="">
+                    <img src="img/template_setting/u776.png" width="300" height="59" alt=""  id="div2">
+                    <span style="position: absolute; top: 100px; left: 210px;color: #0E74B4"><span style="color: #229D0C">赋值</span>/<span style="color: #6C6F6C">计算</span></span>
+                </div>
+                <div onclick="setColor('cc')">
+                    <img src="img/template_setting/u775.png" width="10" height="59" alt="">
+                    <img src="img/template_setting/u776.png" width="300" height="59" alt="" id="div3">
+                    <span style="position: absolute; top: 160px; left: 210px;"><span style="color: #229D0C">置灰</span>/<span style="color: #6C6F6C">激活</span></span>
+                </div>
+                <div onclick="setColor('dd')">
+                    <img src="img/template_setting/u775.png" width="10" height="59" alt="">
+                    <img src="img/template_setting/u776.png" width="300" height="59" alt="" id="div4">
+                    <span style="position: absolute; top: 220px; left: 210px;color: #0E74B4"><span style="color: #229D0C">勾选</span>/<span style="color: #6C6F6C">取消</span></span>
+                </div>
+                <div onclick="setColor('ee')">
+                    <img src="img/template_setting/u775.png" width="10" height="59" alt="">
+                    <img src="img/template_setting/u776.png" width="300" height="59" alt="" id="div5">
+                    <span style="position: absolute; top: 275px; left: 210px;color: #0E74B4"><span style="color: #229D0C">分值计算</span></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true" onclick="baocun2()" >保存</button>
+            </div>
         </div>
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    function showmymodal1() {
+        $("#myModal1").modal("show");
+    }
+</script>
 </html>
