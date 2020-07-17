@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.follow_up_rule_setting.dao.FirstAndLastDAO">
+  <resultMap id="BaseResultMap" type="com.fums.follow_up_rule_setting.pojo.FirstAndLast">
+    <id column="first_and_last_id" jdbcType="INTEGER" property="firstAndLastId" />
+    <result column="first_and_last_name" jdbcType="VARCHAR" property="firstAndLastName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    first_and_last_id, first_and_last_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from first_and_last
+    where first_and_last_id = #{firstAndLastId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from first_and_last
+    where first_and_last_id = #{firstAndLastId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.follow_up_rule_setting.pojo.FirstAndLast">
+    insert into first_and_last (first_and_last_id, first_and_last_name)
+    values (#{firstAndLastId,jdbcType=INTEGER}, #{firstAndLastName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.follow_up_rule_setting.pojo.FirstAndLast">
+    insert into first_and_last
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="firstAndLastId != null">
+        first_and_last_id,
+      </if>
+      <if test="firstAndLastName != null">
+        first_and_last_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="firstAndLastId != null">
+        #{firstAndLastId,jdbcType=INTEGER},
+      </if>
+      <if test="firstAndLastName != null">
+        #{firstAndLastName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.follow_up_rule_setting.pojo.FirstAndLast">
+    update first_and_last
+    <set>
+      <if test="firstAndLastName != null">
+        first_and_last_name = #{firstAndLastName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where first_and_last_id = #{firstAndLastId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.follow_up_rule_setting.pojo.FirstAndLast">
+    update first_and_last
+    set first_and_last_name = #{firstAndLastName,jdbcType=VARCHAR}
+    where first_and_last_id = #{firstAndLastId,jdbcType=INTEGER}
+  </update>
+</mapper>

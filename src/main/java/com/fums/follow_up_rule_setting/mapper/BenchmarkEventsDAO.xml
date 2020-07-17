@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fums.follow_up_rule_setting.dao.BenchmarkEventsDAO">
+  <resultMap id="BaseResultMap" type="com.fums.follow_up_rule_setting.pojo.BenchmarkEvents">
+    <id column="benchmark_events_id" jdbcType="INTEGER" property="benchmarkEventsId" />
+    <result column="benchmark_events_name" jdbcType="VARCHAR" property="benchmarkEventsName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    benchmark_events_id, benchmark_events_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from benchmark_events
+    where benchmark_events_id = #{benchmarkEventsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from benchmark_events
+    where benchmark_events_id = #{benchmarkEventsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fums.follow_up_rule_setting.pojo.BenchmarkEvents">
+    insert into benchmark_events (benchmark_events_id, benchmark_events_name
+      )
+    values (#{benchmarkEventsId,jdbcType=INTEGER}, #{benchmarkEventsName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fums.follow_up_rule_setting.pojo.BenchmarkEvents">
+    insert into benchmark_events
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="benchmarkEventsId != null">
+        benchmark_events_id,
+      </if>
+      <if test="benchmarkEventsName != null">
+        benchmark_events_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="benchmarkEventsId != null">
+        #{benchmarkEventsId,jdbcType=INTEGER},
+      </if>
+      <if test="benchmarkEventsName != null">
+        #{benchmarkEventsName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.follow_up_rule_setting.pojo.BenchmarkEvents">
+    update benchmark_events
+    <set>
+      <if test="benchmarkEventsName != null">
+        benchmark_events_name = #{benchmarkEventsName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where benchmark_events_id = #{benchmarkEventsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fums.follow_up_rule_setting.pojo.BenchmarkEvents">
+    update benchmark_events
+    set benchmark_events_name = #{benchmarkEventsName,jdbcType=VARCHAR}
+    where benchmark_events_id = #{benchmarkEventsId,jdbcType=INTEGER}
+  </update>
+</mapper>
