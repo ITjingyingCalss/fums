@@ -32,7 +32,11 @@ function followUpManagementFenYe(pageNum) {
                 a+='<td>'+result[i].patientUnique+'</td>';
                 a+='<td>'+result[i].followUpName+'</td>';
                 a+='<td>'+result[i].patientName+'</td>';
-                a+='<td>'+result[i].sex+'</td>';
+                if (result[i].sex==1){
+                    a+='<td>男</td>';
+                }else if (result[i].sex==2){
+                    a+='<td>女</td>';
+                }
                 a+='<td>'+result[i].patientId+'</td>';
                 a+='<td>'+result[i].setOfDate+'</td>';
                 a+='<td>'+result[i].dateOfNextFollowUp+'</td>';
