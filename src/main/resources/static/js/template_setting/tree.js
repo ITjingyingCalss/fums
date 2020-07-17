@@ -1,80 +1,88 @@
 var v;
 var checkedData;
 layui.use(['tree', 'util'], function(){
+    // $.ajax({
+    //     url:"selectDictionary",
+    //     data:{},
+    //     dataType:"json",
+    //     type:"post",
+    //     success:function (result) {
+    //
+    //     }
+    // })
     var tree = layui.tree
         ,layer = layui.layer
         ,util = layui.util
-
         //模拟数据
         ,data = [{
             title: '基本信息'
-            ,id: 1
+            ,id: 100
             ,field: ''
             ,children: [{
                 title: '患者唯一标识'
-                ,id: 11
+                ,id: 1
                 ,field: ''
             },{
                 title: '姓名'
-                ,id: 12
+                ,id: 2
                 ,field: ''
             },{
                 title: '性别'
-                ,id: 13
+                ,id: 3
                 ,field: ''
             },{
                 title: '出生地'
-                ,id: 14
+                ,id: 4
                 ,field: ''
             },{
                 title: '文化程度'
-                ,id: 15
+                ,id: 5
                 ,field: ''
             },{
                 title: '移动电话'
-                ,id: 16
+                ,id: 6
                 ,field: ''
             },{
                 title: '电子邮件'
-                ,id: 17
+                ,id: 7
                 ,field: ''
             },{
                 title: 'ABO血型'
-                ,id: 18
+                ,id: 8
                 ,field: ''
             },{
                 title: 'RH血型'
-                ,id: 19
+                ,id: 9
                 ,field: ''
             },{
                 title: '联系人'
-                ,id: 20
+                ,id: 10
                 ,field: ''
                 ,children: [{
                     title: '与患者关系'
-                    ,id: 21
+                    ,id: 22
                     ,field: ''
                     // ,href: 'https://www.layui.com/doc/'
                 },{
                     title: '姓名'
-                    ,id: 22
-                    ,field: ''
-                },{
-                    title: '性别'
                     ,id: 23
                     ,field: ''
                 },{
-                    title: '住址'
+                    title: '性别'
                     ,id: 24
                     ,field: ''
                 },{
-                    title: '电子邮件'
+                    title: '住址'
                     ,id: 25
+                    ,field: ''
+                },{
+                    title: '电子邮件'
+                    ,id: 26
                     ,field: ''
                 }]
             },{
                 title: '证件'
-                ,id: 26
+                ,id: 15
                 ,field: ''
                 ,children: [{
                     title: '身份证号'
@@ -90,7 +98,7 @@ layui.use(['tree', 'util'], function(){
                     ,field: ''
                 },{
                     title: '军官证号'
-                    ,id: 30
+                    ,id:30
                     ,field: ''
                 },{
                     title: '驾驶证号'
@@ -108,7 +116,7 @@ layui.use(['tree', 'util'], function(){
             }]
         },{
             title: '首页信息'
-            ,id: 2
+            ,id: 200
             ,field: ''
             ,children: [{
                 title: '主要诊断'
@@ -177,7 +185,7 @@ layui.use(['tree', 'util'], function(){
             }]
         },{
             title: '手术信息'
-            ,id: 3
+            ,id: 300
             ,field: ''
             ,children: [{
                 title: '手术名称'
@@ -238,7 +246,6 @@ layui.use(['tree', 'util'], function(){
                 }]
             }]
         }]
-
     //基本演示
     tree.render({
         elem: '#test12'
@@ -256,27 +263,66 @@ layui.use(['tree', 'util'], function(){
         return Math.floor(Math.random()*(max-min))+min;
     }
     //按钮事件
+
     util.event('lay-demo', {
         getChecked: function(othis){
             checkedData = tree.getChecked('demoId1'); //获取选中节点的数据
+            aa=checkedData;
+            var a=new Array();
             for (var j = 0; j <checkedData.length; j++) {
                 var title2 = checkedData[j].children.length;
+                //树节点data
                 for(var jj = 0; jj <title2; jj++){
                     var title = checkedData[j].children[jj].title;
+                    //树节点id
+                    var id = checkedData[j].children[jj].id;
                     var ss="对应id";
                     var randnum=rand(1000,9999);
-                    v+="<tr>";
-                    v+='<td style="color: #0E74B4"">'+title +'</td>'
-                    v+='<td>'+"<input type='text' id='"+randnum+"' onfocus='cha(this.id)'>"+'</td>';
-                    v+='<td style="color: #0E74B4"">'+ss +'</td>'
-                    v+='<td>'+"<input  type='text' value='"+randnum+"' />"+'</td>';
-                    v+="</tr>";
+                    var title3 = checkedData[j];
+                    // var s=;
+                    if(id==10||id==15){
+                        for (var ils=0;ils<checkedData[j].children[jj].children.length;ils++){
+                             title = checkedData[j].children[jj].children[ils].title;
+                            //树节点id
+                             id = checkedData[j].children[jj].children[ils].id;
+                             ss="对应id";
+                            title3 = checkedData[j].children[jj];
+                             randnum=rand(1000,9999);
+                            console.log(window.parent.cha123(id));//是否能往里面添加
+                            if(window.parent.cha123(id)){
+                                    v+="<tr>";
+                                    v+='<td style="color: #0E74B4"">'+title +'</td>'
+                                    v+='<td>'+"<input type='text' id='"+id+"' onfocus='cha(this.id)' onclick='cha2("+JSON.stringify(title3)+")'>"+'</td>';
+                                    v+='<td style="color: #0E74B4"">'+ss +'</td>'
+                                    v+='<td>'+"<input  type='text' value='"+id+"' />"+'</td>';
+                                    v+="</tr>";
+                            }else{
+                                continue;
+                            }
+                        }
+                    }else {
+                        console.log(window.parent.cha123(id));//是否能往里面添加
+                        if(window.parent.cha123(id)){
+
+                                v+="<tr>";
+                                v+='<td style="color: #0E74B4"">'+title +'</td>'
+                                v+='<td>'+"<input type='text' id='"+id+"' onfocus='cha(this.id)' onclick='cha2("+JSON.stringify(title3)+")'>"+'</td>';
+                                v+='<td style="color: #0E74B4"">'+ss +'</td>'
+                                v+='<td>'+"<input  type='text' value='"+id+"' />"+'</td>';
+                                v+="</tr>";
+
+                        }else{
+                            continue;
+                        }
+
+                }
                 }
             }
+
            var a = $('#content1', parent.document).append(v);
         }
         ,setChecked: function(){
-            tree.setChecked('demoId1', [1,2,3]); //勾选指定节点
+            tree.setChecked('demoId1', [100,200,300]); //勾选指定节点
         }
         ,reload: function(){
             //重载实例
