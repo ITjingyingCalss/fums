@@ -1,6 +1,6 @@
 package com.fums.system_management.dao;
 
-import com.fums.system_management.pojo.UserDepartment;
+import com.fums.pojo.UserDepartment;
 import org.springframework.stereotype.Repository;
 
 /**

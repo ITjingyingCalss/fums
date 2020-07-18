@@ -2,8 +2,8 @@ package com.fums.system_management.controller;
 
 
 import com.alibaba.fastjson.JSON;
-import com.fums.system_management.pojo.HospitalDepartment;
-import com.fums.system_management.pojo.User;
+import com.fums.pojo.HospitalDepartment;
+import com.fums.pojo.User;
 import com.fums.system_management.service.UserService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -126,9 +126,7 @@ public class SystemManagementController {
 
         PageHelper.startPage(pageNum,5);
         List<User> listUser = userService.selectUser(hospitalDepartmentName,userAccount);
-
         PageInfo<User> pageInfo = new PageInfo<>(listUser);
-
 
         return JSON.toJSONString(pageInfo);
     }
@@ -180,6 +178,5 @@ public class SystemManagementController {
 
         return saveUser;
     }*/
-
 
 }

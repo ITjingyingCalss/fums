@@ -62,21 +62,106 @@
         }
     </style>
 
+    <!--清空   刷新页面-->
+    <script type="text/javascript">
+        function clean() {
+            window.location.reload();
+        }
+    </script>
+
     <script type="text/javascript">
 
+        var page;
         var qian;//前
         var hou;//后
 
         $(function () {
-            retrieval()
+            retrievalForm()
         })
 
-        function retrieval(){
+        function retrievalForm(pageNum){
 
+            $("#tbody").empty();
+
+            var followUpName = $("#follow_up_name").val();//随访组名称
+            var creationDate = $("#creation_date").val();//创建日期
+            var updatedDate = $("#updated_date").val();//更新日期
+            var templateName = $("#template_name").val();//模板名称
+            var theReator = $("#the_reator").val();//创建者
+
+
+
+            $.ajax({
+                url:"FormOverviewController/seleForm",
+                type:"post",
+                data:{
+                    "followUpName":followUpName,
+                    "creationDate":creationDate,
+                    "updatedDate":updatedDate,
+                    "templateName":templateName,
+                    "theReator":theReator,
+                    "pageNum":pageNum
+                },
+                dataType:"json",
+
+
+                success:function (list) {
+                    console.log(list);
+
+                    page = list;
+
+                    var aa = "";
+                    for (var i = 0; i < list.length; i++) {
+                        var data=list;
+                        /*时间处理*/
+                        var date=data[i].updatedDate;
+                        var date2=data[i].creationDate;
+                        var s=new Date(date);
+                        var s2=new Date(date2);
+                        year=s.getFullYear();
+                        month=s.getMonth()+1;
+                        day=s.getDate();
+                        time=year+'-'+getzf(month)+'-'+getzf(day);
+                        year1=s2.getFullYear();
+                        month1=s2.getMonth()+1;
+                        day1=s2.getDate();
+                        time2=year1+'-'+getzf(month1)+'-'+getzf(day1);
+                        console.log(data[i])
+
+                        var state = data[i].state;
+                        if (data[i].state == 0) {
+                            state = "历史版本";
+                        }
+                        if (data[i].state == 1) {
+                            state = "当前版本";
+                        }
+                        if (data[i].state == 2) {
+                            state = "未发布";
+                        }
+                        ss = "<tr><td>"+ data[i].templateName +"</td><td>"
+                            + data[i].followUp.followUpName +"</td><td>"
+                            + time +"</td><td>"
+                            + data[i].updateThe +"</td><td>"
+                            + data[i].theErsionUmber +"</td><td>"
+                            + data[i].theReator +"</td><td>"
+                            + time2 +"</td><td><a href='standard_template'>"+ state +"</a></td></tr>"
+
+                        $("#tbody").append(ss);
+                        qian=list.pageNum==1?1:list.pageNum-1;
+                        hou=list.pageNum==list.pages?list.pages:list.pageNum+1;
+                    }
+                }
+            })
         }
 
 
 
+        function getzf(num) {
+            if(parseInt(num)<10){
+                num='0'+num;
+            }
+            return num;
+        }
 
     </script>
 
@@ -148,35 +233,35 @@
                 <span style="white-space: nowrap;display: inline-block;color: #0E74B4">随访组名称：</span>
             </td>
             <td >
-                <input class="form-control" id="#" style="width: 80%">
+                <input class="form-control" id="follow_up_name" name="followUpName" style="width: 80%">
             </td>
 
             <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">创建日期：</span>
             </td>
             <td >
-                <input  id="14" name="" style="width: 40%">~<input id="77" name="" style="width: 40%;">
+                <input  id="creation_date" name="creationDate" style="width: 40%">~<input id="updated_date" name="updatedDate" style="width: 40%;">
             </td>
         </tr>
             <td style="text-align: right">
                 <span style="white-space: nowrap;display: inline-block;color: #0E74B4">模板名称：</span>
             </td>
             <td>
-                <input class="form-control" id="3" style="width: 80%">
+                <input class="form-control" id="template_name" name="templateName" style="width: 80%">
             </td>
 
             <td style="text-align: right">
                 <span style="white-space: nowrap;display: inline-block;color: #0E74B4">创建者：</span>
             </td>
             <td>
-                <input class="form-control" id="2" style="width: 40%">
+                <input class="form-control" id="the_reator" name="theReator" style="width: 40%">
             </td>
         </div>
 
     </table>
 
     <div style="text-align: center;margin-top: 20px;">
-        <button type="button" class="btn btn-success btn-sm" onclick="retrieval()">检索</button>
-        <button type="button" class="btn btn-success btn-sm" onclick="">清空</button>
+        <button type="button" class="btn btn-success btn-sm" onclick="retrievalForm()">检索</button>
+        <button type="button" class="btn btn-success btn-sm" onclick="clean()">清空</button>
     </div>
 
     <!--    <button class="btn btn-info">创建模板</button>-->
@@ -202,9 +287,9 @@
             <td>001</td>
             <td>赵四</td>
             <td>2015-06-01</td>
-            <td>
+<!--            <butten>
                 <a href="#">历史版本</a>
-            </td>
+            </butten>-->
         </tr>
         <tr class="active">
             <td>2015-06-01</td>
@@ -249,26 +334,26 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button id="bt1" type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3 id="myModalLabel">新增用户</h3>
+                    <h3 id="myModalLabel">表单总览页面的id和name</h3>
                 </div>
                 <table class="table" style="background:beige;" border="0" >
                     <div  class="main-menu" style="text-align: center">
                         <tr>
                             <td style="text-align: right">
-                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">用户ID：</span>
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">模板名称：</span>
                             </td>
                             <td >
                                 <input style="height: 34px;width: 55%" class="form-control" id="user_id" name="userId">
                             </td>
 
-                            <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">姓名：</span>
+                            <td style="text-align: right"><span style="white-space: nowrap;display: inline-block;color: #0E74B4">随访组名称：</span>
                             </td>
                             <td >
                                 <input style="height: 34px;width: 55%" class="form-control" id="user_account" name="userAccount">
                             </td>
                         </tr>
                         <td style="text-align: right">
-                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">性别：</span>
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">更新日期：</span>
                         </td>
                         <td>
                             <select style="width: 55%;height: 34px;" id="user_sex" name="userSex">
@@ -279,7 +364,7 @@
                         </td>
 
                         <td style="text-align: right">
-                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">电话：</span>
+                            <span style="white-space: nowrap;display: inline-block;color: #0E74B4">更新者：</span>
                         </td>
                         <td>
                             <input style="height: 34px;width: 55%" class="form-control" id="user_phone" name="userPhone">
@@ -287,14 +372,14 @@
 
                         <tr>
                             <td style="text-align: right">
-                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">邮箱：</span>
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">版本号：</span>
                             </td>
                             <td>
                                 <input style="height: 34px;width: 55%" class="form-control" id="user_email" name="userEmail">
                             </td>
 
                             <td style="text-align: right">
-                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">密码：</span>
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">创建者：</span>
                             </td>
                             <td>
                                 <input style="height: 34px;width: 55%" class="form-control" id="password" name="password">
@@ -303,7 +388,7 @@
 
                         <tr>
                             <td style="text-align: right">
-                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">科室：</span>
+                                <span style="white-space: nowrap;display: inline-block;color: #0E74B4">创建日期：</span>
                             </td>
                             <td>
                                 <select style="width: 55%;height: 34px;" id="hospital_department_name" name="hospitalDepartmentName">
@@ -312,18 +397,13 @@
                             </td>
                         </tr>
                     </div>
-
                 </table>
-                <div class="modal-footer">
-                    <button class="btn btn-success" onclick="baoCun()" id="dj" data-dismiss="modal" >保存</button>
-                    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
-                </div>
             </div>
         </div>
     </div>
 
 
-    <div style="padding-left: 567px;">
+    <div style="padding-left: 322px;">
         <ul class="pagination">
             <li><a href="#">&laquo;</a></li>
             <li class="active"><a href="#">1</a></li>

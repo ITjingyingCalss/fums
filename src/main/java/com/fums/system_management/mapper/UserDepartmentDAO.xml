@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fums.system_management.dao.UserDepartmentDAO">
-  <resultMap id="BaseResultMap" type="com.fums.system_management.pojo.UserDepartment">
+  <resultMap id="BaseResultMap" type="com.fums.pojo.UserDepartment">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="hospital_department_id" jdbcType="INTEGER" property="hospitalDepartmentId" />
@@ -19,13 +19,13 @@
     delete from user_department
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.fums.system_management.pojo.UserDepartment">
-    insert into user_department (id, user_id, hospital_department_id
-      )
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{hospitalDepartmentId,jdbcType=INTEGER}
-      )
+  <insert id="insert" parameterType="com.fums.pojo.UserDepartment">
+    insert into user_department (id, user_id, hospital_department_id)
+
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{hospitalDepartmentId,jdbcType=INTEGER})
+
   </insert>
-  <insert id="insertSelective" parameterType="com.fums.system_management.pojo.UserDepartment">
+  <insert id="insertSelective" parameterType="com.fums.pojo.UserDepartment">
     insert into user_department
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -50,7 +50,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fums.system_management.pojo.UserDepartment">
+  <update id="updateByPrimaryKeySelective" parameterType="com.fums.pojo.UserDepartment">
     update user_department
     <set>
       <if test="userId != null">
@@ -62,7 +62,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fums.system_management.pojo.UserDepartment">
+  <update id="updateByPrimaryKey" parameterType="com.fums.pojo.UserDepartment">
     update user_department
     set user_id = #{userId,jdbcType=INTEGER},
       hospital_department_id = #{hospitalDepartmentId,jdbcType=INTEGER}

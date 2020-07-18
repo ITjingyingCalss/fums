@@ -54,9 +54,6 @@
                             + "<button type=\"button\" class=\"btn btn-success btn-sm\" data-toggle=\"modal\" data-target=\"#editModal\" onclick=\"UpdateUser("+ listUser.list[i].id +")\">编辑</button>"
                             + "<button type=\"button\" class=\"btn btn-success btn-sm\" onclick=\"deleUser("+ listUser.list[i].id +")\">删除</button></td></tr>"
 
-                        // alert(listUser.list[i].id);
-                        console.log(listUser.id);
-
                         $("#tbody").append(ss);
                         qian=listUser.pageNum==1?1:listUser.pageNum-1;
                         hou=listUser.pageNum==listUser.pages?listUser.pages:listUser.pageNum+1;
@@ -70,12 +67,12 @@
     <script type="text/javascript">
 
         function deleUser(id) {
+            alert(id);
             $.ajax({
                 url:"SystemManagementController/ee",
                 type:"post",
                 data:{id : id},
                 success:function(ee1){
-                    alert(id);
                     if(confirm("是否确定删除？")){
                         alert("删除成功");
                         window.location.reload();
@@ -86,7 +83,6 @@
             })
 
         }
-
 
     </script>
 
@@ -183,11 +179,11 @@
                     $('<option value="' + UpdateUser.id + '"'+(UpdateUser.id == id1?'selected':'')+'>'+ UpdateUser.userAccount +'</option>');*/
                     alert(UpdateUser.hospitalDepartment.hospitalDepartmentName);
                     alert(UpdateUser.userAccount);
-                    $("#hospital_department_id1").val('<option value="' + UpdateUser.hospitalDepartment.hospitalDepartmentId + '">' + UpdateUser.hospitalDepartment.hospitalDepartmentName + '</option>');
-                    $("#id1").val('<option value="' + UpdateUser.id + '">' + UpdateUser.userAccount + '</option>');
+                    /*$("#hospital_department_id1").val('<option value="' + UpdateUser.hospitalDepartment.hospitalDepartmentId + '">' + UpdateUser.hospitalDepartment.hospitalDepartmentName + '</option>');
+                    $("#id1").val('<option value="' + UpdateUser.id + '">' + UpdateUser.userAccount + '</option>');*/
 
-                    /*$("#hospital_department_id1").val(UpdateUser.hospitalDepartment.hospitalDepartmentName);
-                    $("#id1").val(UpdateUser.userAccount);*/
+                    $("#hospital_department_id1").val(UpdateUser.hospitalDepartment.hospitalDepartmentId);
+                    $("#id1").val(UpdateUser.id);
                 }
             })
         }
@@ -288,7 +284,7 @@
                             </td>
                             <td>
                                 <select style="width: 100%;height: 35px;" id="hospital_department_id1" name="hospitalDepartmentName">
-                                    <option value="0" selected="selected">请选择科室</option>
+                                    <option value="0">请选择科室</option>
                                 </select>
                             </td>
 
@@ -297,7 +293,7 @@
                             </td>
                             <td>
                                 <select style="width: 100%;height: 35px;" id="id1" name="userAccount">
-                                    <option value="0" selected="selected">请选择人员</option>
+                                    <option value="0">请选择人员</option>
                                 </select>
                             </td>
                         </tr>

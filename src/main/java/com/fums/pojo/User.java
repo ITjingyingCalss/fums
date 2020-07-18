@@ -1,4 +1,6 @@
-package com.fums.system_management.pojo;
+package com.fums.pojo;
+
+import com.fums.pojo.HospitalDepartment;
 
 import java.io.Serializable;
 import java.util.Date;
