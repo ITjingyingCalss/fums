@@ -39,7 +39,7 @@
 
         $(function () {
             retrieval()
-        })
+        });
 
         function retrieval(pageNum){
 
@@ -72,7 +72,7 @@
                     console.log(list1);
                     var ss = "";
                     for (var i = 0; i < list1.list.length; i++) {
-                        ss = "<tr><td><input id='Uid' type=\"checkbox\" style='width: 40px;' class=\"checkboxxia\" onclick=\"xiaOnclick()\" value=" + list1.list[i].id + "></td><td>"
+                        ss = "<tr><td><input type=\"checkbox\" style='width: 40px;' class=\"checkboxxia\" onclick=\"xiaOnclick()\" value=" + list1.list[i].id + "></td><td>"
                             + list1.list[i].userId +"</td><td>"
                             + list1.list[i].userAccount +"</td><td>"
                             + (list1.list[i].userSex ==1?"男":"女") +"</td><td>"
@@ -128,6 +128,24 @@
              var password = $("#password1").val();//密码
              var hospitalDepartmentName = $("#hospital_department_id1").val();//科室
 
+             /*判断是否有值*/
+             if (userId == null || userId == '') {
+                 alert("请输入用户ID")
+                 return;
+             }
+             if (userAccount == null || userAccount == '') {
+                 alert("请输入姓名")
+                 return;
+             }
+             if (userSex == null || userSex == '') {
+                 alert("请输入性别")
+                 return;
+             }
+             if (userPhone == null || userPhone == '') {
+                 alert("请输入电话")
+                 return;
+             }
+
              $.ajax({
                  url: "SystemManagementController/insert",
                  type: "post",
@@ -159,27 +177,49 @@
     <!--修改回显-->
     <script type="text/javascript">
 
-        function seleUpdate(id){
-            alert(id);
-            $.ajax({
-                url:"SystemManagementController/seleUpdate",
-                type:"post",
-                dataType:"json",
-                data:{
-                    id : id
-                },
-                success:function (seleUpdate) {
+        function seleUpdate(){
 
-                    $("#qqq").val(seleUpdate.id);
-                    $("#user_id2").val(seleUpdate.userId);
-                    $("#user_account2").val(seleUpdate.userAccount);
-                    $("#user_sex2").val(seleUpdate.userSex);
-                    $("#user_phone2").val(seleUpdate.userPhone);
-                    $("#user_email2").val(seleUpdate.userEmail);
-                    $("#password2").val(seleUpdate.password);
-                    $("#hospital_department_name2").val(seleUpdate.hospital_department_name);
-                }
-            })
+            var bool = false;
+            var id = new Array();
+            /*var st="";*/
+            $.each($("input[class='checkboxxia']:checkbox:checked"),function(index,item){
+                id.push($(item).val());
+
+                /*st+=$(item).val()+",";*/
+
+                /*console.log($(item).val());*/
+                bool = true;
+            });
+
+
+            if(true){
+                $.ajax({
+                    url:"SystemManagementController/seleUpdate",
+                    type:"post",
+                    dataType:"json",
+                    data:{
+                        "id" : id[0]
+                    },
+
+                    success:function (seleUpdate) {
+
+
+                        console.log(seleUpdate);
+
+                        $("#qqq").val(seleUpdate.id);
+                        $("#user_id2").val(seleUpdate.userId);
+                        $("#user_account2").val(seleUpdate.userAccount);
+                        $("#user_sex2").val(seleUpdate.userSex);
+                        $("#user_phone2").val(seleUpdate.userPhone);
+                        $("#user_email2").val(seleUpdate.userEmail);
+                        $("#password2").val(seleUpdate.password);
+                        $("#hospital_department_id2").val(seleUpdate.hospitalDepartmentId);
+
+
+                    }
+                })
+            }
+
          }
 
         /*修改更新*/

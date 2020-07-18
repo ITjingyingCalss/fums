@@ -1,8 +1,8 @@
 package com.fums.system_management.dao;
 
 
-import com.fums.system_management.pojo.HospitalDepartment;
-import com.fums.system_management.pojo.User;
+import com.fums.pojo.HospitalDepartment;
+import com.fums.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -46,7 +46,7 @@ public interface UserDAO {
     int insert(User user);
 
 
-    void inserts(@Param("a")Integer a,@Param("b") Integer b);
+    void inserts(@Param("a") Integer a, @Param("b") Integer b);
 
     /*修改回显*/
     User seleUpdate(Integer id);
@@ -68,12 +68,12 @@ public interface UserDAO {
 
     /*新增*/
 
-    int insertsUser(@Param("a")Integer a,@Param("b") Integer b);
+    int insertsUser(@Param("a") Integer a, @Param("b") Integer b);
 
     /*修改回显*/
     User UpdateUser(Integer id);
 
     /*更新*/
-    int saveUpdateUser(@Param("c")Integer c,@Param("d") Integer d);
+    int saveUpdateUser(@Param("c") Integer c, @Param("d") Integer d);
 
 }

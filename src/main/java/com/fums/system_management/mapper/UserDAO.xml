@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fums.system_management.dao.UserDAO">
-  <resultMap id="BaseResultMap" type="com.fums.system_management.pojo.User">
+  <resultMap id="BaseResultMap" type="com.fums.pojo.User">
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="user_account" jdbcType="VARCHAR" property="userAccount" />
@@ -19,24 +19,17 @@
     <result column="hospital_department_name" jdbcType="VARCHAR" property="hospitalDepartmentName" />
     <result column="hospital_department_id" jdbcType="VARCHAR" property="hospitalDepartmentId" />
 
-    <association property="hospitalDepartment" javaType="com.fums.system_management.pojo.HospitalDepartment">
+    <association property="hospitalDepartment" javaType="com.fums.pojo.HospitalDepartment">
       <id column="hospital_department_id" jdbcType="INTEGER" property="hospitalDepartmentId" />
       <result column="hospital_department_name" jdbcType="VARCHAR" property="hospitalDepartmentName" />
       <result column="hospital_department_state" jdbcType="INTEGER" property="hospitalDepartmentState" />
       <result column="hospital_department_code" jdbcType="VARCHAR" property="hospitalDepartmentCode" />
-
     </association>
-  </resultMap>
 
- <resultMap id="usBaseResultMap" type="com.fums.system_management.pojo.HospitalDepartment">
-    <id column="hospital_department_id" jdbcType="INTEGER" property="hospitalDepartmentId" />
-    <result column="hospital_department_name" jdbcType="VARCHAR" property="hospitalDepartmentName" />
-    <result column="hospital_department_state" jdbcType="INTEGER" property="hospitalDepartmentState" />
-    <result column="hospital_department_code" jdbcType="VARCHAR" property="hospitalDepartmentCode" />
   </resultMap>
 
   <!--用户科室中间表-->
-  <resultMap id="ueBaseResultMap" type="com.fums.system_management.pojo.UserDepartment">
+  <resultMap id="ueBaseResultMap" type="com.fums.pojo.UserDepartment">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="hospital_department_id" jdbcType="INTEGER" property="hospitalDepartmentId" />
@@ -75,8 +68,7 @@
   </select>
 
 
-
-  <select id="seleDepartment" resultMap="usBaseResultMap">
+  <select id="seleDepartment" resultMap="BaseResultMap">
     select hospital_department_id,hospital_department_name from hospital_department
   </select>
 
@@ -84,14 +76,14 @@
     select id,user_account from user
   </select>
 
-  <insert id="insert" parameterType="com.fums.system_management.pojo.User" useGeneratedKeys="true" keyProperty="id" >
+  <insert id="insert" parameterType="com.fums.pojo.User" useGeneratedKeys="true" keyProperty="id" >
 
     INSERT INTO `tree`.`user` ( `user_id`, `user_account`, `user_sex`, `user_phone`, `user_email`,  `password`)
     VALUES (#{userId},#{userAccount},#{userSex},#{userPhone},#{userEmail},#{password});
 
   </insert>
 
-  <insert id="inserts" parameterType="com.fums.system_management.pojo.UserDepartment">
+  <insert id="inserts" parameterType="com.fums.pojo.UserDepartment">
 
     INSERT INTO `tree`.`user_department` ( `user_id`,`hospital_department_id`)
     VALUES (#{a},#{b});
@@ -100,7 +92,13 @@
 
 <!--修改回显-->
     <select id="seleUpdate" resultMap="BaseResultMap">
-      select * from user where id = #{id}
+          select u.id, u.user_id ,u.user_account,u.user_sex,u.user_phone,
+    u.user_email,u.password,h.hospital_department_id,h.hospital_department_name
+    from
+    `user` u
+    LEFT JOIN user_department d ON u.id = d.user_id
+    LEFT JOIN hospital_department h ON d.hospital_department_id = h.hospital_department_id
+    where u.id = #{id}
     </select>
 
   <!--  <update id="saveUpdata" parameterType="com.fums.system_management.pojo.User">-->
@@ -137,15 +135,14 @@
           and u.user_account like concat('%',#{userAccount},'%')
       </if>-->
 
-
   </select>
 
   <delete id="delete">
-    delete from user where id = #{id}
+    delete from user_department where id = #{id}
   </delete>
 
 
-  <insert id="insertsUser" parameterType="com.fums.system_management.pojo.UserDepartment">
+  <insert id="insertsUser" parameterType="com.fums.pojo.UserDepartment">
 
     INSERT INTO `tree`.`user_department` ( `user_id`,`hospital_department_id`)
     VALUES (#{a},#{b});

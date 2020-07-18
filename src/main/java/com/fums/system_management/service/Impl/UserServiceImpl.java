@@ -2,8 +2,8 @@ package com.fums.system_management.service.Impl;
 
 
 import com.fums.system_management.dao.UserDAO;
-import com.fums.system_management.pojo.HospitalDepartment;
-import com.fums.system_management.pojo.User;
+import com.fums.pojo.HospitalDepartment;
+import com.fums.pojo.User;
 import com.fums.system_management.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,7 +73,6 @@ public class UserServiceImpl implements UserService {
             return false;
         }
     }
-
 
 
     @Override

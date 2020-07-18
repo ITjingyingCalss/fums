@@ -1,23 +1,26 @@
-package com.fums.system_management.pojo;
+package com.fums.pojo;
 
 import java.io.Serializable;
 
 /**
- * user_department
+ * user_role
  * @author 
  */
-public class UserDepartment implements Serializable {
+public class UserRole implements Serializable {
+    /**
+     * id
+     */
     private Integer id;
 
     /**
-     * 用户表id
+     * 用户id
      */
     private Integer userId;
 
     /**
-     * 科室表id
+     * 角色id
      */
-    private Integer hospitalDepartmentId;
+    private Integer roleId;
 
     private static final long serialVersionUID = 1L;
 
@@ -37,12 +40,12 @@ public class UserDepartment implements Serializable {
         this.userId = userId;
     }
 
-    public Integer getHospitalDepartmentId() {
-        return hospitalDepartmentId;
+    public Integer getRoleId() {
+        return roleId;
     }
 
-    public void setHospitalDepartmentId(Integer hospitalDepartmentId) {
-        this.hospitalDepartmentId = hospitalDepartmentId;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     @Override
@@ -56,10 +59,10 @@ public class UserDepartment implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        UserDepartment other = (UserDepartment) that;
+        UserRole other = (UserRole) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
-            && (this.getHospitalDepartmentId() == null ? other.getHospitalDepartmentId() == null : this.getHospitalDepartmentId().equals(other.getHospitalDepartmentId()));
+            && (this.getRoleId() == null ? other.getRoleId() == null : this.getRoleId().equals(other.getRoleId()));
     }
 
     @Override
@@ -68,7 +71,7 @@ public class UserDepartment implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
-        result = prime * result + ((getHospitalDepartmentId() == null) ? 0 : getHospitalDepartmentId().hashCode());
+        result = prime * result + ((getRoleId() == null) ? 0 : getRoleId().hashCode());
         return result;
     }
 
@@ -80,7 +83,7 @@ public class UserDepartment implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", userId=").append(userId);
-        sb.append(", hospitalDepartmentId=").append(hospitalDepartmentId);
+        sb.append(", roleId=").append(roleId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

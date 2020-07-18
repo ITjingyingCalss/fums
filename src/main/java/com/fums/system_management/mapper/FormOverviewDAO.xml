@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fums.system_management.dao.FormOverviewDAO">
-  <resultMap id="BaseResultMap" type="com.fums.system_management.pojo.FormOverview">
+  <resultMap id="BaseResultMap" type="com.fums.pojo.FormOverview">
     <id column="overview_id" jdbcType="INTEGER" property="overviewId" />
     <result column="department_id" jdbcType="INTEGER" property="departmentId" />
     <result column="followup_up_id" jdbcType="INTEGER" property="followupUpId" />
@@ -13,18 +13,61 @@
     <result column="creation_date" jdbcType="TIMESTAMP" property="creationDate" />
     <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="table_state" jdbcType="VARCHAR" property="tableState" />
+
+      <!--引入随访组表-->
+      <association property="followUp" javaType="com.fums.pojo.FollowUp">
+          <id column="follow_up_id" jdbcType="INTEGER" property="followUpId" />
+          <result column="hospital_id" jdbcType="INTEGER" property="hospitalId" />
+          <result column="hospital_department_child_code" jdbcType="INTEGER" property="hospitalDepartmentChildCode" />
+          <result column="follow_up_principal" jdbcType="VARCHAR" property="followUpPrincipal" />
+          <result column="follow_up_level" jdbcType="INTEGER" property="followUpLevel" />
+          <result column="follow_up_name" jdbcType="VARCHAR" property="followUpName" />
+          <result column="user_account" jdbcType="VARCHAR" property="userAccount" />
+          <result column="follow_up_create_time" jdbcType="DATE" property="followUpCreateTime" />
+          <result column="follow_up_phone" jdbcType="VARCHAR" property="followUpPhone" />
+          <result column="follow_up_status" jdbcType="INTEGER" property="followUpStatus" />
+          <result column="follow_up_start_time" jdbcType="DATE" property="followUpStartTime" />
+          <result column="follow_up_end_time" jdbcType="DATE" property="followUpEndTime" />
+          <result column="follow_up_code" jdbcType="VARCHAR" property="followUpCode" />
+          <result column="follow_up_patient_number" jdbcType="INTEGER" property="followUpPatientNumber" />
+          <result column="follow_up_control_group" jdbcType="VARCHAR" property="followUpControlGroup" />
+          <result column="follow_up_backdrop" jdbcType="VARCHAR" property="followUpBackdrop" />
+      </association>
+
   </resultMap>
+
   <sql id="Base_Column_List">
     overview_id, department_id, followup_up_id, template_name, updated_date, update_the, 
     the_ersion_umber, the_reator, creation_date, `state`, table_state
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from form_overview
-    where overview_id = #{overviewId,jdbcType=INTEGER}
+
+  <select id="seleForm" resultMap="BaseResultMap">
+    SELECT f.overview_id,f.template_name ,f.updated_date,
+           f.update_the,f.the_ersion_umber,f.the_reator,
+           f.creation_date,f.state,u.follow_up_name
+    FROM form_overview f
+    LEFT JOIN follow_up u ON f.followup_up_id = u.follow_up_id
+    where 1 = 1
+
+    <if test="followUpName != null and followUpName != ''">
+      and u.follow_up_name like CONCAT('%',#{followUpName},'%')
+    </if>
+
+/*时间比较的写法*/
+    <if test="creationDate != null and updatedDate != null">
+      and f.creation_date BETWEEN #{creationDate}and #{updatedDate}
+    </if>
+    <if test="templateName != null and templateName != ''">
+      and f.template_name like CONCAT('%',#{templateName},'%')
+    </if>
+    <if test="theReator != null and theReator != ''">
+      and f.the_reator like CONCAT('%',#{theReator},'%')
+    </if>
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+
+
+
+<!--  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from form_overview
     where overview_id = #{overviewId,jdbcType=INTEGER}
   </delete>
@@ -160,5 +203,5 @@
       `state` = #{state,jdbcType=VARCHAR},
       table_state = #{tableState,jdbcType=VARCHAR}
     where overview_id = #{overviewId,jdbcType=INTEGER}
-  </update>
+  </update>-->
 </mapper>

@@ -1,8 +1,8 @@
 package com.fums.system_management.service;
 
 
-import com.fums.system_management.pojo.HospitalDepartment;
-import com.fums.system_management.pojo.User;
+import com.fums.pojo.HospitalDepartment;
+import com.fums.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -64,12 +64,12 @@ public interface UserService {
     int delete(Integer id);
 
     /*新增*/
-    int insertsUser(@Param("a")Integer a,@Param("b") Integer b);
+    int insertsUser(@Param("a") Integer a, @Param("b") Integer b);
 
     /*修改回显*/
     User UpdateUser(Integer id);
 
     /*更新*/
-    int saveUpdateUser(@Param("c")Integer c,@Param("d") Integer d);
+    int saveUpdateUser(@Param("c") Integer c, @Param("d") Integer d);
 
 }

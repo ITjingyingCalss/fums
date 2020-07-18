@@ -1,6 +1,6 @@
 package com.fums.system_management.dao;
 
-import com.fums.system_management.pojo.UserRole;
+import com.fums.pojo.UserRole;
 import org.springframework.stereotype.Repository;
 
 /**
