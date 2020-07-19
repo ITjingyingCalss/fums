@@ -158,11 +158,11 @@
         where u.id = #{id}
     </select>
 
-<!--    <update id="saveUpdateUser" parameterType="com.fums.system_management.pojo.UserDepartment">
+    <update id="saveUpdateUser" parameterType="com.fums.pojo.UserDepartment">
         UPDATE `tree`.`user_department`
         SET `user_id`=#{c}, `hospital_department_id`=#{d}
-        WHERE (`id`=#{id});
-    </update>-->
+        WHERE `user_id`=#{id};
+    </update>
 
 
 </mapper>

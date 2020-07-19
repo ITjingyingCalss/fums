@@ -168,7 +168,7 @@ public class SystemManagementController {
     /**
      * 修改更新
      */
-/*    @RequestMapping(value = "insertUser" ,produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "saveUpdateUser" ,produces = "application/json;charset=utf-8")
     public int saveUpdateUser(String userAccount,String hospitalDepartmentName){
 
         int c = Integer.parseInt(userAccount);
@@ -177,6 +177,6 @@ public class SystemManagementController {
         int saveUser = userService.insertsUser(c,d);
 
         return saveUser;
-    }*/
+    }
 
 }
