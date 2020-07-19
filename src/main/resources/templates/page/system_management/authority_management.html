@@ -177,10 +177,12 @@
 
                     /*$('<option value="' + UpdateUser.hospitalDepartmentId + '"'+(UpdateUser.hospitalDepartmentId == hospital_department_id1?'selected':'')+'>'+ UpdateUser.hospitalDepartmentName +'</option>');
                     $('<option value="' + UpdateUser.id + '"'+(UpdateUser.id == id1?'selected':'')+'>'+ UpdateUser.userAccount +'</option>');*/
-                    alert(UpdateUser.hospitalDepartment.hospitalDepartmentName);
-                    alert(UpdateUser.userAccount);
+                    /*alert(UpdateUser.hospitalDepartment.hospitalDepartmentName);
+                    alert(UpdateUser.userAccount);*/
                     /*$("#hospital_department_id1").val('<option value="' + UpdateUser.hospitalDepartment.hospitalDepartmentId + '">' + UpdateUser.hospitalDepartment.hospitalDepartmentName + '</option>');
                     $("#id1").val('<option value="' + UpdateUser.id + '">' + UpdateUser.userAccount + '</option>');*/
+
+                    console.log(UpdateUser.id);
 
                     $("#hospital_department_id1").val(UpdateUser.hospitalDepartment.hospitalDepartmentId);
                     $("#id1").val(UpdateUser.id);
