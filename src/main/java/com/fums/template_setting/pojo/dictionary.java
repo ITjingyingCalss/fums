@@ -11,6 +11,26 @@ public class dictionary {
 
     private String children;
 
+    private int treeInformationId;
+
+    private treeInformation treeInformation;
+
+    public com.fums.template_setting.pojo.treeInformation getTreeInformation() {
+        return treeInformation;
+    }
+
+    public void setTreeInformation(com.fums.template_setting.pojo.treeInformation treeInformation) {
+        this.treeInformation = treeInformation;
+    }
+
+    public int getTreeInformationId() {
+        return treeInformationId;
+    }
+
+    public void setTreeInformationId(int treeInformationId) {
+        this.treeInformationId = treeInformationId;
+    }
+
     public Integer getId() {
         return id;
     }

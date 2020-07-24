@@ -2,17 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fums.template_setting.dao.dictionaryMapper">
   <resultMap id="BaseResultMap" type="com.fums.template_setting.pojo.dictionary">
-    <id column="id" jdbcType="INTEGER" property="id" />
+    <id column="did" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="cid" jdbcType="INTEGER" property="cid" />
     <result column="children_id" jdbcType="INTEGER" property="childrenId" />
     <result column="children" jdbcType="VARCHAR" property="children" />
+    <result column="tree_information_id" jdbcType="INTEGER" property="treeInformationId" />
+    <association property="treeInformation" javaType="com.fums.template_setting.pojo.treeInformation">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="information" jdbcType="VARCHAR" property="information" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, cid, children_id, children
+     d.id as did,name, cid, children_id, children,tree_information_id
   </sql>
   <select id="selectDictionary" resultMap="BaseResultMap">
-    SELECT * FROM dictionary
+    SELECT t.information,t.id,
+    <include refid="Base_Column_List" />
+    FROM dictionary d
+    INNER JOIN tree_information t ON t.`id`=d.`tree_information_id`
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 'true' as QUERYID,
